@@ -1,0 +1,72 @@
+namespace Emmutaler;
+
+struct LinkedSection {
+    start: ulong;
+    end: ulong;
+}
+
+struct VirtualSegment {
+    start: ulong;
+    size: ulong;
+}
+
+/*
+    Information about build extracted from ROM image.
+*/
+table BuildInfo {
+    // Mostly copyright and board id
+    banner: string;
+    // Style of build, e.g. RELEASE or DEBUG
+    style: string;
+    // TODO: IDK??
+    tag: string;
+}
+
+/*
+    Contains metadata extracted from the ROM image about where stuff is linked.
+    They appear in order of appearence in the image.
+*/
+table LinkerMeta {
+    // Information about the text section.
+    text: LinkedSection;
+    /*
+        How large the text actually is. 
+        !!Important!!: This is not text.end - text.start, this is how much space was actually needed.
+    */
+    text_size: ulong;
+    /*
+        Where inside the RO text section, the (initial) data starts at.
+    */
+    data_ro_start: ulong;
+    data: LinkedSection;
+    bss: LinkedSection;
+    stacks: VirtualSegment;
+    page_tables: VirtualSegment;
+    // The end of the heap segment.
+    heap_guard: ulong;
+    boot_trampoline: LinkedSection;
+    // Where in memory the boot trampoline should be located.
+    boot_trampoline_dest: ulong;
+}
+
+/*
+    A symbol extract with IDA.
+*/
+table Symbol {
+    name: string;
+    address: ulong;
+}
+
+/*
+    Provides metadata information about a given secureROM image.
+    Contains known symbols and everything extracted from +0x200.
+*/
+table ROMMeta {
+    build_info: BuildInfo;
+    linker_info: LinkerMeta;
+    symbols: [Symbol];
+}
+
+file_identifier "SROM";
+file_extension "emmu";
+root_type ROMMeta;
