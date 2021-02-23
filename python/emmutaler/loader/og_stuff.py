@@ -10,7 +10,8 @@ import ida_pro
 import ida_auto
 import idc
 import struct
-from emmu_loader.log import log
+from emmutaler.log import get_logger
+log = get_logger(__name__)
 
 true = True
 false = False

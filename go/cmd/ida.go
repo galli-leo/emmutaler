@@ -24,6 +24,7 @@ import (
 
 var idaPath string = ida.DefaultPath
 var launchOpts ida.LaunchOptions
+var script string
 
 // idaCmd represents the ida command
 var idaCmd = &cobra.Command{
@@ -36,6 +37,9 @@ var idaCmd = &cobra.Command{
 		inputFile := args[0]
 		launchOpts.InputFile = inputFile
 		launchOpts.DeleteDB = true
+		if script != "" {
+			launchOpts.ScriptArgs = []string{script}
+		}
 		c := launchOpts.RedirectedCommand(idaPath)
 		err := c.Run()
 		if err != nil {
@@ -49,6 +53,7 @@ func init() {
 
 	idaCmd.Flags().StringVar(&idaPath, "ida", ida.DefaultPath, "Path to the ida installation")
 	idaCmd.Flags().BoolVarP(&launchOpts.EnableGUI, "gui", "g", true, "Whether to enable the GUI or not.")
+	idaCmd.Flags().StringVarP(&script, "script", "s", "", "Path to script to run on load")
 
 	// Here you will define your flags and configuration settings.
 

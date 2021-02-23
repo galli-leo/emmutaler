@@ -1,29 +1,7 @@
 import os
 import debugpy
-import ida_loader
-from emmu_loader.log import log
-from emmu_loader.Emmutaler.ROMMeta import *
-from emmu_loader.Emmutaler.BuildInfo import *
-import threading
-from threading import current_thread
-
-threadLocal = threading.local()
-
-script_folder = "/Users/leonardogalli/Code/ETH/thesis/emmutaler/loader/"
-getcwd_original = os.getcwd
-
-def getcwd_hook():
-    global script_folder
-
-    cwd = getcwd_original()
-    if cwd.lower() in script_folder.lower() and script_folder.lower() != cwd.lower():
-        cwd = script_folder
-    return cwd
-
-def set_script_folder(folder):
-    global script_folder
-
-    script_folder = folder
+from emmutaler.log import get_logger
+log = get_logger(__name__)
 
 def install():
     # os.getcwd = getcwd_hook
@@ -43,9 +21,9 @@ def install():
 # install()
 
 def load_file(fd, neflags, format):
-    from emmu_loader import load_file
+    from emmutaler.loader import load_file
     return load_file(fd, neflags, format)
 
 def accept_file(fd, fname):
-    from emmu_loader import accept_file
+    from emmutaler.loader import accept_file
     return accept_file(fd, fname)

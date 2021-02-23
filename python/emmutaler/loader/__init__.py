@@ -6,27 +6,16 @@ import ida_idaapi
 import ida_loader
 import ida_idp
 import debugpy
-from emmu_loader.log import log
-import sys
-file_dir = os.path.dirname(__file__)
-sys.path.append(file_dir)
-from emmu_loader.Emmutaler.ROMMeta import *
-from emmu_loader.Emmutaler.BuildInfo import *
-from emmu_loader.Emmutaler.LinkedSection import *
-from emmu_loader.Emmutaler.VirtualSegment import *
-from emmu_loader.Emmutaler.LinkerMeta import *
-from emmu_loader.og_stuff import post_process
+from emmutaler.log import get_logger
+log = get_logger(__name__)
+from emmutaler.loader.og_stuff import post_process
+from emmutaler.flatbuffers.VirtualSegment import VirtualSegment
+from emmutaler.flatbuffers.LinkedSection import LinkedSection
+from emmutaler.flatbuffers.LinkerMeta import LinkerMeta
+from emmutaler.flatbuffers.BuildInfo import BuildInfo
+from emmutaler.meta_file import load_meta
 
 current_file = None
-
-def load_meta(fname) -> ROMMeta:
-    buf = open(fname, 'rb').read()
-    buf = bytearray(buf)
-    try:
-        return ROMMeta.GetRootAsROMMeta(buf, 0)
-    except:
-        log.exception("Failed to parse flatbuffer from input file %s", fname)
-    return None
 
 def create_segment(info: Union[VirtualSegment, LinkedSection], name, sclass):
     debugpy.breakpoint()
