@@ -205,3 +205,19 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,go,python
 
 bin/
+logs/
+
+# IDA files
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.bak
+
+# Build files
+main
+output.map
+builddir/
+*.o

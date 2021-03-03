@@ -2,7 +2,7 @@ PROTOS := $(wildcard ../proto/*.fbs)
 
 .PHONY: flatc
 flatc: $(PROTOS)
-	flatc --python $(PROTOS)
+	flatc --gen-mutable --gen-object-api --python $(PROTOS)
 
 LOADER := $(abspath scripts/emmu_loader.py)
 PACKAGE := $(abspath emmutaler)

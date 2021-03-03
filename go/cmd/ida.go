@@ -36,7 +36,7 @@ var idaCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		inputFile := args[0]
 		launchOpts.InputFile = inputFile
-		launchOpts.DeleteDB = true
+		launchOpts.DeleteDB = false
 		if script != "" {
 			launchOpts.ScriptArgs = []string{script}
 		}

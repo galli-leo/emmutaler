@@ -1,7 +1,7 @@
 package meta
 
 import (
-	"github.com/galli-leo/emmutaler/Emmutaler"
+	"github.com/galli-leo/emmutaler/fbs"
 	flatbuffers "github.com/google/flatbuffers/go"
 )
 
@@ -10,7 +10,7 @@ type VirtualSegment struct {
 }
 
 func (v *VirtualSegment) ToFlatBuffer(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
-	return Emmutaler.CreateVirtualSegment(builder, v.Start, v.Size)
+	return fbs.CreateVirtualSegment(builder, v.Start, v.Size)
 }
 
 type LinkedSection struct {
@@ -18,12 +18,12 @@ type LinkedSection struct {
 }
 
 func (v *LinkedSection) ToFlatBuffer(builder *flatbuffers.Builder) flatbuffers.UOffsetT {
-	return Emmutaler.CreateLinkedSection(builder, v.Start, v.End)
+	return fbs.CreateLinkedSection(builder, v.Start, v.End)
 }
 
 type LinkerMeta struct {
 	// Information about the text section.
-	Text LinkedSection
+	Text fbs.LinkedSectionT
 	/*
 	   How large the text actually is.
 	   !!Important!!: This is not text.end - text.start, this is how much space was actually needed.
@@ -33,13 +33,13 @@ type LinkerMeta struct {
 	   Where inside the RO text section, the (initial) data starts at.
 	*/
 	DataROStart uint64
-	Data        LinkedSection
-	BSS         LinkedSection
-	Stacks      VirtualSegment
-	PageTables  VirtualSegment
+	Data        fbs.LinkedSectionT
+	BSS         fbs.LinkedSectionT
+	Stacks      fbs.VirtualSegmentT
+	PageTables  fbs.VirtualSegmentT
 	// The end of the heap segment.
 	HeapGuard      uint64
-	BootTrampoline LinkedSection
+	BootTrampoline fbs.LinkedSectionT
 	// Where in memory the boot trampoline should be located.
 	BootTrampolineDest uint64
 }

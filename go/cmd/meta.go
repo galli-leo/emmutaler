@@ -22,7 +22,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/galli-leo/emmutaler/Emmutaler"
+	"github.com/galli-leo/emmutaler/fbs"
 	"github.com/galli-leo/emmutaler/meta"
 	flatbuffers "github.com/google/flatbuffers/go"
 	"github.com/spf13/cobra"
@@ -79,33 +79,33 @@ func processFile(inputFile string, outputFile string) {
 	banner := builder.CreateString(info.Build.BannerS())
 	style := builder.CreateString(info.Build.StyleS())
 	tag := builder.CreateString(info.Build.TagS())
-	Emmutaler.BuildInfoStart(builder)
-	Emmutaler.BuildInfoAddBanner(builder, banner)
-	Emmutaler.BuildInfoAddStyle(builder, style)
-	Emmutaler.BuildInfoAddTag(builder, tag)
-	buildInfo := Emmutaler.BuildInfoEnd(builder)
+	fbs.BuildInfoStart(builder)
+	fbs.BuildInfoAddBanner(builder, banner)
+	fbs.BuildInfoAddStyle(builder, style)
+	fbs.BuildInfoAddTag(builder, tag)
+	buildInfo := fbs.BuildInfoEnd(builder)
 
 	// LinkerMeta
 
-	Emmutaler.LinkerMetaStart(builder)
+	fbs.LinkerMetaStart(builder)
 
-	Emmutaler.LinkerMetaAddText(builder, info.LinkerInfo.Text.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddTextSize(builder, info.LinkerInfo.TextSize)
-	Emmutaler.LinkerMetaAddDataRoStart(builder, info.LinkerInfo.DataROStart)
-	Emmutaler.LinkerMetaAddData(builder, info.LinkerInfo.Data.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddBss(builder, info.LinkerInfo.BSS.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddStacks(builder, info.LinkerInfo.Stacks.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddPageTables(builder, info.LinkerInfo.PageTables.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddHeapGuard(builder, info.LinkerInfo.HeapGuard)
-	Emmutaler.LinkerMetaAddBootTrampoline(builder, info.LinkerInfo.BootTrampoline.ToFlatBuffer(builder))
-	Emmutaler.LinkerMetaAddBootTrampolineDest(builder, info.LinkerInfo.BootTrampolineDest)
+	// fbs.LinkerMetaAddText(builder, info.LinkerInfo.Text.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddTextSize(builder, info.LinkerInfo.TextSize)
+	// fbs.LinkerMetaAddDataRoStart(builder, info.LinkerInfo.DataROStart)
+	// fbs.LinkerMetaAddData(builder, info.LinkerInfo.Data.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddBss(builder, info.LinkerInfo.BSS.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddStacks(builder, info.LinkerInfo.Stacks.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddPageTables(builder, info.LinkerInfo.PageTables.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddHeapGuard(builder, info.LinkerInfo.HeapGuard)
+	// fbs.LinkerMetaAddBootTrampoline(builder, info.LinkerInfo.BootTrampoline.ToFlatBuffer(builder))
+	// fbs.LinkerMetaAddBootTrampolineDest(builder, info.LinkerInfo.BootTrampolineDest)
 
-	linkerMeta := Emmutaler.LinkerMetaEnd(builder)
+	linkerMeta := fbs.LinkerMetaEnd(builder)
 
-	Emmutaler.ROMMetaStart(builder)
-	Emmutaler.ROMMetaAddBuildInfo(builder, buildInfo)
-	Emmutaler.ROMMetaAddLinkerInfo(builder, linkerMeta)
-	romMeta := Emmutaler.ROMMetaEnd(builder)
+	fbs.ROMMetaStart(builder)
+	fbs.ROMMetaAddBuildInfo(builder, buildInfo)
+	fbs.ROMMetaAddLinkerInfo(builder, linkerMeta)
+	romMeta := fbs.ROMMetaEnd(builder)
 	builder.Finish(romMeta)
 	data := builder.FinishedBytes()
 	err = ioutil.WriteFile(outputFile, data, 0777)

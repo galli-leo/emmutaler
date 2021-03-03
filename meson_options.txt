@@ -1,0 +1,2 @@
+option('rom', type : 'combo', choices : ['t8030'], value : 't8030')
+option('rom_path', type: 'string', value : '../SecureROMs-master')

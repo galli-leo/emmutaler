@@ -9,10 +9,10 @@ import debugpy
 from emmutaler.log import get_logger
 log = get_logger(__name__)
 from emmutaler.loader.og_stuff import post_process
-from emmutaler.flatbuffers.VirtualSegment import VirtualSegment
-from emmutaler.flatbuffers.LinkedSection import LinkedSection
-from emmutaler.flatbuffers.LinkerMeta import LinkerMeta
-from emmutaler.flatbuffers.BuildInfo import BuildInfo
+from emmutaler.fbs.VirtualSegment import VirtualSegment
+from emmutaler.fbs.LinkedSection import LinkedSection
+from emmutaler.fbs.LinkerMeta import LinkerMeta
+from emmutaler.fbs.BuildInfo import BuildInfo
 from emmutaler.meta_file import load_meta
 
 current_file = None
@@ -60,8 +60,8 @@ def load_file(fd: ida_idaapi.loader_input_t, neflags, format):
         act_data_start = (text_size + page_size) & (~page_size)
         fd.file2base(act_data_start, data_start, data_end, True)
 
-        log.info("Loaded file into segments, post processing...")
-        post_process(text_start)
+        # log.info("Loaded file into segments, post processing...")
+        # post_process(text_start)
 
         return 1
 

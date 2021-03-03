@@ -20,6 +20,16 @@
             ],
             "justMyCode": false
             // "preLaunchTask": "launch_ida"
+        },
+        {
+            "name": "Launch IDA test",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go",
+            "args": [
+                "ida", "${workspaceFolder}/../SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4"
+            ]
         }
     ]
 }
