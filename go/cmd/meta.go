@@ -16,15 +16,6 @@ limitations under the License.
 package cmd
 
 import (
-	"encoding/binary"
-	"io"
-	"io/ioutil"
-	"log"
-	"os"
-
-	"github.com/galli-leo/emmutaler/fbs"
-	"github.com/galli-leo/emmutaler/meta"
-	flatbuffers "github.com/google/flatbuffers/go"
 	"github.com/spf13/cobra"
 )
 
@@ -40,84 +31,16 @@ and usage of using your command. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) > 1 && outputFile != "" {
-			log.Fatalf("Cannot use output filename in combination with multiple input args!")
-		}
-		for _, inputFile := range args {
-			if outputFile == "" {
-				outputFile = inputFile + ".emmu"
-			}
-			processFile(inputFile, outputFile)
-		}
+		r.LoadMetaFromBinary()
+		r.SaveMeta()
 	},
 }
 
-func processFile(inputFile string, outputFile string) {
-	log.Printf("Processing file %s, writing result to %s", inputFile, outputFile)
-	inFile, err := os.Open(inputFile)
-	if err != nil {
-		log.Fatalf("Failed to open input file %s: %v", inputFile, err)
-	}
-	// Interesting bits start at 0x200, so seek to there.
-	_, err = inFile.Seek(0x200, io.SeekStart)
-	if err != nil {
-		log.Fatalf("Could not seek to 0x200, are you sure this is a valid SecureROM image?: %v", err)
-	}
-
-	info := &meta.EmbeddedInfo{}
-	err = binary.Read(inFile, binary.LittleEndian, info)
-	if err != nil {
-		log.Fatalf("Failed to read in embedded info: %v", err)
-	}
-	log.Printf("Read in image: %s", info.Build.BannerS())
-
-	builder := flatbuffers.NewBuilder(1024)
-
-	// BuildInfo
-	banner := builder.CreateString(info.Build.BannerS())
-	style := builder.CreateString(info.Build.StyleS())
-	tag := builder.CreateString(info.Build.TagS())
-	fbs.BuildInfoStart(builder)
-	fbs.BuildInfoAddBanner(builder, banner)
-	fbs.BuildInfoAddStyle(builder, style)
-	fbs.BuildInfoAddTag(builder, tag)
-	buildInfo := fbs.BuildInfoEnd(builder)
-
-	// LinkerMeta
-
-	fbs.LinkerMetaStart(builder)
-
-	// fbs.LinkerMetaAddText(builder, info.LinkerInfo.Text.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddTextSize(builder, info.LinkerInfo.TextSize)
-	// fbs.LinkerMetaAddDataRoStart(builder, info.LinkerInfo.DataROStart)
-	// fbs.LinkerMetaAddData(builder, info.LinkerInfo.Data.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddBss(builder, info.LinkerInfo.BSS.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddStacks(builder, info.LinkerInfo.Stacks.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddPageTables(builder, info.LinkerInfo.PageTables.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddHeapGuard(builder, info.LinkerInfo.HeapGuard)
-	// fbs.LinkerMetaAddBootTrampoline(builder, info.LinkerInfo.BootTrampoline.ToFlatBuffer(builder))
-	// fbs.LinkerMetaAddBootTrampolineDest(builder, info.LinkerInfo.BootTrampolineDest)
-
-	linkerMeta := fbs.LinkerMetaEnd(builder)
-
-	fbs.ROMMetaStart(builder)
-	fbs.ROMMetaAddBuildInfo(builder, buildInfo)
-	fbs.ROMMetaAddLinkerInfo(builder, linkerMeta)
-	romMeta := fbs.ROMMetaEnd(builder)
-	builder.Finish(romMeta)
-	data := builder.FinishedBytes()
-	err = ioutil.WriteFile(outputFile, data, 0777)
-	if err != nil {
-		log.Fatalf("Failed to write output to %s: %v", outputFile, err)
-	}
-}
-
 func init() {
-	rootCmd.AddCommand(metaCmd)
+	romCmd.AddCommand(metaCmd)
 
-	metaCmd.Flags().StringVarP(&outputFile, "--output", "o", "", "Path to output file, by default we will use the same name & location as the image")
+	// metaCmd.Flags().StringVarP(&outputFile, "--output", "o", "", "Path to output file, by default we will use the same name & location as the image")
 
 	// Here you will define your flags and configuration settings.
 

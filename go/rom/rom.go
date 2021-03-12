@@ -9,10 +9,9 @@ import (
 
 func FromPath(romFile string) *ROM {
 	r := &ROM{
-		inputPath:  romFile,
-		meta:       &fbs.ROMMetaT{State: fbs.MetaStateUninitialized},
-		TextChunks: []*Chunk{},
-		DataChunks: []*Chunk{},
+		inputPath:    romFile,
+		meta:         &fbs.ROMMetaT{State: fbs.MetaStateUninitialized, BuildInfo: &fbs.BuildInfoT{}, LinkerInfo: &fbs.LinkerMetaT{}},
+		Instructions: []*Instr{},
 	}
 	return r
 }
@@ -22,12 +21,15 @@ func FromPath(romFile string) *ROM {
 type ROM struct {
 	// Path where we originall found the binary image.
 	inputPath string
+
+	version VersionInfo
 	// Metadata information, either loaded from the .emmu file or parsed from the binary image.
-	meta *fbs.ROMMetaT
-	// Chunks of Text Section
-	TextChunks []*Chunk
-	// Chunks of Data Section
-	DataChunks []*Chunk
+	meta            *fbs.ROMMetaT
+	TextSection     *ChunkTree
+	ExtraTextChunks []*Chunk
+	DataSection     *ChunkTree
+
+	Instructions []*Instr
 }
 
 func (r *ROM) Symbols() []*fbs.SymbolT {
@@ -42,6 +44,20 @@ func (r *ROM) BinaryPath() string {
 	return ret
 }
 
+const DATA_ALIGN = 0x3FFF
+
 func (r *ROM) DataFileStart() int64 {
-	return int64(r.meta.LinkerInfo.TextSize)
+	return (int64(r.meta.LinkerInfo.TextSize) + DATA_ALIGN) & (^DATA_ALIGN)
+}
+
+func (r *ROM) BSSSize() int64 {
+	return int64(r.meta.LinkerInfo.Bss.End - r.meta.LinkerInfo.Bss.Start)
+}
+
+func (r *ROM) StacksSize() int64 {
+	return int64(r.meta.LinkerInfo.Stacks.Size)
+}
+
+func (r *ROM) PTSize() int64 {
+	return int64(r.meta.LinkerInfo.PageTables.Size)
 }

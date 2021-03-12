@@ -1,0 +1,21 @@
+/*
+{{template "gen_header" .}}
+*/
+
+#ifndef __SYMBOLS_LIST_H_
+#define __SYMBOLS_LIST_H_
+
+typedef struct symbol_info {
+    uint64_t start;
+    uint64_t end;
+    char* name;
+} symbol_info_t;
+
+static symbol_info_t symbols[] = {
+    {{range .R.Symbols}}
+    {{- if .Start}}{{"{"}}{{.Start}}, {{.End}}, "{{.Name}}"{{"}"}},
+    {{end -}}
+    {{end}}
+};
+
+#endif /* __SYMBOLS_LIST_H_ */

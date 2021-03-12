@@ -2,6 +2,9 @@ package rom
 
 import (
 	"encoding/binary"
+	"errors"
+	"io"
+	"log"
 	"os"
 
 	"github.com/galli-leo/emmutaler/fbs"
@@ -29,9 +32,12 @@ func (r *ROM) LoadMetaFromBinary() error {
 	if err != nil {
 		return xerrors.Errorf("failed to open input file %s: %w", r.inputPath, err)
 	}
+	defer inFile.Close()
+	inFile.Seek(0x200, io.SeekStart)
 
 	info := &meta.EmbeddedInfo{}
 	err = binary.Read(inFile, binary.LittleEndian, info)
+	log.Printf("Result: %+v", info)
 	if err != nil {
 		return xerrors.Errorf("failed to read into embbeded info struct: %w", err)
 	}
@@ -40,6 +46,8 @@ func (r *ROM) LoadMetaFromBinary() error {
 	r.meta.BuildInfo.Style = info.Build.StyleS()
 	r.meta.BuildInfo.Tag = info.Build.TagS()
 
+	r.ParseVersion()
+
 	// LinkerInfo
 	r.meta.LinkerInfo.Text = &info.LinkerInfo.Text
 	r.meta.LinkerInfo.TextSize = info.LinkerInfo.TextSize
@@ -47,10 +55,17 @@ func (r *ROM) LoadMetaFromBinary() error {
 	r.meta.LinkerInfo.Data = &info.LinkerInfo.Data
 	r.meta.LinkerInfo.Bss = &info.LinkerInfo.BSS
 	r.meta.LinkerInfo.Stacks = &info.LinkerInfo.Stacks
-	r.meta.LinkerInfo.PageTables = &info.LinkerInfo.PageTables
-	r.meta.LinkerInfo.HeapGuard = info.LinkerInfo.HeapGuard
-	r.meta.LinkerInfo.BootTrampoline = &info.LinkerInfo.BootTrampoline
-	r.meta.LinkerInfo.BootTrampolineDest = info.LinkerInfo.BootTrampolineDest
+	if r.version.Less(&vt8030) {
+		r.meta.LinkerInfo.PageTables = &info.LinkerInfo.PageTables
+		r.meta.LinkerInfo.HeapGuard = info.LinkerInfo.HeapGuard
+		r.meta.LinkerInfo.BootTrampoline = &info.LinkerInfo.BootTrampoline
+		r.meta.LinkerInfo.BootTrampolineDest = info.LinkerInfo.BootTrampolineDest
+	} else {
+		// t8030 and higher, PageTables is would actually be the two different stack starts. Everything is moved by 2, and no boot trampoline anymore.
+		r.meta.LinkerInfo.PageTables.Start = info.LinkerInfo.HeapGuard
+		r.meta.LinkerInfo.PageTables.Size = info.LinkerInfo.BootTrampoline.Start
+		r.meta.LinkerInfo.HeapGuard = info.LinkerInfo.BootTrampoline.End
+	}
 
 	r.meta.State = fbs.MetaStateSectionsDefined
 	return nil
@@ -58,7 +73,7 @@ func (r *ROM) LoadMetaFromBinary() error {
 
 func (r *ROM) LoadMeta() error {
 	err := r.LoadMetaFromFile()
-	if xerrors.Unwrap(err) == os.ErrNotExist {
+	if errors.Is(xerrors.Unwrap(err), os.ErrNotExist) {
 		// .emmu does not exist, we read from binary!
 		err := r.LoadMetaFromBinary()
 		if err != nil {
@@ -67,6 +82,7 @@ func (r *ROM) LoadMeta() error {
 		// Create new .emmu file.
 		return r.SaveMeta()
 	}
+	r.ParseVersion()
 	return err
 }
 

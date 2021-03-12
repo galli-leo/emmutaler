@@ -1,76 +1,54 @@
 package rom
 
 import (
-	_ "embed"
+	"embed"
 	"html/template"
 	"os"
 	"path/filepath"
+	"strings"
+	"time"
 
 	"golang.org/x/xerrors"
 )
 
-//go:embed rom.h.tmpl
-var tmplHeader []byte
+//go:embed templates
+var fs embed.FS
 
-//go:embed rom.S.tmpl
-var tmplAsm []byte
+// Gives information about the invocation to the template.
+// This is used to write useful stuff into the GENERATED DO NOT EDIT header.
+type Invocation struct {
+	Command string
+	Date    string
+}
 
-//go:embed symbols.go.tmpl
-var tmplSymbols []byte
+func GetInvocation() Invocation {
+	cmd := strings.Join(os.Args, " ")
+	return Invocation{
+		Command: cmd,
+		Date:    time.Now().String(),
+	}
+}
 
 type TemplateData struct {
-	R *ROM
+	R          *ROM
+	Invocation Invocation
 }
 
 func (r *ROM) TmplData() *TemplateData {
-	return &TemplateData{R: r}
+	return &TemplateData{R: r, Invocation: GetInvocation()}
 }
 
-func (r *ROM) GenerateHeader(output string) error {
-	tmpl := template.New("rom.h")
-	tmpl, err := tmpl.Parse(string(tmplHeader))
+func (r *ROM) GenerateTemplate(filename string, output string) error {
+	tmplName := filename + ".tmpl"
+	tmpl, err := template.ParseFS(fs, "templates/*.tmpl")
 	if err != nil {
-		return xerrors.Errorf("failed to parse template: %w, %s", err, string(tmplHeader))
+		return xerrors.Errorf("failed to parse templates: %w", err)
 	}
-	filename := filepath.Join(output, "rom.h")
-	f, err := os.OpenFile(filename, os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0777)
+	fp := filepath.Join(output, filename)
+	f, err := os.OpenFile(fp, os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0777)
 	if err != nil {
-		return xerrors.Errorf("failed to create output file %s: %w", filename, err)
-	}
-	defer f.Close()
-	return tmpl.Execute(f, r.TmplData())
-}
-
-func (r *ROM) GenerateASM(output string) error {
-	err := r.BuildChunks()
-	if err != nil {
-		return xerrors.Errorf("failed to build chunks: %w", err)
-	}
-	tmpl := template.New("rom.S")
-	tmpl, err = tmpl.Parse(string(tmplAsm))
-	if err != nil {
-		return xerrors.Errorf("failed to parse template: %w, %s", err, string(tmplAsm))
-	}
-	filename := filepath.Join(output, "rom.S")
-	f, err := os.OpenFile(filename, os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0777)
-	if err != nil {
-		return xerrors.Errorf("failed to create output file %s: %w", filename, err)
+		return xerrors.Errorf("failed to create output file %s: %w", fp, err)
 	}
 	defer f.Close()
-	return tmpl.Execute(f, r.TmplData())
-}
-
-func (r *ROM) GenerateSymbols(output string) error {
-	tmpl := template.New("symbols.go")
-	tmpl, err := tmpl.Parse(string(tmplSymbols))
-	if err != nil {
-		return xerrors.Errorf("failed to parse template: %w, %s", err, string(tmplSymbols))
-	}
-	filename := filepath.Join(output, "symbols.go")
-	f, err := os.OpenFile(filename, os.O_CREATE|os.O_RDWR|os.O_TRUNC, 0777)
-	if err != nil {
-		return xerrors.Errorf("failed to create output file %s: %w", filename, err)
-	}
-	defer f.Close()
-	return tmpl.Execute(f, r.TmplData())
+	return tmpl.ExecuteTemplate(f, tmplName, r.TmplData())
 }

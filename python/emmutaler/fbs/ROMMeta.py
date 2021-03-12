@@ -29,7 +29,7 @@ class ROMMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
-            from emmutaler.fbs.BuildInfo import BuildInfo
+            from fbs.BuildInfo import BuildInfo
             obj = BuildInfo()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -40,7 +40,7 @@ class ROMMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(6))
         if o != 0:
             x = self._tab.Indirect(o + self._tab.Pos)
-            from emmutaler.fbs.LinkerMeta import LinkerMeta
+            from fbs.LinkerMeta import LinkerMeta
             obj = LinkerMeta()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -53,7 +53,7 @@ class ROMMeta(object):
             x = self._tab.Vector(o)
             x += flatbuffers.number_types.UOffsetTFlags.py_type(j) * 4
             x = self._tab.Indirect(x)
-            from emmutaler.fbs.Symbol import Symbol
+            from fbs.Symbol import Symbol
             obj = Symbol()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -86,9 +86,9 @@ def ROMMetaStartSymbolsVector(builder, numElems): return builder.StartVector(4, 
 def ROMMetaAddState(builder, state): builder.PrependInt32Slot(3, state, 0)
 def ROMMetaEnd(builder): return builder.EndObject()
 
-import emmutaler.fbs.BuildInfo
-import emmutaler.fbs.LinkerMeta
-import emmutaler.fbs.Symbol
+import fbs.BuildInfo
+import fbs.LinkerMeta
+import fbs.Symbol
 try:
     from typing import List, Optional
 except:
@@ -98,9 +98,9 @@ class ROMMetaT(object):
 
     # ROMMetaT
     def __init__(self):
-        self.buildInfo = None  # type: Optional[emmutaler.fbs.BuildInfo.BuildInfoT]
-        self.linkerInfo = None  # type: Optional[emmutaler.fbs.LinkerMeta.LinkerMetaT]
-        self.symbols = None  # type: List[emmutaler.fbs.Symbol.SymbolT]
+        self.buildInfo = None  # type: Optional[fbs.BuildInfo.BuildInfoT]
+        self.linkerInfo = None  # type: Optional[fbs.LinkerMeta.LinkerMetaT]
+        self.symbols = None  # type: List[fbs.Symbol.SymbolT]
         self.state = 0  # type: int
 
     @classmethod
@@ -120,16 +120,16 @@ class ROMMetaT(object):
         if rOMMeta is None:
             return
         if rOMMeta.BuildInfo() is not None:
-            self.buildInfo = emmutaler.fbs.BuildInfo.BuildInfoT.InitFromObj(rOMMeta.BuildInfo())
+            self.buildInfo = fbs.BuildInfo.BuildInfoT.InitFromObj(rOMMeta.BuildInfo())
         if rOMMeta.LinkerInfo() is not None:
-            self.linkerInfo = emmutaler.fbs.LinkerMeta.LinkerMetaT.InitFromObj(rOMMeta.LinkerInfo())
+            self.linkerInfo = fbs.LinkerMeta.LinkerMetaT.InitFromObj(rOMMeta.LinkerInfo())
         if not rOMMeta.SymbolsIsNone():
             self.symbols = []
             for i in range(rOMMeta.SymbolsLength()):
                 if rOMMeta.Symbols(i) is None:
                     self.symbols.append(None)
                 else:
-                    symbol_ = emmutaler.fbs.Symbol.SymbolT.InitFromObj(rOMMeta.Symbols(i))
+                    symbol_ = fbs.Symbol.SymbolT.InitFromObj(rOMMeta.Symbols(i))
                     self.symbols.append(symbol_)
         self.state = rOMMeta.State()
 

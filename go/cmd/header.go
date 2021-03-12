@@ -27,7 +27,19 @@ var headerCmd = &cobra.Command{
 	Short: "Generate the c header for the rom image.",
 	Long:  `Generates the c header for the given rom image. The header will contain all found symbol definition including their types.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := r.GenerateHeader(outputDirectory)
+		err := r.GenerateTemplate("rom.h", outputDirectory)
+		if err != nil {
+			log.Fatalf("Failed to generate header: %v", err)
+		}
+	},
+}
+
+var symHeaderCmd = &cobra.Command{
+	Use:   "symh",
+	Short: "Generate the c header for the rom symbols.",
+	Long:  `Generates the c header for the given rom image's symbols. This is used for debugging exclusively.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		err := r.GenerateTemplate("symbols_list.h", outputDirectory)
 		if err != nil {
 			log.Fatalf("Failed to generate header: %v", err)
 		}
@@ -36,7 +48,7 @@ var headerCmd = &cobra.Command{
 
 func init() {
 	romCmd.AddCommand(headerCmd)
-
+	romCmd.AddCommand(symHeaderCmd)
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

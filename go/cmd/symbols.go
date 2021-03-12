@@ -35,7 +35,7 @@ to quickly create a Cobra application.`,
 		if outputDirectory == "build" {
 			outputDirectory = "rom"
 		}
-		err := r.GenerateSymbols(outputDirectory)
+		err := r.GenerateTemplate("symbols.go", outputDirectory)
 		if err != nil {
 			log.Fatalf("Failed to generate symbols: %v", err)
 		}

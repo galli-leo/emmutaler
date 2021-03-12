@@ -137,20 +137,23 @@ register_dump (int fd, const ucontext_t *ctx)
 #define ADD_REG(num) ADD_STRING("   R" #num ": "); \
   ADD_MEM (regs[num], 16)
 
+#define ADD_REG2(num) ADD_STRING("   R" #num ":  "); \
+  ADD_MEM (regs[num], 16)
+
   /* Generate the output.  */
   ADD_STRING ("Register dump:\n\n R0: ");
   ADD_MEM (regs[0], 16);
-  ADD_REG(1);
-  ADD_REG(2);
-  ADD_REG(3);
+  ADD_REG2(1);
+  ADD_REG2(2);
+  ADD_REG2(3);
   ADD_STRING("\n");
-  ADD_REG(4);
-  ADD_REG(5);
-  ADD_REG(6);
-  ADD_REG(7);
+  ADD_REG2(4);
+  ADD_REG2(5);
+  ADD_REG2(6);
+  ADD_REG2(7);
   ADD_STRING("\n");
-  ADD_REG(8);
-  ADD_REG(9);
+  ADD_REG2(8);
+  ADD_REG2(9);
   ADD_REG(10);
   ADD_REG(11);
   ADD_STRING("\n");
@@ -175,13 +178,13 @@ register_dump (int fd, const ucontext_t *ctx)
   ADD_REG(27);
   ADD_STRING("\n");
   ADD_REG(28);
-  ADD_STRING ("   FP: ");
+  ADD_STRING ("   FP:  ");
   ADD_MEM (regs[29], 16);
-  ADD_STRING ("   LR: ");
+  ADD_STRING ("   LR:  ");
   ADD_MEM (regs[30], 16);
-  ADD_STRING ("   SP: ");
+  ADD_STRING ("   SP:  ");
   ADD_MEM (regs[31], 16);
-  ADD_STRING ("   PC: ");
+  ADD_STRING ("   PC:  ");
   ADD_MEM (regs[32], 16);
   ADD_STRING ("\n Addr: ");
   ADD_MEM (regs[34], 16);

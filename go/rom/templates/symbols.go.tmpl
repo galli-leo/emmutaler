@@ -1,0 +1,40 @@
+/*
+{{template "gen_header" .}}
+*/
+
+
+package rom
+
+import "github.com/galli-leo/emmutaler/fbs"
+
+func FromFbs(s *fbs.SymbolT) Symbol {
+    return Symbol{Start: int64(s.FileStart), End: int64(s.FileEnd)}
+}
+
+type Symbol struct {
+    Start int64
+    End   int64
+}
+
+type Symbols struct {
+{{range .R.Symbols}}
+    // {{.CDefinition}}
+    {{.Name}} Symbol
+{{end -}}
+}
+
+// Gets the symbols from the rom meta information.
+func (r *ROM) GetSymbols() *Symbols {
+    ret := &Symbols{}
+    for _, symbt := range r.Symbols() {
+        switch symbt.Name {
+{{range $idx, $elem := .R.Symbols}}
+        case "{{$elem.Name}}":
+            ret.{{$elem.Name}} = FromFbs(symbt)
+{{end}}
+        }
+
+    }
+
+    return ret
+}

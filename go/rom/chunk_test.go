@@ -27,19 +27,21 @@ func TestBuildChunks(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to build chunks: %s", err)
 	}
-	t.Logf("Got %d, %d many chunks", len(r.TextChunks), len(r.DataChunks))
+	txtChunks := r.TextSection.Chunks()
+	dataChunks := r.DataSection.Chunks()
+	t.Logf("Got %d, %d many chunks", len(txtChunks), len(dataChunks))
 	// check that chunks are correct and cover whole file.
 	info, err := os.Stat(testFile)
 	if err != nil {
 		t.Fatalf("Failed to get filesize: %s", err)
 	}
-	checkChunks(t, r.TextChunks, 0)
-	lastText := r.TextChunks[len(r.TextChunks)-1]
+	checkChunks(t, txtChunks, 0)
+	lastText := txtChunks[len(txtChunks)-1]
 	if lastText.FileEnd != r.DataFileStart() {
 		t.Fatalf("Last chunk in text region should end at 0x%x not 0x%x", r.DataFileStart(), lastText.FileEnd)
 	}
-	checkChunks(t, r.DataChunks, lastText.FileEnd)
-	lastData := r.DataChunks[len(r.DataChunks)-1]
+	checkChunks(t, dataChunks, lastText.FileEnd)
+	lastData := dataChunks[len(dataChunks)-1]
 	if lastData.FileEnd != info.Size() {
 		t.Fatalf("Last chunk in data region should end at 0x%x not 0x%x", info.Size(), lastData.FileEnd)
 	}

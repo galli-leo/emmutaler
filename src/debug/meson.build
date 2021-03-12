@@ -7,3 +7,5 @@ debug_src = files(
     'register-dump.h',
     'sigcontextinfo.h'
 )
+
+debug_src += symbols_list_h

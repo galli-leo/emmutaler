@@ -18,14 +18,16 @@
 
 if [ "$#" -ne 2 ]; then
     echo "go-build-wrapper: wrong arguments" >&2
-    echo "Usage: go-build-wrapper [SOURCE DIR] [OUTPUT DIR]" >&2
+    echo "Usage: go-build-wrapper [SOURCE DIR] [OUTPUT]" >&2
     exit 1
 fi
+
+PREV_PWD=$PWD
 
 if ! cd "$1"; then
     echo "go-build-wrapper: failed to enter source directory $1"
     exit 1
 fi
 
-go build -o "$2"
+go build -o "$PREV_PWD/$2" .
 exit "$?"

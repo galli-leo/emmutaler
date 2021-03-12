@@ -7,7 +7,7 @@
 #include <ucontext.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "config.h"
+// #include "config.h"
 
 // ^\s*(\w*)\s*[\w-]*\s*\w*\s*([\w ();:\/,.-]*)(\n\s*(([\w();:\/.-] ?)+))?$
 
@@ -20,6 +20,8 @@ typedef struct signal_info
 
 
 #define SIG(name, desc) {#name, name, desc}, 
+
+void print_stacktrace(void* prev_pc, void* fp);
 
 /**
  * 

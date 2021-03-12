@@ -29,1748 +29,4428 @@ mov x29, sp
 .type rom_start,@function
 rom_start:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 0, 340
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 0, 12
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 340, 172
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 16, 80
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 100, 8
+
+
+
+bl vbar_el1_handler_veneer_6c
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 112, 68
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 184, 156
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 340, 172
+
 
 
 .global rom_aSecureromForT8
 .type rom_aSecureromForT8,@function
 rom_aSecureromForT8:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 512, 55
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 512, 55
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 567, 9
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 567, 9
+
 
 
 .global rom_aRomrelease
 .type rom_aRomrelease,@function
 rom_aRomrelease:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 576, 11
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 576, 11
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 587, 53
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 587, 53
+
 
 
 .global rom_aIboot447900100
 .type rom_aIboot447900100,@function
 rom_aIboot447900100:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 640, 21
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 640, 21
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 661, 471
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 661, 155
+
+
+
+.quad 0x19C00C000
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 824, 88
+
+
+
+.global rom_arch_cpu_init
+.type rom_arch_cpu_init,@function
+rom_arch_cpu_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 912, 148
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1060, 72
+
 
 
 .global rom__arm_write_sctlr
 .type rom__arm_write_sctlr,@function
 rom__arm_write_sctlr:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1132, 36
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1132, 36
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1168, 148
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1168, 80
+
+
+
+.global rom_aic_get_ticks
+.type rom_aic_get_ticks,@function
+rom_aic_get_ticks:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1248, 12
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1260, 32
+
+
+
+.global rom_arm_invalidate_icache
+.type rom_arm_invalidate_icache,@function
+rom_arm_invalidate_icache:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1292, 16
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1308, 8
+
 
 
 .global rom_nullsub_1
 .type rom_nullsub_1,@function
 rom_nullsub_1:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1316, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1316, 4
+
 
 
 .global rom_nullsub_2
 .type rom_nullsub_2,@function
 rom_nullsub_2:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1320, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1320, 4
 
 
-.global rom_nullsub_3
-.type rom_nullsub_3,@function
-rom_nullsub_3:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1324, 4
+.global rom_arm_invalidate_dcache
+.type rom_arm_invalidate_dcache,@function
+rom_arm_invalidate_dcache:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1324, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1328, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1328, 8
+
 
 
 .global rom_nullsub_4
 .type rom_nullsub_4,@function
 rom_nullsub_4:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1336, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1336, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1340, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1340, 8
+
 
 
 .global rom__arm_vtop
 .type rom__arm_vtop,@function
 rom__arm_vtop:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1348, 76
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1348, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1424, 12
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1356, 68
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1428, 8
+
 
 
 .global rom_arch_enable_ints
 .type rom_arch_enable_ints,@function
 rom_arch_enable_ints:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1436, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1436, 12
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1464, 72
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1452, 12
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1464, 72
+
 
 
 .global rom_nullsub_14
 .type rom_nullsub_14,@function
 rom_nullsub_14:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1536, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1536, 4
+
 
 
 .global rom__arch_halt
 .type rom__arch_halt,@function
 rom__arch_halt:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1540, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1540, 16
+
 
 
 .global rom__arch_spin
 .type rom__arch_spin,@function
 rom__arch_spin:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1556, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1556, 8
+
 
 
 .global rom_set_paci_a_key
 .type rom_set_paci_a_key,@function
 rom_set_paci_a_key:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1564, 20
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1564, 20
+
 
 
 .global rom_set_paci_b_key
 .type rom_set_paci_b_key,@function
 rom_set_paci_b_key:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1584, 20
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1584, 20
+
 
 
 .global rom_set_pacd_a_key
 .type rom_set_pacd_a_key,@function
 rom_set_pacd_a_key:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1604, 20
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1604, 20
+
 
 
 .global rom_set_pacd_b_key
 .type rom_set_pacd_b_key,@function
 rom_set_pacd_b_key:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1624, 20
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1624, 20
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1644, 2492
+
+.global rom_set_pacc_a_key
+.type rom_set_pacc_a_key,@function
+rom_set_pacc_a_key:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1644, 20
+
+
+
+.global rom_enable_pacia_key
+.type rom_enable_pacia_key,@function
+rom_enable_pacia_key:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1664, 24
+
+
+
+.global rom_enable_pacib_key
+.type rom_enable_pacib_key,@function
+rom_enable_pacib_key:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1688, 24
+
+
+
+.global rom_authenticate_task_pointer
+.type rom_authenticate_task_pointer,@function
+rom_authenticate_task_pointer:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1712, 20
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 1732, 316
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 2052, 380
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 2436, 636
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 3076, 140
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 3220, 124
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 3348, 108
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 3460, 636
+
+
+
+.global rom_aUuid
+.type rom_aUuid,@function
+rom_aUuid:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4096, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4100, 36
+
 
 
 .global rom_getcontext_call_X2
 .type rom_getcontext_call_X2,@function
 rom_getcontext_call_X2:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4136, 164
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4136, 164
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4300, 1376
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 4300, 1376
+
 
 
 .global rom_def_100001428
 .type rom_def_100001428,@function
 rom_def_100001428:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5676, 280
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5676, 16
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5956, 1032
+
+.global rom_jpt_100001428
+.type rom_jpt_100001428,@function
+rom_jpt_100001428:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5692, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5696, 260
+
+
+
+.global rom_arm_mmu_init
+.type rom_arm_mmu_init,@function
+rom_arm_mmu_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 5956, 268
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 6224, 756
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 6984, 4
+
 
 
 .global rom_arch_task_create
 .type rom_arch_task_create,@function
 rom_arch_task_create:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 6988, 200
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 6988, 200
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 7188, 6640
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 7188, 140
+
+
+
+.global rom_main
+.type rom_main,@function
+rom_main:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 7328, 40
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 7372, 4
+
+
+
+bl arch_cpu_init_handler_veneer
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 7380, 1312
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 8692, 1852
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 10548, 456
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 11008, 800
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 11812, 200
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 12016, 432
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 12452, 484
+
+
+
+.global rom_gpio_read
+.type rom_gpio_read,@function
+rom_gpio_read:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 12936, 128
+
+
+
+.global rom_gpio_get_pad_pin
+.type rom_gpio_get_pad_pin,@function
+rom_gpio_get_pad_pin:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13064, 132
+
+
+
+.global rom_flash_spi_select
+.type rom_flash_spi_select,@function
+rom_flash_spi_select:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13196, 176
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13372, 192
+
+
+
+.global rom_gpio_configure
+.type rom_gpio_configure,@function
+rom_gpio_configure:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13564, 264
+
 
 
 .global rom_def_100003578
 .type rom_def_100003578,@function
 rom_def_100003578:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13828, 64
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13828, 64
+
 
 
 .global rom_jpt_100003578
 .type rom_jpt_100003578,@function
 rom_jpt_100003578:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13892, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13892, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13896, 6368
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13896, 28
+
+
+
+.global rom_gpio_configure_pupdn
+.type rom_gpio_configure_pupdn,@function
+rom_gpio_configure_pupdn:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 13924, 164
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 14088, 192
+
+
+
+.global rom_rGPIO_PINSTRAPS_VALID_CFG_0
+.type rom_rGPIO_PINSTRAPS_VALID_CFG_0,@function
+rom_rGPIO_PINSTRAPS_VALID_CFG_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 14280, 24
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 14304, 1348
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 15656, 208
+
+
+
+blr X20
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 15868, 104
+
+
+
+blr X20
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 15976, 104
+
+
+
+blr X19
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 16084, 2044
+
+
+
+.global rom_flash_spi_init
+.type rom_flash_spi_init,@function
+rom_flash_spi_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18128, 204
+
+
+
+.global rom_flash_spi_read_range_fun
+.type rom_flash_spi_read_range_fun,@function
+rom_flash_spi_read_range_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18332, 264
+
+
+
+.global rom_flash_spi_setup_bus
+.type rom_flash_spi_setup_bus,@function
+rom_flash_spi_setup_bus:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18596, 28
+
+
+
+.global rom_flash_spi_wait_busy
+.type rom_flash_spi_wait_busy,@function
+rom_flash_spi_wait_busy:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18624, 240
+
+
+
+.global rom_spiregs
+.type rom_spiregs,@function
+rom_spiregs:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18864, 16
+
+
+
+.global rom_empty_panic
+.type rom_empty_panic,@function
+rom_empty_panic:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18880, 52
+
+
+
+.global rom_spi_setup
+.type rom_spi_setup,@function
+rom_spi_setup:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 18932, 320
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 19252, 80
+
+
+
+.global rom_spi_read_etc
+.type rom_spi_read_etc,@function
+rom_spi_read_etc:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 19332, 380
+
+
+
+.global rom_spi_write_etc
+.type rom_spi_write_etc,@function
+rom_spi_write_etc:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 19712, 280
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 19992, 88
+
+
+
+.global rom_spi_gpio_read
+.type rom_spi_gpio_read,@function
+rom_spi_gpio_read:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20080, 36
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20116, 148
+
 
 
 .global rom__image4_get_partial
 .type rom__image4_get_partial,@function
 rom__image4_get_partial:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20264, 348
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20264, 348
+
 
 
 .global rom_der_expect
 .type rom_der_expect,@function
 rom_der_expect:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20612, 64
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20612, 64
+
 
 
 .global rom_der_restrict
 .type rom_der_restrict,@function
 rom_der_restrict:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20676, 76
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20676, 76
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20752, 256
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20752, 28
+
+
+
+.global rom_der_expect_ia5string
+.type rom_der_expect_ia5string,@function
+rom_der_expect_ia5string:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 20780, 228
+
 
 
 .global rom_image4_validate_property_callback_interposer
 .type rom_image4_validate_property_callback_interposer,@function
 rom_image4_validate_property_callback_interposer:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 21008, 1468
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 21008, 156
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 21168, 60
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 21232, 68
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 21304, 1172
+
 
 
 .global rom_called_by_verify_impl
 .type rom_called_by_verify_impl,@function
 rom_called_by_verify_impl:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22476, 24
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22476, 24
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22500, 504
+
+.global rom_image4_process_superblock
+.type rom_image4_process_superblock,@function
+rom_image4_process_superblock:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22500, 192
+
+
+
+blr X9
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22696, 248
+
+
+
+.global rom_image4_find
+.type rom_image4_find,@function
+rom_image4_find:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 22944, 60
+
 
 
 .global rom_image4_load
 .type rom_image4_load,@function
 rom_image4_load:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23004, 2368
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23004, 440
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25372, 340
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23448, 144
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23596, 112
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23712, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 23740, 1632
+
+
+
+.global rom_image4_load_copyobject
+.type rom_image4_load_copyobject,@function
+rom_image4_load_copyobject:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25372, 112
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25488, 224
+
 
 
 .global rom_image4_verify_number_relation
 .type rom_image4_verify_number_relation,@function
 rom_image4_verify_number_relation:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25712, 160
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25712, 160
+
 
 
 .global rom_image4_verify_boolean_relation
 .type rom_image4_verify_boolean_relation,@function
 rom_image4_verify_boolean_relation:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25872, 124
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25872, 124
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25996, 1844
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 25996, 160
+
+
+
+.global rom_platform_cache_operation
+.type rom_platform_cache_operation,@function
+rom_platform_cache_operation:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26156, 192
+
+
+
+blr X23
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26352, 104
+
+
+
+.global rom_platform_sidp_rom_manifest_locked
+.type rom_platform_sidp_rom_manifest_locked,@function
+rom_platform_sidp_rom_manifest_locked:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26456, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26460, 68
+
+
+
+.global rom_j_chipid_get_minimum_epoch
+.type rom_j_chipid_get_minimum_epoch,@function
+rom_j_chipid_get_minimum_epoch:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26528, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 26532, 1280
+
+
+
+.global rom_panic_as_well
+.type rom_panic_as_well,@function
+rom_panic_as_well:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 27812, 28
+
 
 
 .global rom_platform_start
 .type rom_platform_start,@function
 rom_platform_start:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 27840, 208
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 27840, 208
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28048, 92
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28048, 28
+
+
+
+b report_no_boot_image_handler_veneer
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28080, 28
+
+
+
+b some_kind_of_report_handler_veneer
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28112, 28
+
 
 
 .global rom_nullsub_5
 .type rom_nullsub_5,@function
 rom_nullsub_5:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28140, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28140, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28144, 3424
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28144, 132
+
+
+
+.global rom_platform_init_setup_clocks
+.type rom_platform_init_setup_clocks,@function
+rom_platform_init_setup_clocks:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28276, 60
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28336, 28
+
+
+
+.global rom_unknown_main_init_fn
+.type rom_unknown_main_init_fn,@function
+rom_unknown_main_init_fn:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28364, 52
+
+
+
+.global rom_platform_init_hwpins
+.type rom_platform_init_hwpins,@function
+rom_platform_init_hwpins:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28416, 260
+
+
+
+.global rom_platform_init_internal_mem
+.type rom_platform_init_internal_mem,@function
+rom_platform_init_internal_mem:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28676, 28
+
+
+
+.global rom_platform_get_entropy
+.type rom_platform_get_entropy,@function
+rom_platform_get_entropy:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28704, 108
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 28812, 420
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 29236, 372
+
+
+
+.global rom_platform_disable_keys
+.type rom_platform_disable_keys,@function
+rom_platform_disable_keys:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 29608, 116
+
+
+
+.global rom_get_integrated_hash
+.type rom_get_integrated_hash,@function
+rom_get_integrated_hash:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 29724, 24
+
+
+
+.global rom_something_l2_cramconfig
+.type rom_something_l2_cramconfig,@function
+rom_something_l2_cramconfig:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 29748, 32
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 29780, 356
+
+
+
+.global rom_platform_reset
+.type rom_platform_reset,@function
+rom_platform_reset:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30136, 20
+
+
+
+.global rom_platform_get_board_id
+.type rom_platform_get_board_id,@function
+rom_platform_get_board_id:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30156, 80
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30236, 8
+
+
+
+.global rom_platform_get_boot_device
+.type rom_platform_get_boot_device,@function
+rom_platform_get_boot_device:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30244, 148
+
+
+
+.global rom_platform_enable_boot_interface
+.type rom_platform_enable_boot_interface,@function
+rom_platform_enable_boot_interface:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30392, 260
+
+
+
+.global rom_platform_get_nonce
+.type rom_platform_get_nonce,@function
+rom_platform_get_nonce:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30652, 96
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30748, 4
+
+
+
+.global rom_platform_get_spi_frequency
+.type rom_platform_get_spi_frequency,@function
+rom_platform_get_spi_frequency:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30752, 44
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30796, 68
+
+
+
+.global rom_platform_get_usb_cable_connected
+.type rom_platform_get_usb_cable_connected,@function
+rom_platform_get_usb_cable_connected:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30864, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 30868, 248
+
+
+
+.global rom_platform_get_force_dfu
+.type rom_platform_get_force_dfu,@function
+rom_platform_get_force_dfu:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31116, 36
+
+
+
+.global rom_platform_get_request_dfu1
+.type rom_platform_get_request_dfu1,@function
+rom_platform_get_request_dfu1:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31152, 36
+
+
+
+.global rom_platform_get_request_dfu2
+.type rom_platform_get_request_dfu2,@function
+rom_platform_get_request_dfu2:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31188, 36
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31224, 136
+
+
+
+.global rom_platform_demote_production
+.type rom_platform_demote_production,@function
+rom_platform_demote_production:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31360, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31364, 16
+
+
+
+.global rom_platform_get_boot_manifest_hash
+.type rom_platform_get_boot_manifest_hash,@function
+rom_platform_get_boot_manifest_hash:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31380, 68
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31448, 28
+
+
+
+.global rom_platform_set_boot_manifest_hash
+.type rom_platform_set_boot_manifest_hash,@function
+rom_platform_set_boot_manifest_hash:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31476, 92
+
 
 
 .global rom_memzero_if_io_reg
 .type rom_memzero_if_io_reg,@function
 rom_memzero_if_io_reg:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31568, 100
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31568, 100
+
 
 
 .global rom_panic_now
 .type rom_panic_now,@function
 rom_panic_now:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31668, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31668, 28
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31696, 2132
+
+.global rom_platform_sidp_lock_rom_manifest
+.type rom_platform_sidp_lock_rom_manifest,@function
+rom_platform_sidp_lock_rom_manifest:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31696, 88
+
+
+
+.global rom_platform_sidp_set_rom_manifest
+.type rom_platform_sidp_set_rom_manifest,@function
+rom_platform_sidp_set_rom_manifest:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31784, 152
+
+
+
+.global rom_platform_get_mix_n_match_prevention_status
+.type rom_platform_get_mix_n_match_prevention_status,@function
+rom_platform_get_mix_n_match_prevention_status:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31936, 24
+
+
+
+.global rom_platform_set_mix_n_match_prevention_status
+.type rom_platform_set_mix_n_match_prevention_status,@function
+rom_platform_set_mix_n_match_prevention_status:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 31960, 40
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 32004, 776
+
+
+
+bl vbar_el1_handler_veneer_800c
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 32784, 4
+
+
+
+nop
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 32792, 44
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 32836, 960
+
+
+
+.global rom_chipid_get_minimum_epoch
+.type rom_chipid_get_minimum_epoch,@function
+rom_chipid_get_minimum_epoch:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33796, 24
+
+
+
+.global rom_chipid_get_chip_id
+.type rom_chipid_get_chip_id,@function
+rom_chipid_get_chip_id:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33820, 8
+
 
 
 .global rom__chipid_get_chip_revision
 .type rom__chipid_get_chip_revision,@function
 rom__chipid_get_chip_revision:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33828, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33828, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33860, 1576
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 33860, 1576
+
 
 
 .global rom_def_100008A1C
 .type rom_def_100008A1C,@function
 rom_def_100008A1C:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35436, 24
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35436, 24
+
 
 
 .global rom_jpt_100008A1C
 .type rom_jpt_100008A1C,@function
 rom_jpt_100008A1C:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35460, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35460, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35464, 28
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35464, 28
+
 
 
 .global rom_nullsub_6
 .type rom_nullsub_6,@function
 rom_nullsub_6:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35492, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35492, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35496, 64
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35496, 64
+
 
 
 .global rom_def_100008B28
 .type rom_def_100008B28,@function
 rom_def_100008B28:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35560, 80
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35560, 80
+
 
 
 .global rom_jpt_100008B28
 .type rom_jpt_100008B28,@function
 rom_jpt_100008B28:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35640, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35640, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35644, 1100
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 35644, 832
+
+
+
+.global rom_prepare_and_jump
+.type rom_prepare_and_jump,@function
+rom_prepare_and_jump:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36476, 148
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36628, 20
+
+
+
+blr X20
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36652, 20
+
+
+
+.global rom_debug_init
+.type rom_debug_init,@function
+rom_debug_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36672, 52
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36724, 20
+
 
 
 .global rom_nullsub_7
 .type rom_nullsub_7,@function
 rom_nullsub_7:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36744, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36744, 4
+
 
 
 .global rom_nullsub_8
 .type rom_nullsub_8,@function
 rom_nullsub_8:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36748, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36748, 4
+
 
 
 .global rom__panic
 .type rom__panic,@function
 rom__panic:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36752, 384
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 36752, 384
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37136, 108
+
+.global rom_sys_init_stack_cookie
+.type rom_sys_init_stack_cookie,@function
+rom_sys_init_stack_cookie:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37136, 108
+
 
 
 .global rom_stack_corrupted
 .type rom_stack_corrupted,@function
 rom_stack_corrupted:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37244, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37244, 28
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37272, 284
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37272, 132
+
+
+
+.global rom_sys_init
+.type rom_sys_init,@function
+rom_sys_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37404, 152
+
 
 
 .global rom_task_init
 .type rom_task_init,@function
 rom_task_init:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37556, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37556, 28
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37584, 652
+
+.global rom_security_init
+.type rom_security_init,@function
+rom_security_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37584, 244
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37828, 148
+
+
+
+.global rom_security_allow_modes
+.type rom_security_allow_modes,@function
+rom_security_allow_modes:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 37976, 80
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38056, 180
+
 
 
 .global rom_security_get_effective_production_status
 .type rom_security_get_effective_production_status,@function
 rom_security_get_effective_production_status:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38236, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38236, 44
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38280, 956
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38280, 140
+
+
+
+.global rom_security_consolidate_environment
+.type rom_security_consolidate_environment,@function
+rom_security_consolidate_environment:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38420, 144
+
+
+
+.global rom_security_sidp_seal_rom_manifest
+.type rom_security_sidp_seal_rom_manifest,@function
+rom_security_sidp_seal_rom_manifest:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38564, 132
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 38696, 384
+
+
+
+.global rom_set_thread_id_bootstrap
+.type rom_set_thread_id_bootstrap,@function
+rom_set_thread_id_bootstrap:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39080, 20
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39100, 136
+
 
 
 .global rom_task_create_etc
 .type rom_task_create_etc,@function
 rom_task_create_etc:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39236, 256
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39236, 256
+
 
 
 .global rom_idle_task_routine_0
 .type rom_idle_task_routine_0,@function
 rom_idle_task_routine_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39492, 228
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39492, 228
+
 
 
 .global rom_current_task
 .type rom_current_task,@function
 rom_current_task:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39720, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39720, 44
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39764, 2344
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 39764, 1172
+
+
+
+.global rom_task_sleep
+.type rom_task_sleep,@function
+rom_task_sleep:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 40936, 116
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 41052, 908
+
+
+
+.global rom_system_time
+.type rom_system_time,@function
+rom_system_time:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 41960, 28
+
+
+
+.global rom_time_has_elapsed
+.type rom_time_has_elapsed,@function
+rom_time_has_elapsed:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 41988, 52
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42040, 68
+
 
 
 .global rom__aes_crypto_cmd
 .type rom__aes_crypto_cmd,@function
 rom__aes_crypto_cmd:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42108, 316
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42108, 316
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42424, 200
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42424, 108
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42536, 20
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42560, 64
+
 
 
 .global rom__boot_check_panic
 .type rom__boot_check_panic,@function
 rom__boot_check_panic:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42624, 260
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42624, 260
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42884, 1480
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 42884, 1060
+
+
+
+.global rom_flash_nor_register
+.type rom_flash_nor_register,@function
+rom_flash_nor_register:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 43944, 60
+
+
+
+.global rom_nor_blockdev_read_block_0
+.type rom_nor_blockdev_read_block_0,@function
+rom_nor_blockdev_read_block_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44004, 24
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44028, 48
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44080, 24
+
+
+
+.global rom_flash_nor_init
+.type rom_flash_nor_init,@function
+rom_flash_nor_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44104, 28
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44132, 232
+
 
 
 .global rom__ip6_drain
 .type rom__ip6_drain,@function
 rom__ip6_drain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44364, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44364, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44396, 64
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44396, 64
+
 
 
 .global rom_nullsub_9
 .type rom_nullsub_9,@function
 rom_nullsub_9:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44460, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44460, 4
+
 
 
 .global rom_nullsub_10
 .type rom_nullsub_10,@function
 rom_nullsub_10:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44464, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44464, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44468, 28
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44468, 28
+
 
 
 .global rom_nullsub_11
 .type rom_nullsub_11,@function
 rom_nullsub_11:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44496, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44496, 4
+
 
 
 .global rom_nullsub_12
 .type rom_nullsub_12,@function
 rom_nullsub_12:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44500, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44500, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44504, 104
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44504, 104
+
 
 
 .global rom_image_search_bdev
 .type rom_image_search_bdev,@function
 rom_image_search_bdev:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44608, 204
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44608, 96
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44812, 340
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44708, 104
+
+
+
+.global rom_image_load
+.type rom_image_load,@function
+rom_image_load:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 44812, 336
+
+
+
+.global rom_image_find
+.type rom_image_find,@function
+rom_image_find:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45148, 4
+
 
 
 .global rom_image_create_from_memory
 .type rom_image_create_from_memory,@function
 rom_image_create_from_memory:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45152, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45152, 84
 
-
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45196, 40
 
 
 .global rom_image_free
 .type rom_image_free,@function
 rom_image_free:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45236, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45236, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45268, 1452
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45268, 548
+
+
+
+.global rom_set_thread_id
+.type rom_set_thread_id,@function
+rom_set_thread_id:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45816, 8
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45824, 64
+
+
+
+.global rom_arm_fp_init
+.type rom_arm_fp_init,@function
+rom_arm_fp_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45888, 32
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 45920, 472
+
+
+
+.global rom_timer_get_ticks_0
+.type rom_timer_get_ticks_0,@function
+rom_timer_get_ticks_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46392, 4
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46396, 44
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46444, 212
+
+
+
+.global rom_platform_power_spin
+.type rom_platform_power_spin,@function
+rom_platform_power_spin:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46656, 64
+
 
 
 .global rom___ZN25AppleExternalPowerManager23isExternalPowerProviderEP9IOService
 .type rom___ZN25AppleExternalPowerManager23isExternalPowerProviderEP9IOService,@function
 rom___ZN25AppleExternalPowerManager23isExternalPowerProviderEP9IOService:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46720, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46720, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46752, 7472
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 46752, 1928
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48684, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48712, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48740, 20
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48764, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48792, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48820, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48848, 24
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 48876, 304
+
+
+
+.global rom_spi_nand_init
+.type rom_spi_nand_init,@function
+rom_spi_nand_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 49180, 332
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 49512, 728
+
+
+
+blr X9
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 50244, 3980
+
 
 
 .global rom_nullsub_15
 .type rom_nullsub_15,@function
 rom_nullsub_15:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 54224, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 54224, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 54228, 5408
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 54228, 2064
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56296, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56352, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56408, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56464, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56520, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56576, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56632, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56688, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56744, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56800, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56856, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56912, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 56968, 1920
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 58892, 128
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59024, 260
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59288, 88
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59380, 176
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59560, 76
+
 
 
 .global rom_def_10000E514
 .type rom_def_10000E514,@function
 rom_def_10000E514:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59636, 372
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 59636, 372
+
 
 
 .global rom_jpt_10000E514
 .type rom_jpt_10000E514,@function
 rom_jpt_10000E514:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60008, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60008, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60012, 40
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60012, 40
+
 
 
 .global rom_jpt_10000E6C4
 .type rom_jpt_10000E6C4,@function
 rom_jpt_10000E6C4:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60052, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60052, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60056, 20
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60056, 20
+
 
 
 .global rom_jpt_10000E83C
 .type rom_jpt_10000E83C,@function
 rom_jpt_10000E83C:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60076, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60076, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60080, 528
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60080, 112
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60196, 140
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60340, 44
+
+
+
+blr X9
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60388, 60
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60452, 156
+
 
 
 .global rom__vsock_abort
 .type rom__vsock_abort,@function
 rom__vsock_abort:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60608, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60608, 44
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60652, 3832
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60652, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60708, 204
+
+
+
+.global rom_thunderboot_get_dfu_image
+.type rom_thunderboot_get_dfu_image,@function
+rom_thunderboot_get_dfu_image:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 60912, 96
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 61008, 1028
+
+
+
+.global rom_lookup_blockdev
+.type rom_lookup_blockdev,@function
+rom_lookup_blockdev:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62036, 68
+
+
+
+.global rom_register_blockdev
+.type rom_register_blockdev,@function
+rom_register_blockdev:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62104, 24
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62128, 164
+
+
+
+blr X9
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62296, 72
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62372, 64
+
+
+
+.global rom_construct_blockdev
+.type rom_construct_blockdev,@function
+rom_construct_blockdev:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62436, 172
+
+
+
+.global rom_blockdev_read_hook_fun
+.type rom_blockdev_read_hook_fun,@function
+rom_blockdev_read_hook_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62608, 180
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62792, 188
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 62984, 84
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63072, 52
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63128, 112
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63244, 108
+
+
+
+.global rom_blockdev_read_block_hook_fun
+.type rom_blockdev_read_block_hook_fun,@function
+rom_blockdev_read_block_hook_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63352, 8
+
+
+
+.global rom_blockdev_write_hook_fun
+.type rom_blockdev_write_hook_fun,@function
+rom_blockdev_write_hook_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63360, 180
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63544, 296
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63844, 116
+
+
+
+.global rom_blockdev_write_block_hook_fun
+.type rom_blockdev_write_block_hook_fun,@function
+rom_blockdev_write_block_hook_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63960, 8
+
+
+
+.global rom_blockdev_erase_hook_fun
+.type rom_blockdev_erase_hook_fun,@function
+rom_blockdev_erase_hook_fun:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63968, 8
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 63976, 88
+
+
+
+.global rom_cbuf_create
+.type rom_cbuf_create,@function
+rom_cbuf_create:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64064, 132
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64196, 288
+
 
 
 .global rom_def_10000FBA8
 .type rom_def_10000FBA8,@function
 rom_def_10000FBA8:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64484, 144
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64484, 144
+
 
 
 .global rom_jpt_10000FBA8
 .type rom_jpt_10000FBA8,@function
 rom_jpt_10000FBA8:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64628, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64628, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64632, 24
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64632, 24
+
 
 
 .global rom_heap_alloc
 .type rom_heap_alloc,@function
 rom_heap_alloc:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64656, 256
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64656, 256
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64912, 3040
+
+.global rom_uk_heap_fn
+.type rom_uk_heap_fn,@function
+rom_uk_heap_fn:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64912, 36
+
+
+
+.global rom_panic_almost
+.type rom_panic_almost,@function
+rom_panic_almost:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64948, 28
+
+
+
+.global rom_required_size
+.type rom_required_size,@function
+rom_required_size:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 64976, 60
+
+
+
+.global rom_maybe_verify_block_padding
+.type rom_maybe_verify_block_padding,@function
+rom_maybe_verify_block_padding:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65036, 84
+
+
+
+.global rom_calloc
+.type rom_calloc,@function
+rom_calloc:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65120, 28
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65148, 28
+
+
+
+.global rom_verify_block_checksum
+.type rom_verify_block_checksum,@function
+rom_verify_block_checksum:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65176, 92
+
+
+
+.global rom_heap_free
+.type rom_heap_free,@function
+rom_heap_free:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65268, 516
+
+
+
+.global rom_calculate_block_checksum
+.type rom_calculate_block_checksum,@function
+rom_calculate_block_checksum:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65784, 28
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 65812, 664
+
+
+
+.global rom_posix_memalign
+.type rom_posix_memalign,@function
+rom_posix_memalign:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 66476, 96
+
+
+
+.global rom_heap_panic
+.type rom_heap_panic,@function
+rom_heap_panic:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 66572, 28
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 66600, 116
+
+
+
+.global rom_free_list_add
+.type rom_free_list_add,@function
+rom_free_list_add:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 66716, 164
+
+
+
+.global rom_heap_add_chunk_0
+.type rom_heap_add_chunk_0,@function
+rom_heap_add_chunk_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 66880, 424
+
+
+
+.global rom_heap_add_chunk
+.type rom_heap_add_chunk,@function
+rom_heap_add_chunk:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67304, 20
+
+
+
+.global rom_another_heap_panic2
+.type rom_another_heap_panic2,@function
+rom_another_heap_panic2:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67324, 28
+
+
+
+.global rom_heap_set_cookie
+.type rom_heap_set_cookie,@function
+rom_heap_set_cookie:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67352, 52
+
+
+
+.global rom_another_heap_panic
+.type rom_another_heap_panic,@function
+rom_another_heap_panic:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67404, 56
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67460, 492
+
 
 
 .global rom_free_list_remove
 .type rom_free_list_remove,@function
 rom_free_list_remove:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67952, 140
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 67952, 140
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68092, 296
+
+.global rom_split_tail
+.type rom_split_tail,@function
+rom_split_tail:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68092, 296
+
 
 
 .global rom_malloc
 .type rom_malloc,@function
 rom_malloc:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68388, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68388, 8
+
 
 
 .global rom_free
 .type rom_free,@function
 rom_free:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68396, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68396, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68400, 80
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68400, 56
+
+
+
+.global rom_log2_int
+.type rom_log2_int,@function
+rom_log2_int:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68456, 24
+
 
 
 .global rom_memset_s
 .type rom_memset_s,@function
 rom_memset_s:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68480, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68480, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68512, 200
+
+.global rom_weird_memset
+.type rom_weird_memset,@function
+rom_weird_memset:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68512, 72
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68584, 112
+
+
+
+.global rom_not_empty_putchar
+.type rom_not_empty_putchar,@function
+rom_not_empty_putchar:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68696, 16
+
 
 
 .global rom__do_printf
 .type rom__do_printf,@function
 rom__do_printf:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68712, 1864
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68712, 232
+
+
+
+.global rom_def_100010D1C
+.type rom_def_100010D1C,@function
+rom_def_100010D1C:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 68944, 128
+
+
+
+.global rom_def_100010D64
+.type rom_def_100010D64,@function
+rom_def_100010D64:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 69072, 236
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 69312, 12
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 69328, 240
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 69572, 524
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70100, 48
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70152, 32
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70188, 44
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70236, 48
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70288, 48
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70340, 36
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70380, 196
+
 
 
 .global rom_jpt_100010D1C
 .type rom_jpt_100010D1C,@function
 rom_jpt_100010D1C:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70576, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70576, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70580, 168
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70580, 168
+
 
 
 .global rom_jpt_100010D64
 .type rom_jpt_100010D64,@function
 rom_jpt_100010D64:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70748, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70748, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70752, 508
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 70752, 508
+
 
 
 .global rom__platform_early_init
 .type rom__platform_early_init,@function
 rom__platform_early_init:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71260, 92
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71260, 28
+
+
+
+.global rom_puts
+.type rom_puts,@function
+rom_puts:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71288, 64
+
 
 
 .global rom__putchar
 .type rom__putchar,@function
 rom__putchar:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71352, 60
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71352, 60
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71412, 40
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71412, 40
+
 
 
 .global rom_strlcpy
 .type rom_strlcpy,@function
 rom_strlcpy:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71452, 40
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71452, 40
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71492, 44
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71492, 44
 
 
-.global rom__memmove
-.type rom__memmove,@function
-rom__memmove:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71536, 432
+.global rom_memcpy
+.type rom_memcpy,@function
+rom_memcpy:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71536, 432
+
 
 
 .global rom__bzero
 .type rom__bzero,@function
 rom__bzero:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71968, 120
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71968, 24
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72088, 8
+
+cmp x2, #0x40000
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 71996, 92
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72088, 8
+
 
 
 .global rom__memset
 .type rom__memset,@function
 rom__memset:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72096, 168
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72096, 168
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72264, 36
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72264, 36
+
 
 
 .global rom_memcmp
 .type rom_memcmp,@function
 rom_memcmp:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72300, 52
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72300, 52
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72352, 1656
+
+.global rom_strcmp
+.type rom_strcmp,@function
+rom_strcmp:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72352, 44
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72396, 244
+
+
+
+.global rom_strlen
+.type rom_strlen,@function
+rom_strlen:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72640, 24
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72664, 284
+
+
+
+.global rom_mib_find_node
+.type rom_mib_find_node,@function
+rom_mib_find_node:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 72948, 240
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 73188, 140
+
+
+
+.global rom__mib_find
+.type rom__mib_find,@function
+rom__mib_find:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 73328, 176
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 73508, 56
+
+
+
+.global rom_mib_get_size
+.type rom_mib_get_size,@function
+rom_mib_get_size:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 73564, 44
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 73608, 400
+
 
 
 .global rom_def_1000120D0
 .type rom_def_1000120D0,@function
 rom_def_1000120D0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74008, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74008, 28
+
 
 
 .global rom_jpt_1000120D0
 .type rom_jpt_1000120D0,@function
 rom_jpt_1000120D0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74036, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74036, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74040, 452
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74040, 24
+
+
+
+.global rom_get_entropy
+.type rom_get_entropy,@function
+rom_get_entropy:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74064, 56
+
+
+
+.global rom_init_entropy_source
+.type rom_init_entropy_source,@function
+rom_init_entropy_source:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74120, 224
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74348, 32
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74384, 60
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74444, 48
+
 
 
 .global rom_timer_get_ticks
 .type rom_timer_get_ticks,@function
 rom_timer_get_ticks:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74492, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74492, 16
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74508, 1200
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74508, 72
+
+
+
+.global rom_random_get_bytes_internal
+.type rom_random_get_bytes_internal,@function
+rom_random_get_bytes_internal:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74580, 240
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74824, 28
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74856, 132
+
+
+
+.global rom_random_get_bytes
+.type rom_random_get_bytes,@function
+rom_random_get_bytes:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 74988, 36
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75024, 536
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75564, 144
+
 
 
 .global rom_enter_critical_section
 .type rom_enter_critical_section,@function
 rom_enter_critical_section:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75708, 84
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75708, 84
+
 
 
 .global rom_exit_critical_section
 .type rom_exit_critical_section,@function
 rom_exit_critical_section:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75792, 76
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75792, 76
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75868, 432
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75868, 68
+
+
+
+.global rom__irq_exit_critical_section_0
+.type rom__irq_exit_critical_section_0,@function
+rom__irq_exit_critical_section_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75936, 60
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 75996, 68
+
+
+
+.global rom__irq_exit_critical_section
+.type rom__irq_exit_critical_section,@function
+rom__irq_exit_critical_section:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76064, 60
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76124, 176
+
 
 
 .global rom_image4_load_decrypt_payload
 .type rom_image4_load_decrypt_payload,@function
 rom_image4_load_decrypt_payload:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76300, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76300, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76304, 12
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76304, 4
+
+
+
+.global rom_platform_get_raw_production_mode
+.type rom_platform_get_raw_production_mode,@function
+rom_platform_get_raw_production_mode:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76308, 4
+
+
+
+.global rom_platform_get_security_domain
+.type rom_platform_get_security_domain,@function
+rom_platform_get_security_domain:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76312, 4
+
 
 
 .global rom_platform_get_secure_mode
 .type rom_platform_get_secure_mode,@function
 rom_platform_get_secure_mode:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76316, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76316, 44
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76360, 8
+
+.global rom_platform_get_hardware_epoch
+.type rom_platform_get_hardware_epoch,@function
+rom_platform_get_hardware_epoch:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76360, 4
+
+
+
+.global rom_platform_get_chip_id
+.type rom_platform_get_chip_id,@function
+rom_platform_get_chip_id:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76364, 4
+
 
 
 .global rom_j__chipid_get_chip_revision
 .type rom_j__chipid_get_chip_revision,@function
 rom_j__chipid_get_chip_revision:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76368, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76368, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76372, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76372, 4
+
+
+
+.global rom_platform_get_ecid_id
+.type rom_platform_get_ecid_id,@function
+rom_platform_get_ecid_id:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76376, 4
+
 
 
 .global rom_j__ip6_drain
 .type rom_j__ip6_drain,@function
 rom_j__ip6_drain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76380, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76380, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76384, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76384, 8
+
 
 
 .global rom_j__arch_halt
 .type rom_j__arch_halt,@function
 rom_j__arch_halt:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76392, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76392, 4
+
 
 
 .global rom_j_j__arch_halt
 .type rom_j_j__arch_halt,@function
 rom_j_j__arch_halt:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76396, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76396, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76400, 28
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76400, 28
+
 
 
 .global rom_DERImg4DecodeFindInSequence_0
 .type rom_DERImg4DecodeFindInSequence_0,@function
 rom_DERImg4DecodeFindInSequence_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76428, 136
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76428, 136
+
 
 
 .global rom_DERImg4DecodeContentFindItemWithTag_0
 .type rom_DERImg4DecodeContentFindItemWithTag_0,@function
 rom_DERImg4DecodeContentFindItemWithTag_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76564, 72
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76564, 72
+
 
 
 .global rom_DERImg4DecodeTagCompare_1
 .type rom_DERImg4DecodeTagCompare_1,@function
 rom_DERImg4DecodeTagCompare_1:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76636, 116
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76636, 116
+
 
 
 .global rom_parse_main_img4_der
 .type rom_parse_main_img4_der,@function
 rom_parse_main_img4_der:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76752, 216
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76752, 216
+
 
 
 .global rom_parse_payload_der
 .type rom_parse_payload_der,@function
 rom_parse_payload_der:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76968, 204
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 76968, 204
+
 
 
 .global rom_parse_manifest_der
 .type rom_parse_manifest_der,@function
 rom_parse_manifest_der:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77172, 160
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77172, 160
+
 
 
 .global rom_parse_recovery_der
 .type rom_parse_recovery_der,@function
 rom_parse_recovery_der:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77332, 124
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77332, 124
+
 
 
 .global rom_DERImg4DecodeProperty_0
 .type rom_DERImg4DecodeProperty_0,@function
 rom_DERImg4DecodeProperty_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77456, 248
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77456, 248
+
 
 
 .global rom_DERFindInSequence
 .type rom_DERFindInSequence,@function
 rom_DERFindInSequence:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77704, 220
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77704, 220
+
 
 
 .global rom_DERImg4DecodeParseManifestProperties_0
 .type rom_DERImg4DecodeParseManifestProperties_0,@function
 rom_DERImg4DecodeParseManifestProperties_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77924, 224
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 77924, 224
+
 
 
 .global rom__Img4DecodePayloadExists_0
 .type rom__Img4DecodePayloadExists_0,@function
 rom__Img4DecodePayloadExists_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78148, 56
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78148, 56
+
 
 
 .global rom_Img4DecodeGetPayload
 .type rom_Img4DecodeGetPayload,@function
 rom_Img4DecodeGetPayload:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78204, 112
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78204, 112
+
 
 
 .global rom_Img4DecodeGetPayloadType
 .type rom_Img4DecodeGetPayloadType,@function
 rom_Img4DecodeGetPayloadType:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78316, 116
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78316, 116
+
 
 
 .global rom_Img4DecodeGetPayloadKeybag
 .type rom_Img4DecodeGetPayloadKeybag,@function
 rom_Img4DecodeGetPayloadKeybag:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78432, 112
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78432, 112
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78544, 296
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78544, 296
+
 
 
 .global rom_Img4DecodeCopyPayloadDigest
 .type rom_Img4DecodeCopyPayloadDigest,@function
 rom_Img4DecodeCopyPayloadDigest:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78840, 280
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 78840, 180
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79024, 96
+
 
 
 .global rom__Img4DecodeManifestExists_0
 .type rom__Img4DecodeManifestExists_0,@function
 rom__Img4DecodeManifestExists_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79120, 40
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79120, 40
+
 
 
 .global rom_Img4DecodeCopyManifestDigest
 .type rom_Img4DecodeCopyManifestDigest,@function
 rom_Img4DecodeCopyManifestDigest:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79160, 236
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79160, 160
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79324, 72
+
 
 
 .global rom__Img4DecodeSectionExists_0
 .type rom__Img4DecodeSectionExists_0,@function
 rom__Img4DecodeSectionExists_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79396, 96
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79396, 96
+
 
 
 .global rom__Img4DecodeGetRestoreInfoData
 .type rom__Img4DecodeGetRestoreInfoData,@function
 rom__Img4DecodeGetRestoreInfoData:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79492, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79492, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79524, 520
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 79524, 520
+
 
 
 .global rom_Img4DecodeGetPropertyBoolean_0
 .type rom_Img4DecodeGetPropertyBoolean_0,@function
 rom_Img4DecodeGetPropertyBoolean_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80044, 124
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80044, 124
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80168, 184
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80168, 184
+
 
 
 .global rom_hasher_18
 .type rom_hasher_18,@function
 rom_hasher_18:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80352, 564
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80352, 564
+
 
 
 .global rom_Img4DecodeEvaluateDictionaryProperties_0
 .type rom_Img4DecodeEvaluateDictionaryProperties_0,@function
 rom_Img4DecodeEvaluateDictionaryProperties_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80916, 284
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 80916, 236
+
+
+
+blr X20
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81156, 44
+
 
 
 .global rom_Img4DecodeInit
 .type rom_Img4DecodeInit,@function
 rom_Img4DecodeInit:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81200, 188
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81200, 188
+
 
 
 .global rom_Img4DecodePerformTrustEvaluatation
 .type rom_Img4DecodePerformTrustEvaluatation,@function
 rom_Img4DecodePerformTrustEvaluatation:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81388, 636
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81388, 172
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81564, 28
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81596, 64
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81664, 40
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81708, 36
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81748, 92
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81844, 68
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 81916, 108
+
 
 
 .global rom_verify_signature_for_reals
 .type rom_verify_signature_for_reals,@function
 rom_verify_signature_for_reals:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82024, 484
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82024, 484
+
 
 
 .global rom__verify_signature_rsa_0
 .type rom__verify_signature_rsa_0,@function
 rom__verify_signature_rsa_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82508, 152
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82508, 152
+
 
 
 .global rom_process_chain
 .type rom_process_chain,@function
 rom_process_chain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82660, 532
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 82660, 532
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83192, 396
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83192, 260
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83456, 64
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83524, 64
+
 
 
 .global rom_verify_parse_chain
 .type rom_verify_parse_chain,@function
 rom_verify_parse_chain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83588, 388
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83588, 128
+
+
+
+blr X25
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83720, 256
+
 
 
 .global rom_hasher_8
 .type rom_hasher_8,@function
 rom_hasher_8:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83976, 12
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83976, 12
+
 
 
 .global rom_crack_chain_root
 .type rom_crack_chain_root,@function
 rom_crack_chain_root:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83988, 56
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 83988, 56
+
 
 
 .global rom_Img4DecodeComputeDigest
 .type rom_Img4DecodeComputeDigest,@function
 rom_Img4DecodeComputeDigest:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84044, 76
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84044, 76
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84120, 48
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84120, 48
+
 
 
 .global rom_crack_chain
 .type rom_crack_chain,@function
 rom_crack_chain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84168, 228
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84168, 228
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84396, 316
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84396, 316
+
 
 
 .global rom_DERDecodeItem
 .type rom_DERDecodeItem,@function
 rom_DERDecodeItem:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84712, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84712, 8
+
 
 
 .global rom_DERDecodeItemPartialBuffer
 .type rom_DERDecodeItemPartialBuffer,@function
 rom_DERDecodeItemPartialBuffer:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84720, 324
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 84720, 324
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85044, 276
+
+.global rom_DERDecodeItemPartialBuffer_0
+.type rom_DERDecodeItemPartialBuffer_0,@function
+rom_DERDecodeItemPartialBuffer_0:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85044, 276
+
 
 
 .global rom__DERParseBitString_0_0
 .type rom__DERParseBitString_0_0,@function
 rom__DERParseBitString_0_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85320, 64
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85320, 64
+
 
 
 .global rom__DERParseBoolean_0
 .type rom__DERParseBoolean_0,@function
 rom__DERParseBoolean_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85384, 60
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85384, 60
+
 
 
 .global rom_DERParseInteger
 .type rom_DERParseInteger,@function
 rom_DERParseInteger:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85444, 124
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85444, 124
+
 
 
 .global rom__DERParseInteger64
 .type rom__DERParseInteger64,@function
 rom__DERParseInteger64:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85568, 128
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85568, 128
+
 
 
 .global rom_DERDecodeSeqInitAgain
 .type rom_DERDecodeSeqInitAgain,@function
 rom_DERDecodeSeqInitAgain:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85696, 160
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85696, 160
+
 
 
 .global rom_DERDecodeSeqContentInit
 .type rom_DERDecodeSeqContentInit,@function
 rom_DERDecodeSeqContentInit:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85856, 28
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85856, 28
+
 
 
 .global rom_DERDecodeSeqNext
 .type rom_DERDecodeSeqNext,@function
 rom_DERDecodeSeqNext:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85884, 152
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 85884, 152
+
 
 
 .global rom_DERParseSequence
 .type rom_DERParseSequence,@function
 rom_DERParseSequence:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86036, 176
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86036, 176
+
 
 
 .global rom_DERParseSequenceContent
 .type rom_DERParseSequenceContent,@function
 rom_DERParseSequenceContent:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86212, 532
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86212, 532
+
 
 
 .global rom_DEROidCompare
 .type rom_DEROidCompare,@function
 rom_DEROidCompare:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86744, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86744, 32
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86776, 3400
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 86776, 3400
+
 
 
 .global rom__lzvn_decode_buffer
 .type rom__lzvn_decode_buffer,@function
 rom__lzvn_decode_buffer:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 90176, 756
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 90176, 756
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 90932, 1484
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 90932, 1484
+
 
 
 .global rom__lz4_decode_asm
 .type rom__lz4_decode_asm,@function
 rom__lz4_decode_asm:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 92416, 480
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 92416, 480
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 92896, 560
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 92896, 560
+
 
 
 .global rom__lzfse_decode_lmd
 .type rom__lzfse_decode_lmd,@function
 rom__lzfse_decode_lmd:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 93456, 656
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 93456, 656
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94112, 112
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94112, 112
+
 
 
 .global rom__lzfse_decode_literals
 .type rom__lzfse_decode_literals,@function
 rom__lzfse_decode_literals:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94224, 256
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94224, 256
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94480, 520
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 94480, 520
+
 
 
 .global rom__lz4raw_decode_buffer
 .type rom__lz4raw_decode_buffer,@function
 rom__lz4raw_decode_buffer:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 95000, 160
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 95000, 160
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 95160, 8272
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 95160, 8272
+
 
 
 .global rom__LZFSEIBootBufferPush
 .type rom__LZFSEIBootBufferPush,@function
 rom__LZFSEIBootBufferPush:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 103432, 80
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 103432, 80
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 103512, 5080
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 103512, 3988
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 107504, 60
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 107568, 1024
+
 
 
 .global rom_aes_key_expansion
 .type rom_aes_key_expansion,@function
 rom_aes_key_expansion:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 108592, 496
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 108592, 496
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109088, 112
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109088, 112
+
 
 
 .global rom__ccaes_arm_decrypt_key128
 .type rom__ccaes_arm_decrypt_key128,@function
 rom__ccaes_arm_decrypt_key128:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109200, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109200, 32
+
 
 
 .global rom__ccaes_arm_decrypt_key192
 .type rom__ccaes_arm_decrypt_key192,@function
 rom__ccaes_arm_decrypt_key192:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109232, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109232, 32
+
 
 
 .global rom__ccaes_arm_decrypt_key256
 .type rom__ccaes_arm_decrypt_key256,@function
 rom__ccaes_arm_decrypt_key256:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109264, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109264, 32
+
 
 
 .global rom__ccaes_arm_encrypt_key
 .type rom__ccaes_arm_encrypt_key,@function
 rom__ccaes_arm_encrypt_key:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109296, 112
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109296, 112
+
 
 
 .global rom__ccaes_arm_encrypt_key_0
 .type rom__ccaes_arm_encrypt_key_0,@function
 rom__ccaes_arm_encrypt_key_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109408, 112
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109408, 112
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109520, 48
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109520, 48
+
 
 
 .global rom__ccn_cmp_0
 .type rom__ccn_cmp_0,@function
 rom__ccn_cmp_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109568, 52
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109568, 52
+
 
 
 .global rom_nullsub_13
 .type rom_nullsub_13,@function
 rom_nullsub_13:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109620, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109620, 4
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109624, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109624, 8
+
 
 
 .global rom__ccn_mul
 .type rom__ccn_mul,@function
 rom__ccn_mul:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109632, 172
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109632, 172
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109804, 52
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109804, 52
+
 
 
 .global rom_ccdigest
 .type rom_ccdigest,@function
 rom_ccdigest:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109856, 216
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 109856, 140
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110072, 568
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110000, 72
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110072, 192
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110268, 256
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110528, 112
+
 
 
 .global rom__ccdigest_init
 .type rom__ccdigest_init,@function
 rom__ccdigest_init:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110640, 72
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110640, 72
+
 
 
 .global rom__ccdigest_update
 .type rom__ccdigest_update,@function
 rom__ccdigest_update:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110712, 312
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110712, 148
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111024, 228
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110864, 112
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 110980, 44
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111024, 228
+
 
 
 .global rom__cchmac_final
 .type rom__cchmac_final,@function
 rom__cchmac_final:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111252, 140
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111252, 48
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111304, 68
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111376, 16
+
 
 
 .global rom__cchmac_init
 .type rom__cchmac_init,@function
 rom__cchmac_init:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111392, 456
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111392, 104
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111500, 200
+
+
+
+blr X10
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111704, 100
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111808, 40
+
 
 
 .global rom_j__ccdigest_update
 .type rom_j__ccdigest_update,@function
 rom_j__ccdigest_update:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111848, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111848, 4
+
 
 
 .global rom__cc_mux2p
 .type rom__cc_mux2p,@function
 rom__cc_mux2p:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111852, 52
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111852, 52
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111904, 996
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 111904, 996
+
 
 
 .global rom__ccn_add_0
 .type rom__ccn_add_0,@function
 rom__ccn_add_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 112900, 180
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 112900, 180
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 113080, 980
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 113080, 980
+
 
 
 .global rom__ccn_sub_0
 .type rom__ccn_sub_0,@function
 rom__ccn_sub_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114060, 180
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114060, 180
+
 
 
 .global rom__ccn_write_uint_size
 .type rom__ccn_write_uint_size,@function
 rom__ccn_write_uint_size:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114240, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114240, 32
+
 
 
 .global rom_cc_clear
 .type rom_cc_clear,@function
 rom_cc_clear:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114272, 24
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114272, 24
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114296, 3016
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 114296, 1916
+
+
+
+.global rom_get_sha1_digest
+.type rom_get_sha1_digest,@function
+rom_get_sha1_digest:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 116212, 12
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 116224, 1088
+
 
 
 .global rom__ccn_shift_right_1
 .type rom__ccn_shift_right_1,@function
 rom__ccn_shift_right_1:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 117312, 304
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 117312, 304
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 117616, 1568
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 117616, 360
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 117980, 292
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 118276, 156
+
+
+
+.global rom_ccdrbg_init
+.type rom_ccdrbg_init,@function
+rom_ccdrbg_init:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 118432, 256
+
+
+
+.global rom_ccdrbg_reseed
+.type rom_ccdrbg_reseed,@function
+rom_ccdrbg_reseed:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 118688, 116
+
+
+
+.global rom_ccdrbg_generate
+.type rom_ccdrbg_generate,@function
+rom_ccdrbg_generate:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 118804, 364
+
+
+
+.global rom_ccdrbg_done
+.type rom_ccdrbg_done,@function
+rom_ccdrbg_done:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119168, 16
+
 
 
 .global rom__ccdrbg_factory_nisthmac
 .type rom__ccdrbg_factory_nisthmac,@function
 rom__ccdrbg_factory_nisthmac:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119184, 52
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119184, 52
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119236, 6572
+
+.global rom_ccdrbg_update
+.type rom_ccdrbg_update,@function
+rom_ccdrbg_update:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119236, 744
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 119980, 560
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 120544, 100
+
+
+
+blr X8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 120648, 5148
+
+
+
+.global rom_get_hash_impl
+.type rom_get_hash_impl,@function
+rom_get_hash_impl:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125796, 12
+
 
 
 .global rom__cc_muxp
 .type rom__cc_muxp,@function
 rom__cc_muxp:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125808, 32
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125808, 32
+
 
 
 .global rom__ccn_n_0
 .type rom__ccn_n_0,@function
 rom__ccn_n_0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125840, 44
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125840, 44
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125884, 5
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125884, 5
+
 
 
 .global rom_aNor0
 .type rom_aNor0,@function
 rom_aNor0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125889, 5
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125889, 5
+
 
 
 .global rom_aSpiNand0
 .type rom_aSpiNand0,@function
 rom_aSpiNand0:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125894, 10
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125894, 10
+
 
 
 .global rom_aImg4
 .type rom_aImg4,@function
 rom_aImg4:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125904, 5
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125904, 5
+
 
 
 .global rom_aIm4p
 .type rom_aIm4p,@function
 rom_aIm4p:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125909, 5
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125909, 5
+
 
 
 .global rom_aAppleMobileDev
 .type rom_aAppleMobileDev,@function
 rom_aAppleMobileDev:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125914, 31
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125914, 31
+
 
 
 .global rom_aCpid04xCprv02x
 .type rom_aCpid04xCprv02x,@function
 rom_aCpid04xCprv02x:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125945, 73
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 125945, 73
+
 
 
 .global rom_aSrtgS
 .type rom_aSrtgS,@function
 rom_aSrtgS:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126018, 11
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126018, 11
+
 
 
 .global rom_aNonc
 .type rom_aNonc,@function
 rom_aNonc:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126029, 7
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126029, 7
+
 
 
 .global rom_a02x
 .type rom_a02x,@function
 rom_a02x:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126036, 5
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126036, 5
+
 
 
 .global rom_aSnon
 .type rom_aSnon,@function
 rom_aSnon:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126041, 7
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126041, 7
+
 
 
 .global rom_aDoublePanicIn
 .type rom_aDoublePanicIn,@function
 rom_aDoublePanicIn:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126048, 17
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126048, 17
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126065, 3
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126065, 3
+
 
 
 .global rom_aPanic
 .type rom_aPanic,@function
 rom_aPanic:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126068, 9
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126068, 9
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126077, 3
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126077, 3
+
 
 
 .global rom_aConstructingId
 .type rom_aConstructingId,@function
 rom_aConstructingId:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126080, 24
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126080, 24
+
 
 
 .global rom_aIdleTask
 .type rom_aIdleTask,@function
 rom_aIdleTask:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126104, 10
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126104, 10
+
 
 
 .global rom_aUsb
 .type rom_aUsb,@function
 rom_aUsb:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126114, 4
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126114, 4
+
 
 
 .global rom_aNull
 .type rom_aNull,@function
 rom_aNull:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126118, 7
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126118, 7
+
 
 
 .global rom_aPtr
 .type rom_aPtr,@function
 rom_aPtr:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126125, 6
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126125, 6
+
 
 
 .global rom_a0x
 .type rom_a0x,@function
 rom_a0x:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126131, 3
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126131, 3
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126134, 4
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126134, 4
+
 
 
 .global rom_aAppleInc
 .type rom_aAppleInc,@function
 rom_aAppleInc:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126138, 11
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126138, 11
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126149, 15819
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126149, 627
+
+
+
+.global rom_spi_regs
+.type rom_spi_regs,@function
+rom_spi_regs:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126776, 152
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 126928, 400
+
+
+
+.global rom_boot_device_map
+.type rom_boot_device_map,@function
+rom_boot_device_map:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 127328, 32
+
+
+
+.global rom_boot_flag_map
+.type rom_boot_flag_map,@function
+rom_boot_flag_map:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 127360, 32
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 127392, 14576
+
 
 
 .global rom_a78
 .type rom_a78,@function
 rom_a78:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 141968, 20
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 141968, 20
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 141988, 252
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 141988, 252
+
 
 
 .global rom_img4_item_spec
 .type rom_img4_item_spec,@function
 rom_img4_item_spec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142240, 96
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142240, 96
+
 
 
 .global rom_payload_item_spec
 .type rom_payload_item_spec,@function
 rom_payload_item_spec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142336, 144
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142336, 144
+
 
 
 .global rom_manifest_item_spec
 .type rom_manifest_item_spec,@function
 rom_manifest_item_spec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142480, 120
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142480, 120
+
 
 
 .global rom_recover_item_spec
 .type rom_recover_item_spec,@function
 rom_recover_item_spec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142600, 48
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142600, 48
+
 
 
 .global rom_payload_uk_item_spec
 .type rom_payload_uk_item_spec,@function
 rom_payload_uk_item_spec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142648, 48
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142648, 48
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142696, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142696, 8
+
 
 
 .global rom_root_ca
 .type rom_root_ca,@function
 rom_root_ca:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142704, 1376
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 142704, 1376
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144080, 584
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144080, 584
+
 
 
 .global rom_oidRsa
 .type rom_oidRsa,@function
 rom_oidRsa:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144664, 9
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144664, 9
+
 
 
 .global rom_oidSha384Rsa
 .type rom_oidSha384Rsa,@function
 rom_oidSha384Rsa:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144673, 9
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144673, 9
+
 
 
 .global rom_oidEcPubKey
 .type rom_oidEcPubKey,@function
 rom_oidEcPubKey:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144682, 7
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144682, 7
+
 
 
 .global rom_oidSha384
 .type rom_oidSha384,@function
 rom_oidSha384:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144689, 9
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144689, 9
+
 
 
 .global rom_oidAppleImg4ManifestCertSpec
 .type rom_oidAppleImg4ManifestCertSpec,@function
 rom_oidAppleImg4ManifestCertSpec:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144698, 10
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144698, 10
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144708, 3228
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 144708, 3228
+
 
 
 .global rom_hasher_meta
 .type rom_hasher_meta,@function
 rom_hasher_meta:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 147936, 24
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 147936, 24
+
 
 
 .global rom_cc_digest_impl
 .type rom_cc_digest_impl,@function
 rom_cc_digest_impl:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 147960, 40
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 147960, 40
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148000, 16
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148000, 16
+
 
 
 .global rom_oidRsaItem
 .type rom_oidRsaItem,@function
 rom_oidRsaItem:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148016, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148016, 8
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148024, 24
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148024, 24
+
 
 
 .global rom_oidEcPubKeyItem
 .type rom_oidEcPubKeyItem,@function
 rom_oidEcPubKeyItem:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148048, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148048, 16
+
 
 
 .global rom_oidSha384Item
 .type rom_oidSha384Item,@function
 rom_oidSha384Item:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148064, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148064, 8
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148072, 8
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148072, 8
+
 
 
 .global rom_oidAppleImg4ManifestCertSpecItem
 .type rom_oidAppleImg4ManifestCertSpecItem,@function
 rom_oidAppleImg4ManifestCertSpecItem:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148080, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148080, 16
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148096, 4368
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 148096, 4240
+
+
+
+.global rom_sha384
+.type rom_sha384,@function
+rom_sha384:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 152336, 64
+
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 152400, 11440
+
+
+
+
+.global arch_cpu_init_handler_veneer
+.type arch_cpu_init_handler_veneer,@function
+arch_cpu_init_handler_veneer:
+	stp x29, x30, [sp, #-0x10]!
+	mov x29, sp
+	
+	
+	adrp x28, arch_cpu_init_handler
+	add x28, x28, :lo12:arch_cpu_init_handler
+	blr x28
+
+	ldp x29, x30, [sp], #0x10
+	ret
+
+
+.global report_no_boot_image_handler_veneer
+.type report_no_boot_image_handler_veneer,@function
+report_no_boot_image_handler_veneer:
+	stp x29, x30, [sp, #-0x10]!
+	mov x29, sp
+	
+	
+	adrp x28, report_no_boot_image_handler
+	add x28, x28, :lo12:report_no_boot_image_handler
+	blr x28
+
+	ldp x29, x30, [sp], #0x10
+	ret
+
+
+.global some_kind_of_report_handler_veneer
+.type some_kind_of_report_handler_veneer,@function
+some_kind_of_report_handler_veneer:
+	stp x29, x30, [sp, #-0x10]!
+	mov x29, sp
+	
+	
+	adrp x28, some_kind_of_report_handler
+	add x28, x28, :lo12:some_kind_of_report_handler
+	blr x28
+
+	ldp x29, x30, [sp], #0x10
+	ret
+
+
+.global vbar_el1_handler_veneer_6c
+.type vbar_el1_handler_veneer_6c,@function
+vbar_el1_handler_veneer_6c:
+	stp x29, x30, [sp, #-0x10]!
+	mov x29, sp
+	
+	
+	mov x0, X10
+	
+	adrp x28, vbar_el1_handler
+	add x28, x28, :lo12:vbar_el1_handler
+	blr x28
+
+	ldp x29, x30, [sp], #0x10
+	ret
+
+
+.global vbar_el1_handler_veneer_800c
+.type vbar_el1_handler_veneer_800c,@function
+vbar_el1_handler_veneer_800c:
+	stp x29, x30, [sp, #-0x10]!
+	mov x29, sp
+	
+	
+	mov x0, X1
+	
+	adrp x28, vbar_el1_handler
+	add x28, x28, :lo12:vbar_el1_handler
+	blr x28
+
+	ldp x29, x30, [sp], #0x10
+	ret
 
 
 /*
@@ -1779,49 +4459,186 @@ rom_oidAppleImg4ManifestCertSpecItem:
 .section .rom.data, "aw"
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 152464, 13664
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 163840, 2240
+
+
+.global rom_images
+rom_images:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166080, 16
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166096, 32
 
 
 .global rom_stack_cookie
 rom_stack_cookie:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166128, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166128, 8
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166136, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166136, 8
 
 
 .global rom_task_list
 rom_task_list:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166144, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166144, 16
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166160, 16
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166160, 16
 
 
 .global rom_bootstrap_task
 rom_bootstrap_task:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166176, 432
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166176, 432
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166608, 1336
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166608, 224
+
+
+.global rom_heap_cookie
+rom_heap_cookie:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166832, 16
+
+
+.global rom_ccdrbg_state_ptr
+rom_ccdrbg_state_ptr:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166848, 8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 166856, 1040
+
+
+.global rom_flash_spi_read_range
+rom_flash_spi_read_range:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167896, 8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167904, 40
 
 
 .global rom_idle_task_routine
 rom_idle_task_routine:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167944, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167944, 8
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167952, 176
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167952, 24
+
+
+.global rom_nor_blockdev_read_block
+rom_nor_blockdev_read_block:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167976, 8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 167984, 80
+
+
+.global rom_blockdev_erase_hook
+rom_blockdev_erase_hook:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168064, 8
+
+
+.global rom_blockdev_read_block_hook
+rom_blockdev_read_block_hook:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168072, 8
+
+
+.global rom_blockdev_read_hook
+rom_blockdev_read_hook:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168080, 8
+
+
+.global rom_blockdev_write_block_hook
+rom_blockdev_write_block_hook:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168088, 8
+
+
+.global rom_blockdev_write_hook
+rom_blockdev_write_hook:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168096, 8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168104, 24
 
 
 .global rom_crack_chain_root_ptr
 rom_crack_chain_root_ptr:
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168128, 8
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168128, 8
 
 
-.incbin "/workspaces/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168136, 356152
+.global rom_ccdrbg_done_ptr
+rom_ccdrbg_done_ptr:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168136, 8
+
+
+.global rom_ccdrbg_generate_ptr
+rom_ccdrbg_generate_ptr:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168144, 8
+
+
+.global rom_ccdrbg_init_ptr
+rom_ccdrbg_init_ptr:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168152, 8
+
+
+.global rom_ccdrbg_reseed_ptr
+rom_ccdrbg_reseed_ptr:
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168160, 8
+
+
+.incbin "/Users/leonardogalli/Code/ETH/thesis/SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4", 168168, 356120
+
+
+
+/*
+.section .rom.bss, "aw"
+.fill 28512
+
+.section .rom.stack, "aw"
+.fill 16384
+*/
+
+.section .rom.pt, "aw"
+.fill 49152
+
+/*
+    TODO: Figure out where we can get info about the heap of a rom image.
+    Disassemble and find heap_init?
+*/
+
+
+.section .rom.io, "aw"
+.fill 0x30
+.global report_id
+report_id: .dc.l 0x0
+.global report_arg0
+report_arg0: .dc.l 0x0
+.global report_arg1
+report_arg1: .dc.l 0x0
+.global report_arg2
+report_arg2: .dc.l 0x0
+
+.section .rom.gpio, "aw"
+.fill 0xc4c
+.dc.l 0x1
+.fill 0x8000
+
+.section .rom.pmgr, "aw"
+.fill 0x8000
