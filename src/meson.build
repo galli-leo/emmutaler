@@ -38,5 +38,5 @@ summary({
     'std_gcc_flags': std_flags
 }, section: 'gcc')
 
-main = executable('main', src, include_directories: inc, link_args: mmap_flags, c_args: std_flags)
+main = executable('main', src, include_directories: inc, link_args: mmap_flags + ['-static'], c_args: std_flags)
 test('main_test', main, args : [test_file])

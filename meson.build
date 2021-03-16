@@ -14,7 +14,7 @@ summary({
     'rom': rom_filepath
 }, section: 'ROM')
 
-test_file = join_paths('..', 'ipsw', 'out.img4')
+test_file = join_paths('ipsw', 'out.img4')
 summary({
     'test_file': test_file
 }, section: 'testing')
