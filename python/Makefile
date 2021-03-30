@@ -27,7 +27,7 @@ TEST_SCRIPT := $(abspath scripts/symbolicate.py)
 
 .PHONY: test-symbolicate
 test-symbolicate:
-	../bin/emmu ida --gui=false -s $(TEST_SCRIPT) $(TEST_IMAGE)
+	../bin/emmu ida --gui=false -i $(TEST_IMAGE) script $(TEST_SCRIPT) $(TEST_IMAGE)
 
 
 PATCH_AMIE := scripts/patch_amie.py

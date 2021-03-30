@@ -81,9 +81,26 @@ report_arg1: .dc.l 0x0
 report_arg2: .dc.l 0x0
 
 .section .rom.gpio, "aw"
+.global __start_rom_gpio
+__start_rom_gpio:
 .fill 0xc4c
 .dc.l 0x1
-.fill 0x8000
+.fill 0x100000 - 0xc4c - 0x8
 
 .section .rom.pmgr, "aw"
 .fill 0x8000
+
+.section .rom.fuses, "aw"
+.global __start_rom_fuses
+__start_rom_fuses:
+.fill 0x4000
+
+.section .rom.aes, "aw"
+.global __start_rom_aes
+__start_rom_aes:
+.fill 0x5000
+
+.section .rom.img, "awx"
+.global __start_rom_img
+__start_rom_img:
+.fill 0x10000

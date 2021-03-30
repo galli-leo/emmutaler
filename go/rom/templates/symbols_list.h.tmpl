@@ -2,6 +2,9 @@
 {{template "gen_header" .}}
 */
 
+// We don't care about warnings here, they just clutter the cli output.
+#pragma GCC diagnostic ignored "-Wall"
+
 #ifndef __SYMBOLS_LIST_H_
 #define __SYMBOLS_LIST_H_
 

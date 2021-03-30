@@ -81,9 +81,11 @@ void sig_handler(int signo, siginfo_t *si, void* arg)
     //     uint64_t* p = fp + i;
     //     printf("%016lx: %016lx\n", p, *p);
     // }
+#if DEBUG
     printf("STACKTRACE:\n");
     void* prev_pc = (uint64_t)lr & PTR_MASK;
     print_stacktrace(prev_pc, info_ctx->regs[29]);
+#endif
 
     // stacktrace();
     // struct bt_ctx ctx = {state, 0};
@@ -129,7 +131,6 @@ void print_stacktrace(void* prev_pc, void* fp)
 
 void install_signal_handler()
 {
-#define DEBUG 1
 #if DEBUG
     struct sigaction act;
     act.sa_sigaction = &sig_handler;

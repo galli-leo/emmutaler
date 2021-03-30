@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include "rom/rom_extra.h"
 #include "rom.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include "debug/signals.h"
+#include "platform/chipid.h"
+#include "hexdump.h"
+#include <assert.h>
 
 void sub2_function()
 {
@@ -19,35 +23,30 @@ void sub_function()
     sub2_function();
 }
 
-void vbar_el1_handler(uint64_t addr)
+void setup_manifest()
 {
-    printf("Handling vbar_el1_here, exception vector base is %p\n", addr);
-}
-
-void arch_cpu_init_handler()
-{
-    printf("Pretending to do arch_cpu_init here...\n");
-}
-
-void report_no_boot_image_handler(uint32_t result)
-{
-    some_kind_of_report_handler(result, 0, 0, 0);
-}
-
-void some_kind_of_report_handler(uint32_t result, int a2, int a3, int a4)
-{
-    printf("[*] REPORTING IN: 0x%08x (0x%x, 0x%x, 0x%x)\n", result, a2, a3, a4);
-    void* prev_pc = __builtin_return_address(0);
-    void* fp = __builtin_frame_address(0);
-    printf("STACKTRACE:\n");
-    print_stacktrace(prev_pc, fp);
+    uint64_t board_id = 6;
+    uint64_t epoch = 1;
+    uint64_t prod_mode = 1;
+    uint64_t sec_mode = 1;
+    uint64_t ecid = 0x1538810200802e;
+    uint64_t sec_dom = 1;
+    set_board_id(board_id);
+    set_security_epoch(epoch);
+    set_raw_prod_mode(prod_mode);
+    set_secure_mode(sec_mode);
+    set_ecid(ecid);
+    set_sec_domain(sec_dom);
+    set_curr_prod_mode(prod_mode);
+    set_uk_fuse(0);
+    set_uk_fuse2(0);
 }
 
 extern void buggy(void* address);
 
 int main(int argc, char* argv[]) {
     install_signal_handler();
-
+    setup_manifest();
     // buggy(0x10001d760);
     // dini_muetter(0x40001d760);
 
@@ -66,17 +65,23 @@ int main(int argc, char* argv[]) {
     }
 
     fseek(image_file, 0, SEEK_END);
-    long image_size = ftell(image_file);
+    long act_image_size = ftell(image_file);
+    long image_size = (act_image_size & 0x2000) + 0x4000; // align to next higher power of 0x2000, otherwise complaints will come :(
+    if (act_image_size > 0x10000) {
+        printf("Image is too large: 0x%x\n", act_image_size);
+        exit(2);
+    }
     fseek(image_file, 0, SEEK_SET);
     printf("Image is 0x%x bytes large\n", image_size);
-    char* image_buffer = malloc(image_size);
-    long result = fread(image_buffer, image_size, 1, image_file);
+    // char* image_buffer = malloc(image_size);
+    char* image_buffer = rom_img_start;
+    long result = fread(image_buffer, act_image_size, 1, image_file);
     if (result != 1) {
-        printf("Failed to read in image, expected 0x%x, but read 0x%x\n", image_size, result);
+        printf("Failed to read in image, expected 0x%x, but read 0x%x\n", act_image_size, result);
         exit(1);
     }
 
-    image_info_t* image_info = malloc(sizeof(image_info_t));
+    image_info* image_info = malloc(sizeof(image_info));
     image_info->imageLength = image_size;
     image_info->imagePrivateMagic = 'Memz';
     image_info->imageOptions = IMAGE_OPTION_LOCAL_STORAGE;
@@ -98,6 +103,20 @@ int main(int argc, char* argv[]) {
         printf("Failed to load image: %d\n", result);
     } else {
         printf("Successfully loaded image at %p\n", image_buffer);
+        img_func func = (img_func) image_buffer;
+        int res = func();
+        if (res == 420) {
+            printf("Valid image ran ok, so that's good, I guess\n");
+            exit(0);
+        } else if (res == 69) {
+            printf("Invalid image ran ok, that's not good (for apple)\n");
+            assert(false);
+            exit(3);
+        } else {
+            printf("Unknown return value %d\n", res);
+            exit(4);
+        }
+        // hexdump(image_buffer, 0x100);
     }
 
     // printf("Hello World! ROM LOADED AT: %p, %p\n", &rom_start, &rom_platform_start);

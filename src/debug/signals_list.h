@@ -7,7 +7,7 @@ static signal_info_t sig_infos[] = {
 SIG(SIGABRT, "Abort signal from abort(3)")
 SIG(SIGALRM, "Timer signal from alarm(2)")
 SIG(SIGBUS, "Bus error (bad memory access)")
-SIG(SIGCHLD, "Child stopped or terminated")
+// SIG(SIGCHLD, "Child stopped or terminated")
 // SIG(SIGCLD, "A synonym for SIGCHLD")
 SIG(SIGCONT, "Continue if stopped")
 SIG(SIGFPE, "Floating-point exception")

@@ -29,7 +29,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(4))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.LinkedSection import LinkedSection
+            from emmutaler.fbs.LinkedSection import LinkedSection
             obj = LinkedSection()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -54,7 +54,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(10))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.LinkedSection import LinkedSection
+            from emmutaler.fbs.LinkedSection import LinkedSection
             obj = LinkedSection()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -65,7 +65,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(12))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.LinkedSection import LinkedSection
+            from emmutaler.fbs.LinkedSection import LinkedSection
             obj = LinkedSection()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -76,7 +76,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(14))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.VirtualSegment import VirtualSegment
+            from emmutaler.fbs.VirtualSegment import VirtualSegment
             obj = VirtualSegment()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -87,7 +87,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(16))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.VirtualSegment import VirtualSegment
+            from emmutaler.fbs.VirtualSegment import VirtualSegment
             obj = VirtualSegment()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -105,7 +105,7 @@ class LinkerMeta(object):
         o = flatbuffers.number_types.UOffsetTFlags.py_type(self._tab.Offset(20))
         if o != 0:
             x = o + self._tab.Pos
-            from fbs.LinkedSection import LinkedSection
+            from emmutaler.fbs.LinkedSection import LinkedSection
             obj = LinkedSection()
             obj.Init(self._tab.Bytes, x)
             return obj
@@ -131,8 +131,8 @@ def LinkerMetaAddBootTrampoline(builder, bootTrampoline): builder.PrependStructS
 def LinkerMetaAddBootTrampolineDest(builder, bootTrampolineDest): builder.PrependUint64Slot(9, bootTrampolineDest, 0)
 def LinkerMetaEnd(builder): return builder.EndObject()
 
-import fbs.LinkedSection
-import fbs.VirtualSegment
+import emmutaler.fbs.LinkedSection
+import emmutaler.fbs.VirtualSegment
 try:
     from typing import Optional
 except:
@@ -142,15 +142,15 @@ class LinkerMetaT(object):
 
     # LinkerMetaT
     def __init__(self):
-        self.text = None  # type: Optional[fbs.LinkedSection.LinkedSectionT]
+        self.text = None  # type: Optional[emmutaler.fbs.LinkedSection.LinkedSectionT]
         self.textSize = 0  # type: int
         self.dataRoStart = 0  # type: int
-        self.data = None  # type: Optional[fbs.LinkedSection.LinkedSectionT]
-        self.bss = None  # type: Optional[fbs.LinkedSection.LinkedSectionT]
-        self.stacks = None  # type: Optional[fbs.VirtualSegment.VirtualSegmentT]
-        self.pageTables = None  # type: Optional[fbs.VirtualSegment.VirtualSegmentT]
+        self.data = None  # type: Optional[emmutaler.fbs.LinkedSection.LinkedSectionT]
+        self.bss = None  # type: Optional[emmutaler.fbs.LinkedSection.LinkedSectionT]
+        self.stacks = None  # type: Optional[emmutaler.fbs.VirtualSegment.VirtualSegmentT]
+        self.pageTables = None  # type: Optional[emmutaler.fbs.VirtualSegment.VirtualSegmentT]
         self.heapGuard = 0  # type: int
-        self.bootTrampoline = None  # type: Optional[fbs.LinkedSection.LinkedSectionT]
+        self.bootTrampoline = None  # type: Optional[emmutaler.fbs.LinkedSection.LinkedSectionT]
         self.bootTrampolineDest = 0  # type: int
 
     @classmethod
@@ -170,20 +170,20 @@ class LinkerMetaT(object):
         if linkerMeta is None:
             return
         if linkerMeta.Text() is not None:
-            self.text = fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Text())
+            self.text = emmutaler.fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Text())
         self.textSize = linkerMeta.TextSize()
         self.dataRoStart = linkerMeta.DataRoStart()
         if linkerMeta.Data() is not None:
-            self.data = fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Data())
+            self.data = emmutaler.fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Data())
         if linkerMeta.Bss() is not None:
-            self.bss = fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Bss())
+            self.bss = emmutaler.fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.Bss())
         if linkerMeta.Stacks() is not None:
-            self.stacks = fbs.VirtualSegment.VirtualSegmentT.InitFromObj(linkerMeta.Stacks())
+            self.stacks = emmutaler.fbs.VirtualSegment.VirtualSegmentT.InitFromObj(linkerMeta.Stacks())
         if linkerMeta.PageTables() is not None:
-            self.pageTables = fbs.VirtualSegment.VirtualSegmentT.InitFromObj(linkerMeta.PageTables())
+            self.pageTables = emmutaler.fbs.VirtualSegment.VirtualSegmentT.InitFromObj(linkerMeta.PageTables())
         self.heapGuard = linkerMeta.HeapGuard()
         if linkerMeta.BootTrampoline() is not None:
-            self.bootTrampoline = fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.BootTrampoline())
+            self.bootTrampoline = emmutaler.fbs.LinkedSection.LinkedSectionT.InitFromObj(linkerMeta.BootTrampoline())
         self.bootTrampolineDest = linkerMeta.BootTrampolineDest()
 
     # LinkerMetaT

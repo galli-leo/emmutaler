@@ -5,12 +5,19 @@
 #ifndef __ROM_H_H
 #define __ROM_H_H
 
+// We don't care about warnings here, they just clutter the cli output.
+#pragma GCC diagnostic ignored "-Wall"
+
+#include "types.h"
+#define __fastcall 
+#define __hidden  
+
 /*
     Below are all symbols found in the binary.
 */
 
 {{range .R.Symbols}}
-{{- if .CDefinition}}extern {{.CDefinition}}
+{{- if .CDefinition}}{{.CDefinition}}
 {{end -}}
 {{end}}
 

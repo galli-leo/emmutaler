@@ -93,9 +93,9 @@ var fnTmpl = `
 	{{range $idx, $elem := .Args}}
 	mov x{{$idx}}, {{$elem}}
 	{{end}}
-	adrp x28, {{.Function}}
-	add x28, x28, :lo12:{{.Function}}
-	blr x28
+	adrp x9, {{.Function}}
+	add x9, x9, :lo12:{{.Function}}
+	blr x9
 `
 
 var fn = MustTemplate(fnTmpl)

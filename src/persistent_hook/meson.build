@@ -1,0 +1,1 @@
+shared_library('hook', 'hook.c')

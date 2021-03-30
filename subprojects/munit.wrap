@@ -1,0 +1,4 @@
+[wrap-git]
+directory=munit
+url=https://github.com/nemequ/munit/
+revision=head

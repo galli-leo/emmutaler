@@ -2,10 +2,10 @@ package rom
 
 import (
 	"embed"
-	"html/template"
 	"os"
 	"path/filepath"
 	"strings"
+	"text/template"
 	"time"
 
 	"golang.org/x/xerrors"

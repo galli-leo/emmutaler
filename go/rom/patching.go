@@ -1,5 +1,12 @@
 package rom
 
+import (
+	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+)
+
 func (r *ROM) DoPatch() {
 	symb := r.GetSymbols()
 	// TODO: Nicer syntax here?
@@ -20,6 +27,16 @@ func (r *ROM) DoPatch() {
 	symb.rom__bzero.PatchOffset(0x18).Patch(r.PatchASM("cmp x2, #0x40000"))
 	symb.rom_report_no_boot_image.PatchOffset(0).Patch(r.PatchFunctionNoLink("report_no_boot_image_handler"))
 	symb.rom_some_kind_of_report.PatchOffset(0).Patch(r.PatchFunctionNoLink("some_kind_of_report_handler"))
+	certPath := filepath.Join(filepath.Dir(r.inputPath), "..", "certs", "root_ca.der")
+	certData, err := os.ReadFile(certPath)
+	if err != nil {
+		log.Fatalf("Failed to read root cert: %s", err)
+	}
+	root_ca_start := symb.rom_root_ca.Start
+	r.RawPatch(root_ca_start, int64(len(certData)), fmt.Sprintf(`.incbin "%s"`, certPath))
+
+	symb.rom__panic.PatchOffset(0).Patch(r.PatchFunctionNoLink("panic_handler"))
+	symb.rom_heap_panic.PatchOffset(0).Patch(r.PatchFunctionNoLink("heap_panic_handler"))
 	// symb.rom_start.PatchOffset(0x13E98).Patch(r.PatchASM("blr x8")) // For now 13EB8
 	// symb.rom_start.PatchOffset(0x13EB8).Patch(r.PatchASM("blr x8"))
 	// Handle exception vector

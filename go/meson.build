@@ -13,7 +13,7 @@ custom_target('fbs_go',
     command: [flatc, '--gen-mutable', '--gen-object-api', '--go', '-o', meson.current_source_dir(), '@INPUT@'],
     input: fbs_files,
     output: fbs_go_files,
-    build_by_default: true
+    build_by_default: false
 )
 
 # Actual go part
@@ -33,6 +33,8 @@ go_sources = files(
     'cmd/header.go',
     'cmd/symbols.go',
     # ida
+    'ida/cmd.go',
+    'ida/file_pipe.go',
     'ida/redirected_cmd.go',
     'ida/run.go',
     # meta
@@ -67,6 +69,7 @@ emmu = custom_target(
 )
 
 rom_cmd = [emmu, 'rom', '--rom', rom, '--out', meson.current_build_dir()]
+ida_cmd = [emmu, 'ida', '-i', rom, '--gui=false', '-t']
 
 symbols_file = custom_target(
     'symbols_go',

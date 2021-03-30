@@ -2,7 +2,6 @@ package ida
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -13,14 +12,17 @@ import (
 const DefaultPath = "/Applications/IDA Pro 7.5/ida64.app/Contents/MacOS/"
 
 type LaunchOptions struct {
-	DeleteDB   bool
-	Compiler   string
-	LogFile    string
-	Processor  string
-	ScriptArgs []string
-	FileType   string
-	InputFile  string
-	EnableGUI  bool
+	DeleteDB     bool
+	Compiler     string
+	Processor    string
+	ScriptArgs   []string
+	PluginArgs   []string
+	FileType     string
+	InputFile    string
+	EnableGUI    bool
+	ShowIDALog   bool
+	TempDatabase bool
+	extraArgs    []string
 }
 
 func quoteArg(short string, args string) string {
@@ -33,15 +35,18 @@ func (o *LaunchOptions) Command(path string) *exec.Cmd {
 		executable = filepath.Join(path, "ida64")
 	}
 
-	args := []string{"-A"}
+	args := []string{}
+	if !o.EnableGUI {
+		args = append(args, "-A")
+	}
+	if o.TempDatabase {
+		args = append(args, "-DABANDON_DATABASE=YES")
+	}
 	if o.DeleteDB {
 		args = append(args, "-c")
 	}
 	if o.Compiler != "" {
 		args = append(args, quoteArg("C", o.Compiler))
-	}
-	if o.LogFile != "" {
-		args = append(args, "-L"+o.LogFile)
 	}
 	if o.Processor != "" {
 		args = append(args, quoteArg("p", o.Processor))
@@ -52,11 +57,23 @@ func (o *LaunchOptions) Command(path string) *exec.Cmd {
 			quoted = append(quoted, fmt.Sprintf(`"%s"`, arg))
 		}
 
-		args = append(args, quoteArg("S", strings.Join(quoted, " ")))
+		args = append(args, quoteArg("S", strings.Join(o.ScriptArgs[:], " ")))
+		args = append(args, fmt.Sprintf("-OIDAPython:run_script=%s", o.ScriptArgs[0]))
+	}
+	if len(o.PluginArgs) > 0 {
+		if len(o.ScriptArgs) > 0 {
+			o.PluginArgs = append([]string{o.ScriptArgs[0]}, o.PluginArgs...)
+		} else {
+			o.PluginArgs = append([]string{"no_script"}, o.PluginArgs...)
+		}
+		for _, arg := range o.PluginArgs[:] {
+			args = append(args, fmt.Sprintf("-Oemmu:%s", arg))
+		}
 	}
 	if o.FileType != "" {
 		args = append(args, quoteArg("T", o.FileType))
 	}
+	args = append(args, o.extraArgs...)
 	args = append(args, o.InputFile)
 	cmd := exec.Command(executable, args...)
 	log.Printf("Created Command: %s %s", executable, strings.Join(args, " "))
@@ -64,20 +81,25 @@ func (o *LaunchOptions) Command(path string) *exec.Cmd {
 }
 
 func (o *LaunchOptions) RedirectedCommand(path string) *RedirectedCommand {
-	tempDir, err := ioutil.TempDir("", "emmutaler")
+	r := NewRedirected()
+	pyLog, err := r.NewPipe("python")
 	if err != nil {
-		log.Fatalf("Failed to create temporary directory: %v", err)
+		log.Fatalf("Failed to setup pipe: %s", err)
 	}
-	o.LogFile = filepath.Join(tempDir, "ida.log")
+	o.PluginArgs = append(o.PluginArgs, "--log-file", pyLog)
+	if o.ShowIDALog {
+		idaLog, err := r.NewPipe("ida")
+		if err != nil {
+			log.Fatalf("Failed to setup pipe: %s", err)
+		}
+		o.extraArgs = append(o.extraArgs, "-L"+idaLog)
+	}
 	cmd := o.Command(path)
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	cmd.Stdin = os.Stdin
-	ret := &RedirectedCommand{
-		Cmd:     cmd,
-		tmpDir:  tempDir,
-		logFile: o.LogFile,
+	if o.ShowIDALog {
+		cmd.Stderr = os.Stderr
+		cmd.Stdout = os.Stdout
+		cmd.Stdin = os.Stdin
 	}
-	ret.Setup()
-	return ret
+	r.Cmd = cmd
+	return r
 }
