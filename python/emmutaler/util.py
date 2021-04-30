@@ -5,6 +5,8 @@ import ida_idp
 
 def get_plugin_args() -> list:
     opts = ida_loader.get_plugin_options("emmu")
+    if opts is None:
+        return []
     return opts.split(":")
 
 def get_args() -> list:

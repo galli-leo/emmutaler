@@ -7,6 +7,7 @@ import idautils
 import idc
 import time
 import os
+import logging
 
 BAD_MODIFIERS = ["static", "__fastcall", "__cdecl"]
 
@@ -23,6 +24,7 @@ class GenHeader:
     """
     def __init__(self, outfile):
         self.log = get_logger(__name__ + ".GenHeader")
+        self.log.setLevel(logging.DEBUG)
         self.outfile = outfile
         self.sys_includes = []
         self.include_defs = True
@@ -77,7 +79,7 @@ class GenHeader:
             mem = ida_typeinf.udt_member_t()
             mem.offset = i
             ti.find_udt_member(mem, ida_typeinf.STRMEM_INDEX)
-            self.log.debug("Member %s.%s (%s)", name, mem.name, mem.type)
+            self.log.info("Member %s.%s (%s)", name, mem.name, mem.type)
             t: ida_typeinf.tinfo_t = mem.type
             # dereference type!
             while t.is_ptr_or_array() and not t.is_funcptr():
@@ -88,7 +90,7 @@ class GenHeader:
                     argt = t.get_nth_arg(k)
                     if argt.get_ordinal() > 0:
                         self.write_type(argt)
-            if t.get_ordinal() > 0:
+            if t.get_ordinal() > 0 and t.get_ordinal() != ordinal:
                 self.write_type(t)
             else:
                 self.log.debug("Member %s.%s (%s)", name, mem.name, mem.type)

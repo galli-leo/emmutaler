@@ -7,7 +7,7 @@ ROMS = {
 rom_path = get_option('rom_path')
 rom_id = get_option('rom')
 rom_filename = ROMS[rom_id]
-rom_filepath = join_paths(rom_path, rom_filename)
+rom_filepath = join_paths(meson.current_source_dir(), rom_path, rom_filename)
 rom = files(rom_filepath)
 rom_dep = files(
     rom_filepath + '.i64',
@@ -21,9 +21,13 @@ summary({
 
 test_file = join_paths('ipsw', 'out.img4')
 custom_test = join_paths('img', 'test.img4')
+img_gen_test = join_paths('img', 'img_0002.img4')
+img_gen_path = join_paths('img')
 summary({
     'test_file': test_file,
-    'custom_test': custom_test
+    'custom_test': custom_test,
+    'img_gen_test': img_gen_test,
+    'img_gen_path': img_gen_path
 }, section: 'testing')
 
 # TODO: Make this generateable??
@@ -39,7 +43,8 @@ SECTIONS = {
     'bss': '0x19c00d100',
     'fuses': '0x23D2BC000',
     'aes': '0x23d2d0000',
-    'img': '0x420069000'
+    'img': '0x320069000',
+    'allow': '0x2000000'
 }
 
 summary(SECTIONS, section: 'memory_map')
@@ -51,6 +56,16 @@ endforeach
 summary({
     'mmap_flags': mmap_flags
 }, section: 'memory_map')
+
+fuzz_host = get_option('fuzz_host')
+fuzz_user = get_option('fuzz_user')
+fuzz_dir = get_option('fuzz_dir')
+
+summary({
+    'fuzz_host': fuzz_host,
+    'fuzz_user': fuzz_user,
+    'fuzz_dir': fuzz_dir
+}, section: 'fuzz')
 
 # Get flatbuffers
 subdir('proto')
@@ -64,3 +79,12 @@ subdir('python')
 
 # Actual code
 subdir('src')
+
+fuzz_scp_prog = find_program('fuzz_scp.sh')
+
+fuzz_scp = custom_target(
+    'fuzz_scp',
+    input: ['./fuzz_scp.sh', '../img', 'run.sh', emmu_fuzz, main, repro_fuzz] + emmu_fuzz_extras,
+    output: 'fuzz_scp',
+    command : [fuzz_scp_prog, fuzz_host, fuzz_user, fuzz_dir, '@INPUT@']
+)

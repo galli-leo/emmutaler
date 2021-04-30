@@ -1,0 +1,16 @@
+/*
+{{template "gen_header" .}}
+*/
+
+#ifndef __CONFIG_H_H
+#define __CONFIG_H_H
+
+#define IBOOT_MAJOR {{.R.Version.Major}}
+#define IBOOT_ZERO1 0 
+#define IBOOT_ZERO2 0
+#define IBOOT_MINOR {{.R.Version.Minor}}
+#define IBOOT_PATCH {{.R.Version.Patch}}
+
+#define IBOOT_CHIP 0x{{.R.ChipID}}
+
+#endif /* __CONFIG_H_H */

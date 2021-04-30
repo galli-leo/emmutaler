@@ -7,6 +7,7 @@
 #include "platform/chipid.h"
 #include "hexdump.h"
 #include <assert.h>
+#include "config/version.h"
 
 void sub2_function()
 {
@@ -47,6 +48,9 @@ extern void buggy(void* address);
 int main(int argc, char* argv[]) {
     install_signal_handler();
     setup_manifest();
+    printf("iBoot version: %s (%s)\n", IBOOT_VERSION, CHIP_STR);
+    // void* heap_addr = malloc(0x10);
+    // printf("HEAP ADDR: %p\n", heap_addr);
     // buggy(0x10001d760);
     // dini_muetter(0x40001d760);
 
@@ -66,7 +70,7 @@ int main(int argc, char* argv[]) {
 
     fseek(image_file, 0, SEEK_END);
     long act_image_size = ftell(image_file);
-    long image_size = (act_image_size & 0x2000) + 0x4000; // align to next higher power of 0x2000, otherwise complaints will come :(
+    long image_size = act_image_size;//(act_image_size & 0x2000) + 0x4000; // align to next higher power of 0x2000, otherwise complaints will come :(
     if (act_image_size > 0x10000) {
         printf("Image is too large: 0x%x\n", act_image_size);
         exit(2);
@@ -96,7 +100,7 @@ int main(int argc, char* argv[]) {
     printf("Randomized heap cookie...\n");
     rom_heap_add_chunk(heap_base, 0x8000uLL, 1);
     printf("Done with heap\n");
-
+    memset(&image_buffer[image_size], 0x42, 0x10000 - image_size);
     uint32_t types = 'ibec';
     result = rom_image_load(image_info, &types, 1u, 0LL, image_buffer, image_size, 0LL);
     if (result != 0) {
@@ -118,7 +122,13 @@ int main(int argc, char* argv[]) {
         }
         // hexdump(image_buffer, 0x100);
     }
-
+    unsigned char* rom_bytes = (unsigned char*) rom_img_start;
+    for (int i = image_size; i < 0x10000; i++) {
+        if (rom_bytes[i] != 0x42) {
+            printf("OUT OF BOUNDS WRITE TO %p\n", &rom_bytes[i]);
+            assert(false);
+        }
+    }
     // printf("Hello World! ROM LOADED AT: %p, %p\n", &rom_start, &rom_platform_start);
     // sub_function();
     // fake_rom_start();

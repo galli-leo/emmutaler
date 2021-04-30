@@ -144,7 +144,7 @@ func (e *encodeCtx) encode() error {
 }
 
 func (d *encodeCtx) encodeNil() error {
-	d.b.AddASN1(asn1.NULL, nil) // actually how you encode null :)
+	d.b.AddASN1(asn1.NULL, func(child *Builder) {}) // actually how you encode null :)
 	return nil
 }
 
@@ -188,6 +188,9 @@ func (e *encodeCtx) encodeStruct() error {
 	for _, f := range fs {
 		fv := f.v
 		if f.params.omitEmpty && isEmptyValue(fv) {
+			continue
+		}
+		if f.params.skip {
 			continue
 		}
 		// if we have a set, we are still nested!

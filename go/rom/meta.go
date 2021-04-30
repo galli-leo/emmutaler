@@ -47,6 +47,7 @@ func (r *ROM) LoadMetaFromBinary() error {
 	r.meta.BuildInfo.Tag = info.Build.TagS()
 
 	r.ParseVersion()
+	r.ParseChipID()
 
 	// LinkerInfo
 	r.meta.LinkerInfo.Text = &info.LinkerInfo.Text
@@ -55,7 +56,7 @@ func (r *ROM) LoadMetaFromBinary() error {
 	r.meta.LinkerInfo.Data = &info.LinkerInfo.Data
 	r.meta.LinkerInfo.Bss = &info.LinkerInfo.BSS
 	r.meta.LinkerInfo.Stacks = &info.LinkerInfo.Stacks
-	if r.version.Less(&vt8030) {
+	if r.Version.Less(&vt8030) {
 		r.meta.LinkerInfo.PageTables = &info.LinkerInfo.PageTables
 		r.meta.LinkerInfo.HeapGuard = info.LinkerInfo.HeapGuard
 		r.meta.LinkerInfo.BootTrampoline = &info.LinkerInfo.BootTrampoline
@@ -83,6 +84,7 @@ func (r *ROM) LoadMeta() error {
 		return r.SaveMeta()
 	}
 	r.ParseVersion()
+	r.ParseChipID()
 	return err
 }
 

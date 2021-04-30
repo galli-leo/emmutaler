@@ -59,16 +59,23 @@ mov x29, sp
 .fill {{.R.StacksSize}}
 */
 
+/*
+    Section for storing page tables, currently unused (since we don't have page tables).
+*/
 .section .rom.pt, "aw"
 .fill {{.R.PTSize}}
 
 /*
     TODO: Figure out where we can get info about the heap of a rom image.
     Disassemble and find heap_init?
+    Why is this commented out?
 */
 {{/* .section .rom.heap, "aw"
 .fill 0x8000 */}}
 
+/*
+    Basic IO section?
+*/
 .section .rom.io, "aw"
 .fill 0x30
 .global report_id
@@ -80,6 +87,9 @@ report_arg1: .dc.l 0x0
 .global report_arg2
 report_arg2: .dc.l 0x0
 
+/*
+    GPIO section.
+*/
 .section .rom.gpio, "aw"
 .global __start_rom_gpio
 __start_rom_gpio:
@@ -87,20 +97,43 @@ __start_rom_gpio:
 .dc.l 0x1
 .fill 0x100000 - 0xc4c - 0x8
 
+/*
+    Platform Manager section.
+*/
 .section .rom.pmgr, "aw"
 .fill 0x8000
 
+/*
+    Fuses section.
+*/
 .section .rom.fuses, "aw"
 .global __start_rom_fuses
 __start_rom_fuses:
 .fill 0x4000
 
+/*
+    Section used for AES (coprocessor?).
+*/
 .section .rom.aes, "aw"
 .global __start_rom_aes
 __start_rom_aes:
 .fill 0x5000
 
+/*
+    Section used for storing the boot image.
+    Only really used for fuzzing at the moment.
+*/
 .section .rom.img, "awx"
 .global __start_rom_img
 __start_rom_img:
 .fill 0x10000
+
+/*
+    Extremely hacky workaround.
+    In the latest version of the ROM image, it seems that the DER parsing expects a pointer instead of a boolean for the allow partial parameter.
+    Since we need to patch that in one instruction, the address of the pointer should be small.
+*/
+.section .rom.allow, "awx"
+.global __start_rom_allow
+__start_rom_allow:
+.fill 0x10

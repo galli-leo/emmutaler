@@ -1,7 +1,6 @@
 package rom
 
 import (
-	"log"
 	"regexp"
 	"strconv"
 )
@@ -31,11 +30,19 @@ func mustParseUint(inp string) uint64 {
 
 func (r *ROM) ParseVersion() {
 	matches := versionRegex.FindStringSubmatch(r.meta.BuildInfo.Tag)
-	log.Printf("TAG: %s", r.meta.BuildInfo.Tag)
+	// log.Printf("TAG: %s", r.meta.BuildInfo.Tag)
 	major, minor, patch := matches[1], matches[2], matches[3]
-	r.version = VersionInfo{
+	r.Version = VersionInfo{
 		Major: mustParseUint(major),
 		Minor: mustParseUint(minor),
 		Patch: mustParseUint(patch),
 	}
+}
+
+var chipIDRegex = regexp.MustCompile(`t(\d+)si`)
+
+func (r *ROM) ParseChipID() {
+	matches := chipIDRegex.FindStringSubmatch(r.meta.BuildInfo.Banner)
+	chipID := matches[1]
+	r.ChipID = mustParseUint(chipID)
 }

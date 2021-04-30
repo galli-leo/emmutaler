@@ -254,7 +254,6 @@ struct image_info
 {
   uint32_t imageLength;
   uint32_t imageAllocation;
-  uint32_t imageType;
   uint32_t imagePrivateMagic;
   uint32_t imageOptions;
   void *imagePrivate;
@@ -675,4 +674,321 @@ struct chain_verification
   DERSize field_2F8;
 };
 #pragma pack(pop)
+
+/* 115 */
+enum boot_device
+{
+  BOOT_DEVICE_NOR = 0x0,
+  BOOT_DEVICE_SPI = 0x1,
+  BOOT_DEVICE_NAND = 0x2,
+  BOOT_DEVICE_NVME = 0x3,
+  BOOT_DEVICE_USBDFU = 0x4,
+  BOOT_DEVICE_TBTDFU = 0x5,
+  BOOT_DEVICE_XMODEM = 0x6,
+};
+
+/* 116 */
+struct boot_config
+{
+  boot_device device;
+  uint32_t flag;
+};
+
+/* 117 */
+typedef uint32_t block_addr;
+
+/* 118 */
+typedef uint64_t off_t;
+
+/* 119 */
+struct blockdev
+{
+  struct blockdev *next;
+  uint32_t flags;
+  uint32_t block_size;
+  uint32_t block_count;
+  uint32_t block_shift;
+  uint64_t total_len;
+  uint32_t alignment;
+  uint32_t alignment_shift;
+  int (__fastcall *read_hook)(struct blockdev *, void *ptr, off_t offset, uint64_t len);
+  int (__fastcall *read_block_hook)(struct blockdev *, void *ptr, block_addr block, uint32_t count);
+  int (__fastcall *write_hook)(struct blockdev *, const void *ptr, off_t offset, uint64_t len);
+  int (__fastcall *write_block_hook)(struct blockdev *, const void *ptr, block_addr block, uint32_t count);
+  int (__fastcall *erase_hook)(struct blockdev *, off_t offset, uint64_t len);
+  char name[16];
+  off_t protect_start;
+  off_t protect_end;
+};
+
+/* 120 */
+struct image4_info
+{
+  struct list_node node;
+  struct blockdev *bdev;
+  off_t devOffset;
+  struct image_info image_info;
+};
+
+/* 121 */
+enum boot_target
+{
+  BOOT_UNKNOWN = 0x0,
+  BOOT_HALT = 0x1,
+  BOOT_IBOOT = 0x2,
+  BOOT_DARWIN = 0x3,
+  BOOT_DARWIN_RESTORE = 0x4,
+  BOOT_DIAGS = 0x5,
+  BOOT_TSYS = 0x6,
+  BOOT_SECUREROM = 0x7,
+  BOOT_MONITOR = 0x8,
+  BOOT_DALI = 0x9,
+};
+
+/* 122 */
+typedef unsigned __int64 uintptr_t;
+
+/* 123 */
+struct nor_blockdev
+{
+  struct blockdev bdev;
+  uintptr_t handle;
+  int (__fastcall *readRange)(uintptr_t handle, uint8_t *ptr, uint32_t offset, uint32_t length);
+  int (__fastcall *writeRange)(uintptr_t handle, const uint8_t *ptr, uint32_t offset, uint32_t length);
+  int (__fastcall *eraseRange)(uintptr_t handle, uint32_t offset, uint32_t length);
+};
+
+/* 124 */
+typedef unsigned int u_int32_t;
+
+/* 125 */
+struct spi_ndev
+{
+  struct nor_blockdev ndev;
+  u_int32_t spiBus;
+  u_int32_t spiChipSelect;
+  u_int32_t spiFrequency;
+  u_int32_t spiMode;
+  u_int32_t jedecID;
+  u_int32_t flags;
+  u_int32_t blockSize;
+  u_int32_t blockCount;
+  u_int32_t softWriteProtectMask;
+  u_int32_t progMaxLength;
+  u_int32_t progAlignMask;
+  u_int32_t defaultTimeout;
+  u_int32_t byteProgramTimeout;
+  u_int32_t eraseSectorTimeout;
+};
+
+/* 126 */
+struct nvme_bdev
+{
+  struct blockdev blockdev;
+  int nvme_id;
+  uint32_t nsid;
+  uint32_t max_transfer_blocks;
+  uint32_t dummy_blocks;
+  uint32_t blocks_per_virtual_block;
+  struct list_node node;
+};
+
+/* 127 */
+typedef struct nvme_bdev nvme_bdev_t;
+
+/* 129 */
+struct nand_blockdev
+{
+  struct blockdev bdev;
+  uintptr_t handle;
+  int (__fastcall *readRange)(uintptr_t handle, uint8_t *ptr, uint32_t offset, uint32_t length);
+};
+
+/* 128 */
+struct __attribute__((packed)) __attribute__((aligned(4))) spi_nand_blockdev
+{
+  struct nand_blockdev ndev;
+  u_int32_t spiBus;
+  u_int32_t spiChipSelect;
+  u_int32_t spiFrequency;
+  u_int32_t spiMode;
+  u_int32_t flags;
+  u_int32_t blockSize;
+  u_int32_t blockCount;
+  u_int32_t softWriteProtectMask;
+  u_int32_t progMaxLength;
+  u_int32_t progAlignMask;
+  u_int32_t defaultTimeout;
+  u_int32_t byteProgramTimeout;
+  u_int32_t eraseSectorTimeout;
+};
+
+/* 130 */
+struct $5090A74087FCA804CCC0A9D0D379692B
+{
+  volatile uint32_t *spclkcon;
+  volatile uint32_t *spcon;
+  volatile uint32_t *spsta;
+  volatile uint32_t *sppin;
+  volatile uint32_t *sptdat;
+  volatile uint32_t *sprdat;
+  volatile uint32_t *sppre;
+  volatile uint32_t *spcnt;
+  volatile uint32_t *spidd;
+  volatile uint32_t *spirto;
+  volatile uint32_t *spihangd;
+  volatile uint32_t *spiswrst;
+  volatile uint32_t *spiver;
+  volatile uint32_t *sptdcnt;
+  uint32_t clock;
+  uint32_t irq;
+};
+
+/* 131 */
+typedef struct $5090A74087FCA804CCC0A9D0D379692B spi_regs_t;
+
+/* 132 */
+enum spi_clk
+{
+  PCLK = 0x0,
+  NCLK = 0x1,
+};
+
+/* 133 */
+struct task_event
+{
+  bool signalled;
+  uint32_t flags;
+  struct task_wait_queue wait;
+};
+
+/* 134 */
+struct spi_status_t
+{
+  int bits;
+  int clkpol;
+  int clkpha;
+  enum spi_clk clk;
+  int baud;
+  bool master;
+  bool dma;
+  const void *tx_buf;
+  size_t tx_pos;
+  size_t tx_len;
+  void *rx_buf;
+  size_t rx_pos;
+  size_t rx_len;
+  int overrun_errors;
+  struct task_event event;
+  uint32_t shadow_spcon;
+  volatile int tx_complete;
+  volatile int rx_complete;
+};
+
+/* 135 */
+struct heap_block
+{
+  uint64_t checksum;
+  uint32_t _pad[4];
+  void *chunk_ptr;
+  size_t this_size;
+  unsigned __int64 this_free : 1;
+  unsigned __int64 prev_free : 1;
+  unsigned __int64 prev_size : 62;
+  size_t padding_start;
+  size_t padding_bytes;
+};
+
+/* 136 */
+struct free_block
+{
+  struct heap_block common;
+  struct free_block *next_in_bin;
+  struct free_block *prev_in_bin;
+};
+
+/* 137 */
+struct chunk_data
+{
+  struct heap_block *chunk_base;
+  uint32_t chunk_size;
+};
+
+/* 138 */
+struct new_chunk_data
+{
+  heap_block *front_sentinel;
+  _BYTE gap_8[2560];
+  _DWORD free_size_maybe;
+  _DWORD field_A0C;
+  heap_block *chunk_start;
+  char *chunk_end;
+};
+
+/* 139 */
+typedef void (__fastcall *mib_func_t)(uint32_t oid, void *arg, void *value);
+
+/* 140 */
+struct mib_func_spec
+{
+  mib_func_t func;
+  void *arg;
+};
+
+/* 141 */
+union mib_value
+{
+  uint32_t v32;
+  uint64_t v64;
+  bool v_bool;
+  void *v_ptr;
+  struct mib_func_spec v_func;
+};
+
+/* 142 */
+struct mib_node
+{
+  uint32_t node_oid;
+  uint32_t node_type;
+  union mib_value node_data;
+};
+
+/* 143 */
+struct ccdrbg_nisthmac_custom
+{
+  const struct ccdigest_info *di;
+  int strictFIPS;
+};
+
+/* 144 */
+struct ccdrbg_state
+{
+  const struct ccdrbg_nisthmac_custom *custom;
+  uint8_t key[64];
+  uint8_t V[64];
+  uint64_t reseed_counter;
+};
+
+/* 145 */
+struct ccdrbg_info
+{
+  size_t size;
+  int (__fastcall *init)(const struct ccdrbg_info *info, struct ccdrbg_state *drbg, size_t entropyLength, const void *entropy, size_t nonceLength, const void *nonce, size_t psLength, const void *ps);
+  int (__fastcall *reseed)(struct ccdrbg_state *prng, size_t entropylen, const void *entropy, size_t inlen, const void *in);
+  int (__fastcall *generate)(struct ccdrbg_state *prng, size_t outlen, void *out, size_t inlen, const void *in);
+  void (__fastcall *done)(struct ccdrbg_state *prng);
+  const void *custom;
+};
+
+/* 146 */
+struct cbuf
+{
+  void *buf;
+  unsigned int head;
+  unsigned int tail;
+  size_t has;
+  size_t len;
+  uint32_t len_mask;
+  struct task_event *event;
+};
 

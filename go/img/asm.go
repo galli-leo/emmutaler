@@ -54,7 +54,6 @@ func Trying() {
 var retBytes = []byte{0xc0, 0x03, 0x5f, 0xd6}
 
 func BuildSimplePayload(ret int) ([]byte, error) {
-	Trying()
 	r := []byte{}
 	b, err := asm.NewBuilder("arm64", 0)
 	if err != nil {
@@ -81,6 +80,22 @@ func BuildSimplePayload(ret int) ([]byte, error) {
 	r = b.Assemble()
 	r = r[:len(r)-8] // cut off last 4 bytes.
 	r = append(r, retBytes...)
-	log.Printf("Simple Payload: %x", r)
+	return r, nil
+}
+
+func BuildPaddedPayload(ret int, numNops int) ([]byte, error) {
+	mov := mustDec("803480d2")
+	if ret == RetInvalidPayload {
+		mov = mustDec("a00880d2")
+	}
+	nop := mustDec("1f2003d5")
+	rett := mustDec("c0035fd6")
+	r := []byte{}
+	r = append(r, mov...)
+	for i := 0; i < numNops; i++ {
+		r = append(r, nop...)
+	}
+	r = append(r, rett...)
+	log.Printf("Padded Payload: %x", r)
 	return r, nil
 }

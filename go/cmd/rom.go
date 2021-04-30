@@ -48,7 +48,7 @@ func init() {
 	// romCmd.PersistentFlags().String("foo", "", "A help for foo")
 	romCmd.PersistentFlags().StringVarP(&inputFile, "rom", "r", "", "Path to the ROM file to use for the build.")
 	romCmd.PersistentFlags().StringVarP(&outputDirectory, "out", "o", "build", "Path to were built output should be stored.")
-
+	AddStructFlags(romCmd.PersistentFlags(), &rom.GenConf)
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// romCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")

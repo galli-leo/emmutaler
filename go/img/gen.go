@@ -7,6 +7,8 @@ import (
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/hex"
+	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -15,6 +17,7 @@ import (
 	"github.com/galli-leo/emmutaler/img/certs"
 	"github.com/galli-leo/emmutaler/img/cryptobyte"
 	"github.com/galli-leo/emmutaler/img/cryptobyte/asn1"
+	"github.com/galli-leo/emmutaler/img/mutation"
 )
 
 type imgGenerator struct {
@@ -47,7 +50,66 @@ func GenerateImages(outDir string, certDir string) {
 	leafInfo := certs.DefaultLeafInfo()
 	g.leafKey, g.leafCert = certs.GenerateLeafTmp(&leafInfo, g.rootCert, g.rootKey, GenManifestExtension())
 
-	g.GenerateImage(filepath.Join(outDir, "test.img4"))
+	testData := g.GenerateImage(filepath.Join(outDir, "test.img4"))
+	GenMutations(testData, outDir)
+
+	img := &IMG4{}
+	m := mutation.NewGen(img)
+
+	m.Add(mutation.NewFunc((*IMG4).FillDefault, []interface{}{certDir}))
+	m.Add(mutation.NewFunc(func(i *IMG4, numPads int) {
+		if numPads == -1 {
+			return
+		}
+		pay, err := BuildPaddedPayload(RetValidPayload, numPads)
+		if err != nil {
+			log.Fatalf("Failed to build simple payload: %s", err)
+		}
+		img.Payload.Contents = pay
+		img.Manifest.RawManifest.ManB.IBEC.Digest = img.Payload.Digest()
+	}, []interface{}{-1, 0, 1000}))
+	m.Add(&mutation.StructMutator{Times: 2})
+	m.Add(mutation.NewStruct(2, func(i *IMG4) *IM4M {
+		return &i.Manifest
+	}))
+	m.Add(mutation.NewStruct(5, func(i *IMG4) *ManP {
+		return &i.Manifest.RawManifest.ManB.ManP.ManP
+	}))
+	m.Add(mutation.NewStruct(2, func(i *IMG4) *PayloadManifestInfo {
+		return &i.Manifest.RawManifest.ManB.IBEC.PayloadManifestInfo
+	}))
+	m.Add(mutation.NewFunc(img.chain.MutateRoot, []interface{}{0, 1, 2}))
+	m.Add(mutation.NewFunc(img.chain.MutateLeafs, []interface{}{0, 1})) // for now
+	m.Add(mutation.NewFunc(img.chain.MutateSignChain, []interface{}{0}))
+	// m.Add(mutation.NewStruct(5, func(i *IMG4) *CustomCert {
+	// 	return &i.Manifest.CertChain[0]
+	// }))
+	m.Add(mutation.NewFunc(img.chain.MutateSignImg, []interface{}{0}))
+
+	metaInfo := make(map[string][]string)
+	count := 0
+	m.Gen(func(meta []string) {
+		filename := fmt.Sprintf("img_%04d.img4", count)
+		outFile := filepath.Join(outDir, filename)
+		res, err := cryptobyte.Marshal(img)
+		if err != nil {
+			log.Fatalf("Failed to marshal img4: %s", err)
+		}
+		err = os.WriteFile(outFile, res, 0777)
+		if err != nil {
+			log.Fatalf("Failed to write outfile %s: %s", outFile, err)
+		}
+		metaInfo[filename] = meta
+		count++
+	})
+	metaData, err := json.MarshalIndent(metaInfo, "", "  ")
+	if err != nil {
+		log.Fatalf("Failed to marshal meta info: %s", err)
+	}
+	metaFile := filepath.Join(outDir, "meta.json")
+	if err = os.WriteFile(metaFile, metaData, 0777); err != nil {
+		log.Fatalf("Failed to write meta info to %s: %s", metaFile, err)
+	}
 }
 
 func mustDec(s string) []byte {
@@ -61,7 +123,7 @@ func mustDec(s string) []byte {
 }
 
 // For now.
-func (g *imgGenerator) GenerateImage(outFile string) {
+func (g *imgGenerator) GenerateImage(outFile string) []byte {
 	img := IMG4{}
 	img.FillID()
 	img.Payload.Type = PayloadIBEC
@@ -116,4 +178,5 @@ func (g *imgGenerator) GenerateImage(outFile string) {
 	if err != nil {
 		log.Fatalf("Failed to write outfile %s: %s", outFile, err)
 	}
+	return res
 }

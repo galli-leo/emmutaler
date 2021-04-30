@@ -41,4 +41,17 @@ func (r *ROM) DoPatch() {
 	// symb.rom_start.PatchOffset(0x13EB8).Patch(r.PatchASM("blr x8"))
 	// Handle exception vector
 	r.PatchInstruction("msr s3_0_c12_c0_0,").Patch(r.PatchFunctionTmpl("vbar_el1_handler", "{{(index .Args 1)}}"))
+
+	if GenConf.AllowOOB {
+		// Patch DER functions to not check length!
+		r.PatchDERItem(symb.rom_DERDecodeItemPartialBuffer)
+		symb.rom_DERDecodeItemPartialBuffer_0.PatchOffset(4).Patch(r.PatchASM("mov x2, #0x1"))
+		symb.rom_DERDecodeItemPartialBuffer_0.PatchOffset(8).Patch(r.PatchASM("b .+12"))
+		//r.PatchDERItem(symb.rom_DERDecodeItemPartialBuffer_0)
+	}
+}
+
+func (r *ROM) PatchDERItem(symb Symbol) {
+	symb.PatchOffset(4).Patch(r.PatchASM("mov x2, #0x2000000"))
+	symb.PatchOffset(8).Patch(r.PatchASM("b .+12")) // always branch
 }

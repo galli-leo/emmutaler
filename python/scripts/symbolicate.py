@@ -72,7 +72,18 @@ def main():
         #     log.warning("Unable to change the name of %s", name)
         symb_def = print_item_type(symb.start)
         if symb_def is not None:
-            symb.cDefinition = symb_def.replace(act_name, name)
+            repl_name = act_name
+            if act_name[0] == "_":
+                repl_name = act_name[1:]
+            occ = symb_def.count(repl_name)
+            # TODO: Fix this for real!
+            if occ > 1:
+                repl_name = " " + repl_name
+                symb.cDefinition = symb_def.replace(repl_name, " "+name)
+            else:
+                symb.cDefinition = symb_def.replace(repl_name, name)
+            if "rom_" not in symb.cDefinition:
+                log.warning("Symbol %s could not fixup c definition %s to have rom_ prefix", symb.name, symb.cDefinition)
         # ida_name.set_name(ea, act_name)
         # symb.address = ea
         meta.symbols.append(symb)

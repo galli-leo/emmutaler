@@ -14,6 +14,18 @@ import (
 //go:embed templates
 var fs embed.FS
 
+// Global configuration for the gen commands.
+// Used with command line to change generated stuff.
+type GenConfig struct {
+	AllowOOB bool `name:"allow-oob" help:"Whether to allow OOB memory accesses for DER parsing."`
+}
+
+// Global configuration actually used.
+// Filled in cmd package.
+var GenConf GenConfig = GenConfig{
+	AllowOOB: false,
+}
+
 // Gives information about the invocation to the template.
 // This is used to write useful stuff into the GENERATED DO NOT EDIT header.
 type Invocation struct {

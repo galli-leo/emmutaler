@@ -22,7 +22,8 @@ type ROM struct {
 	// Path where we originall found the binary image.
 	inputPath string
 
-	version VersionInfo
+	Version VersionInfo
+	ChipID  uint64
 	// Metadata information, either loaded from the .emmu file or parsed from the binary image.
 	meta            *fbs.ROMMetaT
 	TextSection     *ChunkTree

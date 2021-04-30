@@ -46,9 +46,22 @@ var symHeaderCmd = &cobra.Command{
 	},
 }
 
+var configHeaderCmd = &cobra.Command{
+	Use:   "configh",
+	Short: "Generate the c config header.",
+	Long:  `TODO`,
+	Run: func(cmd *cobra.Command, args []string) {
+		err := r.GenerateTemplate("config.h", outputDirectory)
+		if err != nil {
+			log.Fatalf("Failed to generate header: %v", err)
+		}
+	},
+}
+
 func init() {
 	romCmd.AddCommand(headerCmd)
 	romCmd.AddCommand(symHeaderCmd)
+	romCmd.AddCommand(configHeaderCmd)
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

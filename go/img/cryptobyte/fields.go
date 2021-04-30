@@ -35,6 +35,7 @@ type fieldParameters struct {
 	set        bool     // true iff this should be encoded as a SET
 	omitEmpty  bool     // true iff this should be omitted if empty when marshaling.
 	nested     bool     // true iff it is nested inside another layer, e.g. octet string.
+	skip       bool     // true iff we should skip i.e. not encode this field.
 	// Invariants:
 	//   if explicit is set, tag is non-nil.
 }
@@ -89,6 +90,8 @@ func parseFieldParameters(str string) (ret fieldParameters) {
 			ret.tag = ret.tag.WithMethod(asn1.MethodConstructed)
 		case part == "omitempty":
 			ret.omitEmpty = true
+		case part == "skip":
+			ret.skip = true
 		}
 	}
 	return

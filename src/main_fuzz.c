@@ -7,6 +7,7 @@
 #include "platform/chipid.h"
 #include "hexdump.h"
 #include <assert.h>
+#include <string.h>
 
 image_info img_info;
 
@@ -40,35 +41,68 @@ void setup_heap()
     printf("Done with heap\n");
 }
 
-int do_fuzz(uint64_t img_size)
+int do_fuzz(void* address, uint64_t img_size, uint64_t another_one)
 {
-    printf("Running with size: 0x%lx\n", img_size);
-    if (img_size + 10 > 10) {
-        uint64_t image_size = (img_size & 0x2000) + 0x4000; // align to next higher power of 0x2000, otherwise complaints will come :(
-        img_info.imageLength = image_size;
+    uint64_t saved_image_size = img_size;
+    uint64_t really_boi = saved_image_size + 0x10;
+    img_info.imageLength = img_size;
+#if DEBUG
+    printf("Running with size: 0x%lx, %p, 0x%lx, 0x%lx\n", img_size, address, another_one, img_info.imageLength);
+#endif
+    //printf("asdf: 0x%x vs 0x%x vs 0x%x\n", img_size, saved_image_size, really_boi);
+    // if (img_size + 10 > 10) {
+        uint64_t image_size = img_info.imageLength;//(img_size & 0x2000) + 0x4000; // align to next higher power of 0x2000, otherwise complaints will come :(
+        unsigned char* rom_bytes = (unsigned char*) rom_img_start;
+        // printf("ROM IMAGE AT: %p, 0x%x, 0x%x, 0x%x\n", rom_img_start, image_size, saved_image_size, img_info.imageLength);
+#if ALLOW_OOB
+        memset(&rom_bytes[image_size], 0, 0x10000 - image_size);
+#else
+        memset(&rom_bytes[image_size], 0x42, 0x10000 - image_size);
+#endif
         uint32_t types = 'ibec';
+        // printf("Types: 0x%x\n", types);
         uint32_t result = rom_image_load(&img_info, &types, 1u, 0LL, rom_img_start, image_size, 0LL);
         if (result != 0) {
+            #if DEBUG
             printf("Failed to load image: %d\n", result);
+            #endif
         } else {
             printf("Successfully loaded image at %p\n", rom_img_start);
             img_func func = (img_func) rom_img_start;
             int res = func();
             if (res == 420) {
+                #if DEBUG
                 printf("Valid image ran ok, so that's good, I guess\n");
+                #endif
                 // exit(0);
             } else if (res == 69) {
                 printf("Invalid image ran ok, that's not good (for apple)\n");
-                assert(false);
+                // raise(SIGSEGV);
+                abort();
+                // assert(false);
                 // exit(3);
             } else {
                 printf("Unknown return value %d\n", res);
                 // exit(4);
             }
         }
-    } else {
-        printf("HAHA NO GOOD!\n");
-    }
+#if ALLOW_OOB
+#else
+        for (int i = image_size; i < 0x10000; i++) {
+            if (rom_bytes[i] != 0x42) {
+                printf("OUT OF BOUNDS WRITE TO %p\n", &rom_bytes[i]);
+                // break;
+                assert(false);
+            }
+        }
+#endif
+
+    // } else {
+    //     printf("HAHA NO GOOD!\n");
+    // }
+    // void* prev_pc = __builtin_return_address(0);
+    // void* fp = __builtin_frame_address(0);
+    // printf("RETURN ADDRESS: %p\n", prev_pc);
     return 1; // I think this is needed, so that the return is not compiled out. or something idk.
 }
 
@@ -84,8 +118,9 @@ int main(int argc, char* argv[]) {
 
     printf("Allocated image info at %p, buffer at: %p\n", &img_info, rom_img_start);
 
-    do_fuzz(10);
-
+    do_fuzz(0, 0, 0);
+#if DEBUG
     printf("Goodbye!\n");
+#endif
     return 0;
 }

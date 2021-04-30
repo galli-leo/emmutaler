@@ -3,6 +3,11 @@ package img
 import (
 	"crypto/sha512"
 	"crypto/x509"
+	"log"
+
+	"github.com/galli-leo/emmutaler/img/certs"
+	"github.com/galli-leo/emmutaler/img/cryptobyte"
+	"github.com/galli-leo/emmutaler/img/cryptobyte/asn1"
 )
 
 type ObjectIdentifer string
@@ -32,7 +37,8 @@ type ImgObject struct {
 type IMG4 struct {
 	Identifier ObjectIdentifer
 	Payload    IM4P
-	Manifest   IM4M `asn1:"nested,tag:0,context,constructed"`
+	Manifest   IM4M             `asn1:"nested,tag:0,context,constructed"`
+	chain      CertificateChain `asn1:"skip"`
 }
 
 func (i *IMG4) FillID() {
@@ -50,10 +56,19 @@ type IM4M struct {
 	RawManifest Manifest `asn1:"set"`
 	Signature   []byte
 	CertChain   []CustomCert
+	rawDigest   []byte `asn1:"skip"`
 }
 
 func (i *IM4M) FillID() {
 	i.Identifier = Img4Manifest
+}
+
+func (i *IM4M) ToSign() []byte {
+	manifestData, err := cryptobyte.MarshalStart(&i.RawManifest, asn1.SET)
+	if err != nil {
+		log.Fatalf("Failed to marshal manifest: %s", err)
+	}
+	return manifestData
 }
 
 type ManPWrapper struct {
@@ -138,6 +153,19 @@ func (i *IM4P) FillID() {
 }
 
 func (i *IM4P) Digest() []byte {
-	dig := sha512.Sum384(i.Contents)
-	return dig[:]
+	payloadData, err := cryptobyte.Marshal(i)
+	if err != nil {
+		log.Fatalf("Failed to marshal payload: %s", err)
+	}
+	payloadDgst := sha512.Sum384(payloadData)
+	return payloadDgst[:]
+}
+
+// Used to generate images.
+type CertificateChain struct {
+	fakeRoot bool
+	noRoot   bool
+	chain    []*certs.Pair
+	img      *IMG4
+	certDir  string
 }

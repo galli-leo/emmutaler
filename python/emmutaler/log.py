@@ -13,7 +13,7 @@ if args.log_file != "":
 
 def get_logger(name):
     logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     logger.handlers = []
     # logger.addHandler(ch)
     coloredlogs.install(level='INFO', logger=logger, isatty=True, stream=log_file)

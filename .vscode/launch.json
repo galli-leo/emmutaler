@@ -26,6 +26,17 @@
             "rom", "asm", "--rom", "../../SecureROMs-master/SecureROM for t8030si, iBoot-4479.0.0.100.4"
         ]
     },
+    {
+        "name": "Launch IMG Generator",
+        "type": "go",
+        "request": "launch",
+        "mode": "debug",
+        "program": "${workspaceFolder}/go",
+        "cwd": "${workspaceFolder}/go",
+        "args": [
+            "img"
+        ]
+    },
         {
             "name": "Python: Attach to Loader in IDA",
             "type": "python",
