@@ -11,5 +11,5 @@ def get_plugin_args() -> list:
 
 def get_args() -> list:
     if len(idc.ARGV) < 1:
-        return []
+        return get_plugin_args()
     return idc.ARGV[0].split(" ")

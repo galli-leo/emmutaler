@@ -32,6 +32,7 @@ go_sources = files(
     'cmd/asm.go',
     'cmd/header.go',
     'cmd/symbols.go',
+    'cmd/usbMsg.go',
     # ida
     'ida/cmd.go',
     'ida/file_pipe.go',
@@ -57,7 +58,9 @@ go_sources = files(
     'rom/templates/symbols.go.tmpl',
     'rom/templates/rom.h.tmpl',
     'rom/templates/gen_header.tmpl',
-    'rom/templates/symbols_list.h.tmpl'
+    'rom/templates/symbols_list.h.tmpl',
+    # usb_msg
+    'usb_msg/generator.go'
 )
 
 emmu = custom_target(

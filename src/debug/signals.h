@@ -23,6 +23,11 @@ typedef struct signal_info
 
 void print_stacktrace(void* prev_pc, void* fp);
 
+static inline void print_stacktrace_here()
+{
+    print_stacktrace(__builtin_return_address(0), __builtin_frame_address(0));
+}
+
 /**
  * 
  * @brief Installs a signal handler around all signals.

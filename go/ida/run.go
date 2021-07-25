@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-const DefaultPath = "/Applications/IDA Pro 7.5/ida64.app/Contents/MacOS/"
+const DefaultPath = "/Applications/IDA Pro 7.6/ida64.app/Contents/MacOS/"
 
 type LaunchOptions struct {
 	DeleteDB     bool
@@ -20,6 +20,7 @@ type LaunchOptions struct {
 	FileType     string
 	InputFile    string
 	EnableGUI    bool
+	AutoAccept   bool
 	ShowIDALog   bool
 	TempDatabase bool
 	extraArgs    []string
@@ -36,7 +37,7 @@ func (o *LaunchOptions) Command(path string) *exec.Cmd {
 	}
 
 	args := []string{}
-	if !o.EnableGUI {
+	if !o.EnableGUI || o.AutoAccept {
 		args = append(args, "-A")
 	}
 	if o.TempDatabase {
@@ -57,12 +58,15 @@ func (o *LaunchOptions) Command(path string) *exec.Cmd {
 			quoted = append(quoted, fmt.Sprintf(`"%s"`, arg))
 		}
 
-		args = append(args, quoteArg("S", strings.Join(o.ScriptArgs[:], " ")))
+		// Doesn't really work, probably some escaping issue :/
+		// args = append(args, quoteArg("S", strings.Join(o.ScriptArgs[:], " ")))
 		args = append(args, fmt.Sprintf("-OIDAPython:run_script=%s", o.ScriptArgs[0]))
 	}
 	if len(o.PluginArgs) > 0 {
 		if len(o.ScriptArgs) > 0 {
-			o.PluginArgs = append([]string{o.ScriptArgs[0]}, o.PluginArgs...)
+			origArgs := o.PluginArgs
+			o.PluginArgs = o.ScriptArgs
+			o.PluginArgs = append(o.PluginArgs, origArgs...)
 		} else {
 			o.PluginArgs = append([]string{"no_script"}, o.PluginArgs...)
 		}

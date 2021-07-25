@@ -1,7 +1,12 @@
 import os
 import debugpy
+import logging
 from emmutaler.log import get_logger
 log = get_logger(__name__)
+# maybe this makes all lighthouse logs show up?
+# lighthouse_log = get_logger("Lighthouse")
+# lighthouse_log.info("Hello there")
+# lighthouse_log.setLevel(logging.DEBUG)
 
 def install():
     # os.getcwd = getcwd_hook

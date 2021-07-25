@@ -31,7 +31,7 @@ func (img *IMG4) FillDefault(certDir string) {
 	manP.BootNonceHash = mustDec("DA980208D2E1193F2ACB6F4A2337B420CCF47ACF46BAAADA317654F13C5EE619")
 	manP.BoardID = 6
 	manP.CertificateEpoch = 1
-	manP.ChipID = 0x8030
+	manP.ChipID = 0x8030 //0x8101
 	manP.CertificateProduction = true
 	manP.CertificateSecurityMode = true
 	manP.UniqueChipID = 5973101246447662

@@ -94,7 +94,7 @@ def main():
     if len(args) > 1:
         type_file = args[1]
         gen = GenHeader(type_file)
-        gen.sys_includes = ["stdint.h"]
+        gen.sys_includes = ["stdint.h", "stddef.h", "stdbool.h", "sys/types.h"]
         gen.gen()
     idaapi.qexit(0)
 

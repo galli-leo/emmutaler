@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define IMG_BASE (0x320069000)
-#define IMG_MAX 0x10000
+// #define IMG_BASE (0x320069000)
+// #define IMG_MAX 0x10000
 
 void afl_persistent_hook(struct arm64_regs *regs, uint64_t guest_base,
                          uint8_t *input_buf, uint32_t input_buf_len) {
@@ -26,13 +26,11 @@ void afl_persistent_hook(struct arm64_regs *regs, uint64_t guest_base,
   // printf("SP: %016x GB: %016x", regs->sp, guest_base);
   // printf("\n");
 
-  if (input_buf_len > IMG_MAX) input_buf_len = IMG_MAX;
-  memcpy(g2h(IMG_BASE), input_buf, input_buf_len);
-  regs->x1 = input_buf_len;
-  regs->x0 = IMG_BASE;
-  regs->x2 = 0x4242;
+  uint64_t max_buf = regs->x1;
+  if (input_buf_len > max_buf) input_buf_len = max_buf;
 
-  uint64_t* stack_ptr = (uint64_t*)g2h(regs->sp);
+  // if (input_buf_len > IMG_MAX) input_buf_len = IMG_MAX;
+  memcpy(g2h(regs->x0), input_buf, input_buf_len);
 
   // for (int i = -0x100 / 8; i <= 0x100 / 8; i += 0x10 / 8) {
   //   printf("sp+%02x: %016x  %016x\n", i*8, stack_ptr[i], stack_ptr[i+1]);

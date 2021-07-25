@@ -55,6 +55,23 @@
             // "preLaunchTask": "launch_ida"
         },
         {
+            "name": "Python: Attach to Coverage Script in IDA",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/python/emmutaler/",
+                    "remoteRoot": "/Users/leonardogalli/.idapro/python/emmutaler"
+                }
+            ],
+            "justMyCode": false
+            // "preLaunchTask": "launch_ida"
+        },
+        {
             "name": "Launch IDA test",
             "type": "go",
             "request": "launch",

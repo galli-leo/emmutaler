@@ -21,13 +21,15 @@
 #define	rCFG_FUSE9			rCFG_FUSE(9)
 #define	rCFG_FUSE10			rCFG_FUSE(10)
 
+// TODO: t8030 has +0x300 / t8101 has +0x500
 #define ECID_BASE (0x300)
 #define	rECIDLO				PMGR_FUSE(ECID_BASE)
 #define	rECIDHI				PMGR_FUSE(ECID_BASE+4)
 
 // #define rSEP_SECURITY			(*(volatile uint32_t *)(AOP_MINIPMGR_BASE_ADDR + MINIPMGR_FUSE_SEP_SECURITY_OFFSET))
 
-#define rCFG_FUSE_RAW(n) PMGR_FUSE(4*(n) + 0x400)
+// TODO: t8030 has +0x600
+#define rCFG_FUSE_RAW(n) PMGR_FUSE(4*(n) + 0x600)
 #define rCFG_FUSE0_RAW			rCFG_FUSE_RAW(0)
 #define rCFG_FUSE1_RAW          rCFG_FUSE_RAW(1)
 #define rCFG_FUSE2_RAW          rCFG_FUSE_RAW(2)

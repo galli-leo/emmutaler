@@ -1,4 +1,4 @@
-option('rom', type : 'combo', choices : ['t8030'], value : 't8030')
+option('rom', type : 'combo', choices : ['t8030', 't8101'], value : 't8030')
 option('rom_path', type: 'string', value : '../SecureROMs-master')
 option('fuzz_host', type: 'string', value: '10.0.0.10')
 option('fuzz_user', type: 'string', value: 'leonardo')

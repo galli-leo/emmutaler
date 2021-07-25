@@ -221,3 +221,4 @@ main
 output.map
 builddir/
 *.o
+.clangd

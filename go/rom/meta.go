@@ -63,6 +63,7 @@ func (r *ROM) LoadMetaFromBinary() error {
 		r.meta.LinkerInfo.BootTrampolineDest = info.LinkerInfo.BootTrampolineDest
 	} else {
 		// t8030 and higher, PageTables is would actually be the two different stack starts. Everything is moved by 2, and no boot trampoline anymore.
+		r.meta.LinkerInfo.PageTables = &fbs.VirtualSegmentT{}
 		r.meta.LinkerInfo.PageTables.Start = info.LinkerInfo.HeapGuard
 		r.meta.LinkerInfo.PageTables.Size = info.LinkerInfo.BootTrampoline.Start
 		r.meta.LinkerInfo.HeapGuard = info.LinkerInfo.BootTrampoline.End

@@ -5,7 +5,9 @@ debug_src = files(
     'stacktrace.c',
     'stacktrace.h',
     'register-dump.h',
-    'sigcontextinfo.h'
+    'sigcontextinfo.h',
+    'log.h',
+    'log.c'
 )
 
 debug_src += symbols_list_h

@@ -21,7 +21,6 @@
 
 extern void __start_rom_gpio;
 extern void __start_rom_img;
-void* rom_img_start = &__start_rom_img;
 
 typedef int (*img_func)();
 // void* start_rom_gpio = &__start_rom_gpio;

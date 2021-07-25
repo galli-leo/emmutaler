@@ -60,6 +60,7 @@ func init() {
 	idaCmd.MarkFlagRequired("input")
 	idaCmd.PersistentFlags().BoolVarP(&launchOpts.ShowIDALog, "log", "l", false, "Whether to show the IDA log on stdout. Otherwise only python log will be shown.")
 	idaCmd.PersistentFlags().BoolVarP(&launchOpts.TempDatabase, "temp", "t", false, "Whether to not save database changes on exit.")
+	idaCmd.PersistentFlags().BoolVarP(&launchOpts.AutoAccept, "auto", "a", false, "Whether to automatically answer any dialogs that come up. Enabled whenever gui == false and disabled by default if gui == true")
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

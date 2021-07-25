@@ -1,4 +1,5 @@
 #include "debug/signals.h"
+#include "debug/log.h"
 
 void report_no_boot_image_handler(uint32_t result)
 {
@@ -8,10 +9,10 @@ void report_no_boot_image_handler(uint32_t result)
 void some_kind_of_report_handler(uint32_t result, int a2, int a3, int a4)
 {
 #if DEBUG
-    printf("[*] REPORTING IN: 0x%08x (0x%x, 0x%x, 0x%x)\n", result, a2, a3, a4);
+    log_debug("report_handler(0x%08x, 0x%x, 0x%x, 0x%x)", result, a2, a3, a4);
     void* prev_pc = __builtin_return_address(0);
     void* fp = __builtin_frame_address(0);
-    printf("STACKTRACE:\n");
-    print_stacktrace(prev_pc, fp);
+    // printf("STACKTRACE:\n");
+    // print_stacktrace(prev_pc, fp);
 #endif
 }

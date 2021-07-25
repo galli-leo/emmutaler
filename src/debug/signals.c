@@ -4,6 +4,9 @@
 // #include <backtrace.h>
 // #include <backtrace-supported.h>
 #include <execinfo.h>
+#include <stdio.h>
+#include <unistd.h>
+#include "log.h"
 
 struct bt_ctx {
 	struct backtrace_state *state;
@@ -69,7 +72,7 @@ void sig_handler(int signo, siginfo_t *si, void* arg)
     void* pc = info_ctx->pc;
     void* lr = info_ctx->regs[30];
 
-    printf("Received signal %s (%d, %d) @ %p, pc: %p, prev: %p\n", info->name, info->code, si->si_code, fault_addr, pc, lr);
+    log_error("Received signal %s (%d, %d) @ %p, pc: %p, prev: %p\n", info->name, info->code, si->si_code, fault_addr, pc, lr);
     for (int i = 0; i < 32; i++) {
         printf("R%02d: %016lx    ", i, info_ctx->regs[i]);
         if (i % 4 == 3){
@@ -82,9 +85,10 @@ void sig_handler(int signo, siginfo_t *si, void* arg)
     //     printf("%016lx: %016lx\n", p, *p);
     // }
 #if DEBUG
-    printf("STACKTRACE:\n");
+    // printf("STACKTRACE:\n");
     void* prev_pc = (uint64_t)lr & PTR_MASK;
     print_stacktrace(prev_pc, info_ctx->regs[29]);
+    // abort();
 #endif
 
     // stacktrace();
@@ -95,11 +99,28 @@ void sig_handler(int signo, siginfo_t *si, void* arg)
     exit(1);
 }
 
+#include <pthread.h>
+
+pthread_mutex_t stack_trace_lock = PTHREAD_MUTEX_INITIALIZER;
+
 void print_stacktrace(void* prev_pc, void* fp)
 {
+    pthread_mutex_lock(&stack_trace_lock);
+#define LINE_PAD "               "
+
+#ifdef LOG_USE_COLOR
+  fprintf(stderr, LINE_PAD "\x1b[90mSTACKTRACE:\x1b[0m\n");
+#else
+  fprintf(stderr, LINE_PAD "STACKTRACE:\n");
+#endif
+
+    
+    pthread_t self = pthread_self();
+    
     frame_info_t* prev_frame = fp; // fp
     void* addr[BACKTRACE_SIZE];
     int i = 0;
+    
     // struct backtrace_state *state = backtrace_create_state ("./main", 0, error_callback, NULL);
     for (; i < BACKTRACE_SIZE; i++) {
         addr[i] = prev_pc-4; // bc call!
@@ -111,22 +132,64 @@ void print_stacktrace(void* prev_pc, void* fp)
         prev_pc = (uint64_t)prev_frame->prev_pc & PTR_MASK;
     }
     int num_pcs = i+1;
+    /*FILE* addrout = NULL;
+    char cmd[0x2000] = {};
+    char exeName[0x101] = {};
+    size_t res = readlink("/proc/self/exe", exeName, 0x100);*/
+    // printf("num_pcs: %d\n", num_pcs);
     char** funcs = backtrace_symbols(addr, num_pcs);
     for (int i = 0; i < num_pcs; i++) {
         symbol_info_t* sym = find_symbol(addr[i]);
         symbol_info_t fake_sym = {0, 0, 0};
+        char* finalName = NULL;
         if (sym == NULL) {
             sym = &fake_sym;
             char** funcs = backtrace_symbols(&addr[i], 1);
             if (funcs != NULL){
-                // printf("WTF???? %p\n", funcs);
                 fake_sym.name = funcs[0];
+                /*
+                sprintf(cmd, "addr2line -f -s -e %s 0x%lx", exeName, addr[i]);
+                addrout = popen(cmd, "r");
+                char* symbolName = NULL;
+                size_t len = 0;
+                size_t read = getline(&symbolName, &len, addrout);
+                if (read == -1) {
+                    fake_sym.name = funcs[0];
+                    fclose(addrout);
+                } else {
+                    symbolName[read-1] = 0;
+                
+                    char* file = NULL;
+                    read = getline(&file, &len, addrout);
+                    fclose(addrout);
+
+                    if (read == -1) {
+                        fake_sym.name = funcs[0];
+                        free(symbolName);
+                    } else {
+                        file[read -1] = 0;
+                        finalName = malloc(0x100);
+
+                        sprintf(finalName, "%s -> %s", file, symbolName);
+
+                        free(file);
+                        free(symbolName);
+                        fake_sym.name = finalName;
+                    }
+                }*/
             } else {
                 fake_sym.name = "unknown";
             }
         }
-        printf("[0x%016lx] %s+0x%x\n", addr[i], sym->name, addr[i] - sym->start);
+#ifdef LOG_USE_COLOR
+  fprintf(stderr, LINE_PAD "\x1b[90m[0x%016lx]\x1b[0m %s+0x%x\n", addr[i], sym->name, addr[i] - sym->start);
+#else
+  fprintf(stderr, LINE_PAD "[0x%016lx] %s+0x%x\n", addr[i], sym->name, addr[i] - sym->start);
+#endif
+        //if (finalName != NULL) free(finalName);
     }
+    fprintf(stderr, "\n");
+    pthread_mutex_unlock(&stack_trace_lock);
 }
 
 void install_signal_handler()
