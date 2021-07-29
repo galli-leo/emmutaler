@@ -50,9 +50,9 @@ func (r *ROM) DoPatch() {
 	// Handle exception vector
 	r.PatchInstruction("msr s3_0_c12_c0_0,").Patch(r.PatchFunctionTmpl("vbar_el1_handler", "{{(index .Args 1)}}"))
 
-	// symb.rom_heap_alloc.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_alloc"))
-	// symb.rom_heap_free.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_free"))
-	// symb.rom_heap_memalign.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_memalign"))
+	symb.rom_heap_alloc.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_alloc"))
+	symb.rom_heap_free.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_free"))
+	symb.rom_heap_memalign.PatchOffset(0).Patch(r.PatchFunctionNoLink("checked_heap_memalign"))
 
 	if GenConf.AllowOOB {
 		// Patch DER functions to not check length!

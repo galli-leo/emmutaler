@@ -92,6 +92,7 @@ void unmap_chunk(heap_chunk_t *chunk)
 
 void* checked_heap_alloc(size_t size)
 {
+    // log_warn("heap_alloc(0x%x)", size);
     heap_chunk_t* chunk = calloc(1, sizeof(heap_chunk_t));
     chunk->size = size;
     size_t pagedSize = paged_size(chunk->size);

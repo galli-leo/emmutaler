@@ -87,8 +87,8 @@ def latexify_name(name):
 tbl_cols: List[Tuple[str, Callable[[FunctionMetadata, FunctionCoverage], str]]] = [
     ("Function", lambda m, c: f"\\footnotesize \\texttt{{{latexify_name(m.name)}}}"),
     ("Coverage", lambda m, c: f"${c.instruction_percent*100:.2f}\%$"),
-    ("BB Hit", lambda m, c: f"{c.nodes_executed} / {m.node_count}"),
-    ("Instr Hit", lambda m, c: f"{c.instructions_executed} / {m.instruction_count}"),
+    ("BB Hit", lambda m, c: f"{c.nodes_executed} \\/ {m.node_count}"),
+    ("Instr Hit", lambda m, c: f"{c.instructions_executed} \\/ {m.instruction_count}"),
     ("Size", lambda m, c: f"{m.size} B"),
     ("Cyclomatic Complexity", lambda m, c: f"{m.cyclomatic_complexity}")
 ]
@@ -135,7 +135,7 @@ def get_table_rows(span_name, ctx: LighthouseContext):
             # cols.append(f"\\color{{{text_color}}}{txt}")
             cols.append(txt)
         row = " & ".join(cols)
-        row += "\\\\ \n"
+        row += "\\\\\n"
         out += row
     return out
         
@@ -192,7 +192,7 @@ try:
                 if i < num_colors:
                     tbl_f.write(f"{span} & ${lhs_bracket}{prev_perc*100:.1f}\%, {perc*100:.1f}\%)$ & \\cellcolor{{ccvg{i}}} \\\\ \n")
                 else:
-                    tbl_f.write(f"& $100.0\%$ & \\cellcolor{{ccvg{i}}} \\\\ \n")
+                    tbl_f.write(f"& $100.0\%$ & \\cellcolor{{ccvg{i}}} \\\\\n")
                 colors.append(color.red() | (color.green() << 8) | (color.blue() << 16))
     names = {}
     for run in RUNS:

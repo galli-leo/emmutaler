@@ -33,12 +33,13 @@ static const size_t heap_size = 0x8000;
 
 void setup_heap()
 {
-    uint64_t g_heap_cookie[2] = { 0xa7fa3a2e367917fcULL, 0x64636b783132322fULL };
-    log_info("Initializing heap at %p", heap_base);
-    rom_heap_set_cookie(g_heap_cookie); // TODO: Randomized heap cookie?
-    log_info("Randomized heap cookie...");
-    rom_heap_add_chunk(heap_base, heap_size, 1);
-    log_info("Done with heap");
+    // TODO: Make this more nicely configurable!
+    // uint64_t g_heap_cookie[2] = { 0xa7fa3a2e367917fcULL, 0x64636b783132322fULL };
+    // log_info("Initializing heap at %p", heap_base);
+    // rom_heap_set_cookie(g_heap_cookie); // TODO: Randomized heap cookie?
+    // log_info("Randomized heap cookie...");
+    // rom_heap_add_chunk(heap_base, heap_size, 1);
+    // log_info("Done with heap");
     init_heap();
 }
 
@@ -119,6 +120,7 @@ void* usb_main_thread(void* args)
             log_info("Starting usb_main_thread");
             // Signal before starting USB procedure
             // actually, no that seems to result in a deadlock at points.
+            // signal_exit();
             int res = rom_getDFUImage(rom_img_start, IMG_SIZE);
             if (res <= 0) {
                 log_info("getDFUImage failed: %d", res);
@@ -126,6 +128,8 @@ void* usb_main_thread(void* args)
                 log_info("getDFUImage success: %d", res);
                 if (IMG_SIZE < res) {
                     log_error("WTF? getDFUImage result is larger than IMG_SIZE (%d > %d)", res, IMG_SIZE);
+                    // Should probably be an abort, since that could cause issues in SecureROM as well.
+                    abort();
                     continue;
                 }
                 struct image_info* img_info = image_create_from_memory(rom_img_start, res);
