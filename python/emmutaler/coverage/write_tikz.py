@@ -65,6 +65,7 @@ class TikzWriter:
                 # log.info("Node type: %s", type(node))
                 info.ea = node.start_ea
                 conts, color = node_info(info.ea)
+                node_name = f"bb{info.ea:x}"
                 height = rect.height()*self.scale
                 if conts is None:
                     conts = ""
@@ -80,7 +81,7 @@ class TikzWriter:
                 if height < 0.2:
                     conts = ""
                 x, y = self.conv_point(rect.center())
-                f.write(f"\\node[fill={self.conv_color(color)}, minimum width={rect.width()*self.scale}cm, minimum height={height}cm, inner sep=0pt] at ({x}cm, {y}cm) {{\\tiny {conts}}};\n")
+                f.write(f"\\node[fill={self.conv_color(color)}, minimum width={rect.width()*self.scale}cm, minimum height={height}cm, inner sep=0pt] ({node_name}) at ({x}cm, {y}cm) {{\\tiny {conts}}};\n")
                 num_edges = self.graph.nsucc(i)
                 for edgei in range(num_edges):
                     succ = self.graph.succ(i, edgei)

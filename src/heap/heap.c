@@ -123,6 +123,8 @@ void* checked_heap_memalign(size_t size, size_t constraint)
 
 void checked_heap_free(void *ptr)
 {
+    // bruh why
+    if (ptr == NULL) return;
     void* user_addr = ptr;
     heap_chunk_t** chunk_ptr = (heap_chunk_t**)(user_addr - sizeof(heap_chunk_t*));
     heap_chunk_t* chunk = *chunk_ptr;

@@ -14,11 +14,14 @@
 image_info* img_info;
 
 
-int do_fuzz(void* address, uint64_t img_size, uint64_t another_one)
+int __attribute__ ((noinline)) do_fuzz(void* address, uint64_t img_size, uint64_t another_one)
 {
+    // needed to actually stop inlining, why though lol
+    asm("");
     img_info->imageLength = img_size;
     img_info->imageAllocation = img_size;
     load_and_test_image(img_info, DEFAULT_TYPE, rom_img_start, img_size);
+    asm("");
     return 1;
 }
 
@@ -31,6 +34,6 @@ int main(int argc, char* argv[]) {
 
     log_info("Allocated image info at %p, buffer at: %p", &img_info, rom_img_start);
 
-    do_fuzz(0, 0, 0);
+    do_fuzz(rom_img_start, IMG_SIZE, 0);
     return 0;
 }

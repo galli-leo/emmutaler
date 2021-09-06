@@ -2,6 +2,7 @@ from collections import OrderedDict
 import threading
 from typing import Callable, List, Tuple
 import idaapi
+import idautils
 from emmutaler.log import get_logger
 from emmutaler.fbs.Symbol import Symbol, SymbolT
 from emmutaler.fbs.MetaState import MetaState
@@ -20,6 +21,7 @@ import debugpy
 from emmutaler.log import get_logger
 from lighthouse.util.qt.util import compute_color_on_gradiant
 from PyQt5.QtGui import QColor
+from emmutaler.reachable import get_reachable
 
 log = get_logger(__name__)
 
@@ -38,17 +40,38 @@ def install():
     except Exception as e:
         pass
 
-RUNS = ["usb", "img", "img_oob"]
-FUNCS = ["usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request", "image4_load", "image4_validate_property_callback_interposer"]
-BINS = [0.0, 0.5 / 100, 2.0 / 100, 10.0 / 100, 25.0 / 100, 1]
+RUNS = [
+    "usb",
+    "img", "img_small", "img_oob"
+]
+FUNCS = [
+    # "usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request",
+    # "image4_load", "image4_validate_property_callback_interposer", "Img4DecodePerformTrustEvaluatation"
+]
+BINS = [0.0, 0.5 / 100, 2.0 / 100, 10.0 / 100, 25.0 / 100, 60.0 / 100, 1]
 num_colors = len(BINS) - 1
 
 TBL_ENTRIES = {
     "USB": ["usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request", "usb_dfu_data_received"],
     "IMG4": ["image4_load", "image4_validate_property_callback_interposer", "_image4_get_partial", "Img4DecodePerformTrustEvaluatation"],
     "Certificates": ["parse_chain", "verify_parse_chain", "verify_payload_properties"],
-    "DER": ["DERDecodeItemPartialBuffer", "DERParseSequenceContent", "_DERParseInteger64"]
+    "DER": ["DERDecodeItemPartialBuffer", "DERParseSequenceContent", "_DERParseInteger64"],
+    "ALL": []
 }
+
+COLORS = [
+0xDB133C,
+0x800104,
+0x2F2B4A,
+0x54518C,
+0x9490FC,
+0x2B6F51,
+0x47B685,
+]
+
+def get_color(idx):
+    val = COLORS[idx]
+    return QColor(val)
 
 def get_color_idx(percentage):
     color_idx = 0
@@ -59,7 +82,7 @@ def get_color_idx(percentage):
     return color_idx
 
 def refreshed():
-    log.info("Database is refreshed!")
+    log.debug("Database is refreshed!")
 
 def wait_event(event: threading.Event, interval = 0.02):
     interval = 0.02    # the interval which we wait for a response
@@ -86,16 +109,23 @@ def latexify_name(name):
     return name.replace('_', '\\_')
 tbl_cols: List[Tuple[str, Callable[[FunctionMetadata, FunctionCoverage], str]]] = [
     ("Function", lambda m, c: f"\\footnotesize \\texttt{{{latexify_name(m.name)}}}"),
-    ("Coverage", lambda m, c: f"${c.instruction_percent*100:.2f}\%$"),
-    ("BB Hit", lambda m, c: f"{c.nodes_executed} \\/ {m.node_count}"),
-    ("Instr Hit", lambda m, c: f"{c.instructions_executed} \\/ {m.instruction_count}"),
+    # ("Coverage", lambda m, c: f"${c.instruction_percent*100:.2f}\%$"),
+    ("Executions", lambda m, c: f"\\numprint{{{int(c.act_executions)}}}"),
+    ("BB Hit", lambda m, c: f"{c.nodes_executed} / {m.node_count}"),
+    ("Instr Hit", lambda m, c: f"{c.instructions_executed} / {m.instruction_count}"),
     ("Size", lambda m, c: f"{m.size} B"),
     ("Cyclomatic Complexity", lambda m, c: f"{m.cyclomatic_complexity}")
 ]
 TABLE_COLS = OrderedDict(tbl_cols)
 
 def get_table_rows(span_name, ctx: LighthouseContext):
-    funcs = TBL_ENTRIES[span_name]
+    funcs = []
+    if span_name == "ALL":
+        all_funcs = idautils.Functions()
+        for addr in all_funcs:
+            funcs.append(idaapi.get_ea_name(addr, 0))
+    else:
+        funcs = TBL_ENTRIES[span_name]
     text_color = "white"
     out = ""
     num_rows = len(funcs)
@@ -109,7 +139,7 @@ def get_table_rows(span_name, ctx: LighthouseContext):
         function_metadata = ctx.metadata.functions[addr]
         function_coverage: FunctionCoverage = ctx.director.coverage.functions.get(addr, None)
         if function_coverage is None:
-            log.error("Could not retrieve coverage for function %s", func)
+            log.debug("Could not retrieve coverage for function %s", func)
             continue
         act_funcs.append(func)
     for idx, func in enumerate(act_funcs):
@@ -119,22 +149,24 @@ def get_table_rows(span_name, ctx: LighthouseContext):
             continue
         function_metadata = ctx.metadata.functions[addr]
         function_coverage: FunctionCoverage = ctx.director.coverage.functions.get(addr, None)
+        function_coverage.max_executions
         if function_coverage is None:
             log.error("Could not retrieve coverage for function %s", func)
             continue
         percentage = function_coverage.instruction_percent
         color = get_color_idx(percentage)
         span = f"\\rowcolor{{ccvg{color}}} "
-        count += 1
-        if idx == len(act_funcs) - 1:
-            #\\color{{{text_color}}}
-            span += f"\\multirow{{-{count}}}{{*}}{{{span_name}}}"
-        cols = [span]
+        # count += 1
+        # if idx == len(act_funcs) - 1:
+        #     #\\color{{{text_color}}}
+        #     span += f"\\multirow{{-{count}}}{{*}}{{{span_name}}}"
+        # cols = [span]
+        cols = []
         for _, mapper in TABLE_COLS.items():
             txt = mapper(function_metadata, function_coverage)
             # cols.append(f"\\color{{{text_color}}}{txt}")
             cols.append(txt)
-        row = " & ".join(cols)
+        row = span + " & ".join(cols)
         row += "\\\\\n"
         out += row
     return out
@@ -183,6 +215,7 @@ try:
                     palette.table_coverage_bad,
                     palette.table_coverage_good
                 )
+                # color = get_color(i)
                 f.write(f"\\definecolor{{ccvg{i}}}{{RGB}}{{{color.red()},{color.green()},{color.blue()}}}\n")
                 span = ""
                 lhs_bracket = "["
@@ -194,7 +227,7 @@ try:
                 else:
                     tbl_f.write(f"& $100.0\%$ & \\cellcolor{{ccvg{i}}} \\\\\n")
                 colors.append(color.red() | (color.green() << 8) | (color.blue() << 16))
-    names = {}
+    names = {"aggr": ["Aggregate"]}
     for run in RUNS:
         usb_dir = os.path.join(input_dir, run)
         add_names = create_batches.load_aggr_cov(usb_dir, run)
@@ -228,7 +261,7 @@ try:
                 event = ctx.painter.repaint()
                 wait_event(event)
                 # ctx.painter._priority_paint_functions(faddr)
-                log.info("Function %s is at 0x%x", fname, faddr)
+                log.debug("Function %s is at 0x%x", fname, faddr)
                 screen_name = os.path.join(graphs_dir, f"{name}_{fname}.png")
                 tikz_name = os.path.join(graphs_dir, f"{name}_{fname}.tex")
                 viewer = graph_viewer.GraphViewer(faddr)
@@ -236,7 +269,7 @@ try:
                 writer = write_tikz.TikzWriter(viewer.graph, tikz_name)
 
                 def node_info(node_addr):
-                    log.debug("Calculating percentage for addr: 0x%x", node_addr)
+                    # log.info("Calculating percentage for addr: 0x%x", node_addr)
                     db_coverage = ctx.director.coverage
                     db_metadata = ctx.director.metadata
                     node_coverage = db_coverage.nodes.get(node_addr, None)
@@ -259,8 +292,8 @@ try:
                         if not node_metadata:
                             node_metadatas = []
                             break
-
-                        # logger.info("Function 0x%x has %d max executions", function.address, func_coverage.max_executions)
+                        if function.address == 0x100005210:
+                            log.debug("Function 0x%x has %d max executions, node has %d execs", function.address, func_coverage.max_executions, node_coverage.executions)
                         
                         percentage = float(node_coverage.executions) / func_coverage.max_executions
                         conts = f"${percentage*100:.2f}\\%$"
@@ -278,7 +311,25 @@ try:
                 writer.write(faddr, node_info)
                 viewer.close()
                 # graph_viewer.screenshot_graph(faddr, screen_name)
-
+    called_fns = ["usb_core_event_handler", "init_entropy_source", "getDFUImage", "security_protect_memory", "usb_core_handle_usb_control_receive", "usb_core_complete_endpoint_io"]
+    all_reachable = set()
+    for fn in called_fns:
+        all_reachable = all_reachable.union(get_reachable(fn))
+    try:
+        ctx.director.select_coverage("Aggregate")
+    except Exception:
+        log.error("Could not load coverage for Aggregate")
+    db_cov = ctx.director.coverage
+    hitmap = db_cov.data
+    total = len(all_reachable)
+    log.info("Total reachable: %d", total)
+    covered = 0
+    for addr in all_reachable:
+        if addr in hitmap and hitmap[addr] > 0:
+            covered += 1
+        # else:
+        #     log.info("Not covered: 0x%x", addr)
+    log.info("Total coverage percent of all reachable instructions is %.2f %%", float(covered) / total * 100)
 
 
 except:
@@ -286,4 +337,4 @@ except:
     idaapi.qexit(1)
 
 log.info("done here, exiting")
-idaapi.qexit(0)
+# idaapi.qexit(0)

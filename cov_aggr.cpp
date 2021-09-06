@@ -82,6 +82,7 @@ bool mmaped_file<I>::open_file()
         fprintf(stderr, "failed to mmap file\n");
         return false;
     }
+    real_size = hitmap_real_size;
 
     uint64_t* hitmap_ptr = (uint64_t*)addr;
     if (create)
@@ -116,7 +117,7 @@ void aggregate_coverage(std::string outpath, std::vector<std::string>& input_fil
             fprintf(stderr, "failed to open input file at %s\n", elem.c_str());
             continue;
         }
-        std::cout << "Aggregating for " << elem << std::endl;
+        // std::cout << "Aggregating for " << elem << std::endl;
         for (size_t i = 0; i < currfile.size; i++)
         {
             outfile.hitmap[i] += currfile.hitmap[i];

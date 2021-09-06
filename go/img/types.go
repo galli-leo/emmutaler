@@ -144,7 +144,7 @@ type IM4P struct {
 	Info       string
 	Contents   []byte
 	Keybags    []Keybag `asn1:"nested"`
-	// Not emmitting this should just work?
+	// Not emitting this should just work?
 	// Compression PayloadCompression
 }
 

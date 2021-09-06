@@ -75,7 +75,7 @@ src += common_src
 
 
 thread_dep = dependency('threads')
-main = executable('main', src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1'], dependencies: [thread_dep])
+main = executable('main', src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1', '-DDEBUG=1'], dependencies: [thread_dep])
 test('main_test', main, args : [test_file], is_parallel: false)
 test('main_custom_test', main, args : [custom_test], is_parallel: false)
 
@@ -92,7 +92,7 @@ main_usb_src = files(
 )
 main_usb_src += common_src
 
-main_usb = executable('main_usb', main_usb_src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1', '-DDEBUG=1'], dependencies: [thread_dep])
+main_usb = executable('main_usb', main_usb_src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1'], dependencies: [thread_dep])
 
 test('main_usb_test_img_upload', main_usb, args: ['usb_msg/short_upload.seq'], is_parallel: false)
 
