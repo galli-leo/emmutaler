@@ -39,10 +39,10 @@ func (r *ROM) ParseVersion() {
 	}
 }
 
-var chipIDRegex = regexp.MustCompile(`t(\d+)si`)
+var chipIDRegex = regexp.MustCompile(`(t|s)(\d+)si`)
 
 func (r *ROM) ParseChipID() {
 	matches := chipIDRegex.FindStringSubmatch(r.meta.BuildInfo.Banner)
-	chipID := matches[1]
+	chipID := matches[2]
 	r.ChipID = mustParseUint(chipID)
 }

@@ -6,7 +6,7 @@ import idautils
 from emmutaler.log import get_logger
 from emmutaler.fbs.Symbol import Symbol, SymbolT
 from emmutaler.fbs.MetaState import MetaState
-from emmutaler.util import get_plugin_args
+from emmutaler.util import func_str, get_func, get_plugin_args, log_list
 from emmutaler.typeinf import GenHeader, print_item_type
 from emmutaler.coverage import create_batches, graph_viewer, write_tikz
 from lighthouse import get_context
@@ -21,9 +21,11 @@ import debugpy
 from emmutaler.log import get_logger
 from lighthouse.util.qt.util import compute_color_on_gradiant
 from PyQt5.QtGui import QColor
-from emmutaler.reachable import get_reachable
+from emmutaler.reachable import get_reachable, Reachability
 
 log = get_logger(__name__)
+
+AGGREGATE = False
 
 def install():
     # os.getcwd = getcwd_hook
@@ -44,6 +46,8 @@ RUNS = [
     "usb",
     "img", "img_small", "img_oob"
 ]
+if not AGGREGATE:
+    RUNS = ["usb", "img"]
 FUNCS = [
     # "usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request",
     # "image4_load", "image4_validate_property_callback_interposer", "Img4DecodePerformTrustEvaluatation"
@@ -179,6 +183,20 @@ def write_table_items(output, prefix, ctx: LighthouseContext):
         with open(output_file, "w") as f:
             f.write(get_table_rows(span, ctx))
 
+def load_coverage(input_dir):
+    global AGGREGATE, RUNS
+    names = {"aggr": ["Aggregate"]}
+    if not AGGREGATE:
+        input_dir = os.path.join(input_dir, "..")
+    for run in RUNS:
+        usb_dir = os.path.join(input_dir, run)
+        if not AGGREGATE:
+            add_names = create_batches.load_fuzzing_cov_full(usb_dir, run)
+        else:
+            add_names = create_batches.load_aggr_cov(usb_dir, run)
+        names[run] = add_names
+    return names
+
 # install()
 try:
     # Don't save anything we do here!
@@ -227,11 +245,7 @@ try:
                 else:
                     tbl_f.write(f"& $100.0\%$ & \\cellcolor{{ccvg{i}}} \\\\\n")
                 colors.append(color.red() | (color.green() << 8) | (color.blue() << 16))
-    names = {"aggr": ["Aggregate"]}
-    for run in RUNS:
-        usb_dir = os.path.join(input_dir, run)
-        add_names = create_batches.load_aggr_cov(usb_dir, run)
-        names[run] = add_names
+    names = load_coverage(input_dir)
     idaapi.auto_wait()
     for run, run_names in names.items():
         log.info("Creating coverage graphs and tables for run %s", run)
@@ -251,7 +265,9 @@ try:
             graphs_dir = os.path.join(batch_dir, "graphs")
             os.makedirs(graphs_dir, exist_ok=True)
             tables_dir = os.path.join(batch_dir, "tables")
-            write_table_items(tables_dir, "", ctx)
+            # dont want to change the tables otherwise!
+            if AGGREGATE:
+                write_table_items(tables_dir, "", ctx)
             for fname in FUNCS:
                 log.info("Creating picture for %s:%s", name, fname)
                 faddr = idaapi.get_name_ea(0, fname)
@@ -311,26 +327,47 @@ try:
                 writer.write(faddr, node_info)
                 viewer.close()
                 # graph_viewer.screenshot_graph(faddr, screen_name)
-    called_fns = ["usb_core_event_handler", "init_entropy_source", "getDFUImage", "security_protect_memory", "usb_core_handle_usb_control_receive", "usb_core_complete_endpoint_io"]
-    all_reachable = set()
+    called_fns = ["usb_core_event_handler", "init_entropy_source", "getDFUImage", "security_protect_memory", "usb_core_handle_usb_control_receive", "usb_core_complete_endpoint_io", "image_load"]
+    # DECRYPT IMG4
+    # DECOMPRESS IMG4
+    nono_bbs = [0x100005E80, 0x100006104]
+    # add patched fns start bbs
+    patched_fns = ["report_no_boot_image", "some_kind_of_report", "synopsys_otg_controller_init", "platform_get_entropy", "platform_get_sep_nonce", "_aes_crypto_cmd"]
+    for fn in patched_fns:
+        fn_ea = idaapi.get_name_ea(idaapi.BADADDR, fn)
+        nono_bbs.append(fn_ea)
+    r = Reachability(nono_bbs)
+    r.add_panic_fn("_panic")
     for fn in called_fns:
-        all_reachable = all_reachable.union(get_reachable(fn))
+        r.run(fn)
     try:
         ctx.director.select_coverage("Aggregate")
     except Exception:
         log.error("Could not load coverage for Aggregate")
     db_cov = ctx.director.coverage
     hitmap = db_cov.data
-    total = len(all_reachable)
+    total = len(r.reachable)
     log.info("Total reachable: %d", total)
     covered = 0
-    for addr in all_reachable:
+    for addr in r.reachable:
         if addr in hitmap and hitmap[addr] > 0:
             covered += 1
         # else:
         #     log.info("Not covered: 0x%x", addr)
     log.info("Total coverage percent of all reachable instructions is %.2f %%", float(covered) / total * 100)
-
+    reach_list = []
+    for (func, path) in r.fns_reached.values():
+        path_txt = "\n"
+        for item in path:
+            path_txt += "\t"*3 + item + "\n"
+        reach_list.append(f"{func_str(func)}: {path_txt}")
+    # log.info("List of reachable functions: %s", log_list([func_str(f) for f in r.fns.values()]))
+    log.info("List of reachable function: %s", log_list(reach_list))
+    panic_fns = []
+    for key, val in r.panic_fns.items():
+        if val:
+            panic_fns.append(func_str(get_func(key)))
+    log.info("List of panic functions: %s", log_list(panic_fns))
 
 except:
     log.exception("Failed to load coverage!", exc_info=True)

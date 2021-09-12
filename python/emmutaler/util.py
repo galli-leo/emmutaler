@@ -1,4 +1,4 @@
-from typing import Union
+from typing import List, Union
 import idc
 import idaapi
 import ida_loader
@@ -45,4 +45,10 @@ def get_func(val: FuncLoc) -> ida_funcs.func_t:
     
 def func_str(f: idaapi.func_t) -> str:
     name = ida_funcs.get_func_name(f.start_ea)
-    return f"<{name} @ 0x{f.start_ea:x}>"
+    return f"< {name} @ 0x{f.start_ea:x} >"
+
+def log_list(items: List[str]) -> str:
+    ret = "\n"
+    for item in items:
+        ret += "\t" + item + "\n"
+    return ret

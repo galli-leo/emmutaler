@@ -54,12 +54,14 @@ def load_fuzzing_cov(path, name):
             batch_name = f"{name}_{folder_name}"
             load_coverage_batch(pattern, batch_name)
             names.append(batch_name)
+    names += load_fuzzing_cov_full(path, name)
+    return names
 
+def load_fuzzing_cov_full(path, name):
     # finally, load full coverage
     full_name = f"{name}_full"
-    names.append(full_name)
     load_coverage_batch(os.path.join(path, "*", "*.cov"), full_name)
-    return names
+    return [full_name]
 
 def load_aggr_cov(path, name):
     log.info("Loading coverage for %s with path %s", name, path)

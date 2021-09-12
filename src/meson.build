@@ -57,7 +57,7 @@ common_src += heap_src
 rom_gen_src = [rom_h, rom_s, symbols_list_h]
 
 
-std_flags = ['-g', '-fno-pie', '-no-pie', '-fno-omit-frame-pointer', '-march=armv8.3-a', '-O2']
+std_flags = ['-g', '-fno-pie', '-no-pie', '-fno-omit-frame-pointer', '-march=armv8.3-a', '-O3']
 
 std_link_flags = mmap_flags # + ['-static'] static is actually only for libraries we want to fuzz.
 
@@ -92,7 +92,7 @@ main_usb_src = files(
 )
 main_usb_src += common_src
 
-main_usb = executable('main_usb', main_usb_src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1'], dependencies: [thread_dep])
+main_usb = executable('main_usb', main_usb_src + rom_gen_src, include_directories: inc, link_args: std_link_flags, c_args: std_flags + ['-DLOG_USE_COLOR=1', '-DDEBUG=1'], dependencies: [thread_dep])
 
 test('main_usb_test_img_upload', main_usb, args: ['usb_msg/short_upload.seq'], is_parallel: false)
 

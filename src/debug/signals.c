@@ -13,6 +13,7 @@ struct bt_ctx {
 	int error;
 };
 
+#define DEBUG 1
 
 signal_info_t* find_signal(int signo)
 {
@@ -88,7 +89,7 @@ void sig_handler(int signo, siginfo_t *si, void* arg)
     // printf("STACKTRACE:\n");
     void* prev_pc = (uint64_t)lr & PTR_MASK;
     print_stacktrace(prev_pc, info_ctx->regs[29]);
-    // abort();
+    abort();
 #endif
 
     // stacktrace();

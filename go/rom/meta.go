@@ -76,6 +76,7 @@ func (r *ROM) LoadMetaFromBinary() error {
 func (r *ROM) LoadMeta() error {
 	err := r.LoadMetaFromFile()
 	if errors.Is(xerrors.Unwrap(err), os.ErrNotExist) {
+		log.Printf(".emmu did not exist, creating new one from binary and save it")
 		// .emmu does not exist, we read from binary!
 		err := r.LoadMetaFromBinary()
 		if err != nil {

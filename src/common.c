@@ -3,6 +3,7 @@
 #include "debug/log.h"
 #include "rom/rom_extra.h"
 #include "platform/chipid.h"
+#include "types.h"
 #include "usb/usb.h"
 #include <pthread.h>
 #include "heap/heap.h"
@@ -88,14 +89,18 @@ void load_and_test_image(struct image_info *loaded_image, uint32_t type, void *l
 #endif
 }
 
-struct image_info* image_create_from_memory(void* load_address, size_t loaded_length)
+void image_init_from_memory(image_info* image_info, void* load_address, size_t loaded_length)
 {
-    image_info* image_info = malloc(sizeof(struct image_info));
     image_info->imageLength = loaded_length;
     image_info->imagePrivateMagic = IMAGE_MEMORY_INFO_MAGIC;
     image_info->imageOptions = IMAGE_OPTION_LOCAL_STORAGE;
     image_info->imagePrivate = load_address;
+}
 
+struct image_info* image_create_from_memory(void* load_address, size_t loaded_length)
+{
+    image_info* image_info = malloc(sizeof(struct image_info));
+    image_init_from_memory(image_info, load_address, loaded_length);
     return image_info;
 }
 
@@ -110,6 +115,8 @@ void signal_exit()
     pthread_cond_signal(&exit_cond);
     pthread_mutex_unlock(&exit_lock);
 }
+
+image_info* usb_img = NULL;
 
 void* usb_main_thread(void* args)
 {
@@ -132,9 +139,8 @@ void* usb_main_thread(void* args)
                     abort();
                     continue;
                 }
-                struct image_info* img_info = image_create_from_memory(rom_img_start, res);
-                load_and_test_image(img_info, DEFAULT_TYPE, rom_img_start, res);
-                free(img_info);
+                image_init_from_memory(usb_img, rom_img_start, res);
+                load_and_test_image(usb_img, DEFAULT_TYPE, rom_img_start, res);
             }
             pthread_mutex_lock(&exit_lock);
         }
@@ -162,6 +168,7 @@ void setup_usb()
     setup_entropy();
     setup_heap();
     initialize_manager(&usb_mgr);
+    usb_img = image_create_from_memory(rom_img_start, IMG_SIZE);
     log_info("usb_main: %p", &usb_main_thd);
 }
 
