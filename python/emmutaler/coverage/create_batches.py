@@ -29,6 +29,7 @@ def load_coverage_batch(pattern, name):
     log.info("Loading %d files for batch %s", len(filenames), name)
     ctx: LighthouseContext = lighthouse.get_context(None)
     ctx.director.load_coverage_batch(filenames, name, progress_callback=log.info)
+    return len(filenames)
     
 
 def load_fuzzing_cov(path, name):
@@ -52,16 +53,17 @@ def load_fuzzing_cov(path, name):
             log.info("Found special cased %s: %s", folder, folder_name)
             pattern = os.path.join(full_folder, "*.cov")
             batch_name = f"{name}_{folder_name}"
-            load_coverage_batch(pattern, batch_name)
-            names.append(batch_name)
-    names += load_fuzzing_cov_full(path, name)
+            num_files = load_coverage_batch(pattern, batch_name)
+            names.append((batch_name, num_files))
+    add_names = load_fuzzing_cov_full(path, name)
+    names += add_names
     return names
 
 def load_fuzzing_cov_full(path, name):
     # finally, load full coverage
-    full_name = f"{name}_full"
-    load_coverage_batch(os.path.join(path, "*", "*.cov"), full_name)
-    return [full_name]
+    full_name = f"{name}_all"
+    num_files = load_coverage_batch(os.path.join(path, "*", "*.cov"), full_name)
+    return [(full_name, num_files)]
 
 def load_aggr_cov(path, name):
     log.info("Loading coverage for %s with path %s", name, path)
@@ -71,6 +73,6 @@ def load_aggr_cov(path, name):
         aggr_name, ext = os.path.splitext(aggr)
         filepath = os.path.join(path, aggr)
         batch_name = f"{name}_{aggr_name}"
-        names.append(batch_name)
+        names.append((batch_name, 1))
         ctx.director.load_coverage_batch([filepath], batch_name)
     return names

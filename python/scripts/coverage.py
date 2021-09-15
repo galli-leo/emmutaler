@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import math
 import threading
 from typing import Callable, List, Tuple
 import idaapi
@@ -46,12 +47,21 @@ RUNS = [
     "usb",
     "img", "img_small", "img_oob"
 ]
-if not AGGREGATE:
-    RUNS = ["usb", "img"]
 FUNCS = [
-    # "usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request",
-    # "image4_load", "image4_validate_property_callback_interposer", "Img4DecodePerformTrustEvaluatation"
+    "usb_core_handle_usb_control_receive", "usb_core_event_handler", "usb_dfu_handle_interface_request",
+    "image4_load", "image4_validate_property_callback_interposer", "Img4DecodePerformTrustEvaluatation"
 ]
+if not AGGREGATE:
+    # RUNS = ["usb", "img"]
+    # need to do them separate, because lighthouse bad
+    # RUNS = ["usb"]
+    RUNS = ["img"]
+    FUNCS = [
+        "usb_core_handle_usb_control_receive",
+        "image4_validate_property_callback_interposer",
+        "image4_load"
+    ]
+
 BINS = [0.0, 0.5 / 100, 2.0 / 100, 10.0 / 100, 25.0 / 100, 60.0 / 100, 1]
 num_colors = len(BINS) - 1
 
@@ -183,9 +193,12 @@ def write_table_items(output, prefix, ctx: LighthouseContext):
         with open(output_file, "w") as f:
             f.write(get_table_rows(span, ctx))
 
+NUM_FILES = 0
+
 def load_coverage(input_dir):
-    global AGGREGATE, RUNS
-    names = {"aggr": ["Aggregate"]}
+    global AGGREGATE, RUNS, NUM_FILES
+    total_files = 0
+    names = {}
     if not AGGREGATE:
         input_dir = os.path.join(input_dir, "..")
     for run in RUNS:
@@ -195,6 +208,11 @@ def load_coverage(input_dir):
         else:
             add_names = create_batches.load_aggr_cov(usb_dir, run)
         names[run] = add_names
+    for add_names in names.values():
+        for (_, num_items) in add_names:
+            total_files += num_items
+    names["aggr"] = [("Aggregate", total_files)]
+    log.info("Loaded a total of %d items", total_files)
     return names
 
 # install()
@@ -213,6 +231,8 @@ try:
     input_dir = args[1]
     output_dir = args[2]
 
+    addr = idaapi.get_name_ea(idaapi.BADADDR, "image4_validate_property_callback_interposer")
+    log.info("image4_validate_property_callback_interposer is at 0x%x", addr)
     
     colors = []
     log.info("Writing coverage colors")
@@ -251,7 +271,7 @@ try:
         log.info("Creating coverage graphs and tables for run %s", run)
         run_dir = os.path.join(output_dir, run)
         os.makedirs(run_dir, exist_ok=True)
-        for name in run_names:
+        for name, num_items in run_names:
             log.info("Creating coverage graphs and tables for %s", name)
             try:
                 ctx.director.select_coverage(name)
@@ -308,10 +328,25 @@ try:
                         if not node_metadata:
                             node_metadatas = []
                             break
+                        cov = "func"
+                        if "usb" in name:
+                            cov = "func"
                         if function.address == 0x100005210:
                             log.debug("Function 0x%x has %d max executions, node has %d execs", function.address, func_coverage.max_executions, node_coverage.executions)
-                        
-                        percentage = float(node_coverage.executions) / func_coverage.max_executions
+                        num_inputs_reach = len(ctx.director.owners[function.address])
+                        if node_addr == function.address:
+                                percentage = float(num_inputs_reach) / num_items
+                                percentage = round(percentage, 3)
+                        elif cov == "input":
+                            if node_addr in ctx.director.owners:
+                                num_inputs_entry = len(ctx.director.owners[node_addr])
+                            else:
+                                num_inputs_entry = 0
+                            percentage = float(num_inputs_entry) / num_inputs_reach
+                            # entry block!
+                            
+                        else:
+                            percentage = float(node_coverage.executions) / func_coverage.act_executions
                         conts = f"${percentage*100:.2f}\\%$"
                         color_idx = 0
                         for i in range(num_colors+1):
