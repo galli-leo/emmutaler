@@ -10,6 +10,9 @@ Need to first figure out whats the best way to do that :)
 I also need to figure out a License for this (not sure if I am using anything that requires me to have a restrictive license).
 If you need to use it urgently and are concerned about the license, let me know :)
 
+**Disclaimer:** Everything is as is and will almost certainly not work out of the box.
+You will have to change quite a few things to make it run locally.
+
 # Directory Layout
 
 The following is very incomplete, but it should give you an idea on what to look for where.
